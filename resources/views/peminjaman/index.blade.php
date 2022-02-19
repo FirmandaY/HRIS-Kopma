@@ -22,7 +22,7 @@
                 <div class="col-sm-12">
                     <a href="{{ route('pinjam.create') }}" class="btn btn-success">
                         <i class="fas fa-plus-square"></i>
-                        Ajukan Permohonan Peminjaman disiniii</a>
+                        Ajukan Permohonan Peminjaman</a>
                 </div>
             </div>
             <hr>
