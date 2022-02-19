@@ -18,4 +18,8 @@ class Acc_mandiv extends Model
     {
         return $this->hasMany((Izin::class));
     }
+    public function pinjams()
+    {
+        return $this->hasMany((Peminjaman::class));
+    }
 }

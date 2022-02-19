@@ -24,6 +24,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        // -------------------- Ini adalah role authorization user--------------------
+
         Gate::define('isAdmin', function ($user) {
             return $user->role_id == '1';
         });
@@ -33,8 +36,16 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isKaryawan', function ($user) {
             return $user->role_id == '3';
         });
-        //
+        Gate::define('isPengurus', function ($user) {
+            return $user->role_id == '4';
+        });
+
+        //--------------------- Ini adalah role authorization tindakan user -----------------
+
         Gate::define('pengajuan', function ($user) {
+            return $user->role_id === 2 || $user->role_id === 3 || $user->role_id === 4;
+        });
+        Gate::define('peminjaman', function ($user) {
             return $user->role_id === 2 || $user->role_id === 3;
         });
         Gate::define('persetujuan', function ($user) {

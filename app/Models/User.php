@@ -69,4 +69,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Izin::class);
     }
+    public function pinjams()
+    {
+        return $this->hasMany(Peminjaman::class);
+    }
 }

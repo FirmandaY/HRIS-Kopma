@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CutiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IzinController;
+use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\KelolaController;
 use App\Http\Controllers\ProfilController;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/anggota')->middleware('can:isAdmin')->group(function () {
         Route::get('/', [KelolaController::class, 'index'])->name('kelola.index');
+        
         Route::get('/trashed', [KelolaController::class, 'trashed'])->name('kelola.trashed');
         Route::get('/daftar', [KelolaController::class, 'create'])->name('kelola.daftar');
         Route::post('/daftar', [KelolaController::class, 'store'])->name('kelola.store');
@@ -68,6 +70,20 @@ Route::middleware('auth')->group(function () {
         Route::get('/{izin:slug}/edit', [IzinController::class, 'edit'])->middleware('can:edit')->name('izin.edit');
         Route::patch('/{izin:slug}/edit', [IzinController::class, 'update'])->middleware('can:update')->name('izin.update');
         Route::delete('/{izin:slug}/delete', [IzinController::class, 'destroy'])->middleware('can:delete');
+    });
+
+    Route::prefix('/pinjam')->group(function () {
+        Route::get('/', [PeminjamanController::class, 'index'])->name('pinjam.index');
+        Route::get('/admin', [PeminjamanController::class, 'admin'])->middleware('can:edit')->name('pinjam.admin');
+        Route::get('/create', [PeminjamanController::class, 'create'])->middleware('can:pengajuan')->name('pinjam.create');
+        Route::post('/create', [PeminjamanController::class, 'store'])->name('pinjam.store');
+        Route::get('/export', [PeminjamanController::class, 'export'])->middleware('can:isAdmin')->name('pinjam.export');
+        Route::delete('/delete-all', [PeminjamanController::class, 'destroyAll'])->middleware('can:isAdmin')->name('pinjam.delete.all');
+        Route::get('/lampiran/{pinjam:slug}', [PeminjamanController::class, 'lampiran'])->name('pinjam.lampiran');
+        Route::get('/{pinjam:slug}', [PeminjamanController::class, 'show']);
+        Route::get('/{pinjam:slug}/edit', [PeminjamanController::class, 'edit'])->middleware('can:edit')->name('pinjam.edit');
+        Route::patch('/{pinjam:slug}/edit', [PeminjamanController::class, 'update'])->middleware('can:update')->name('pinjam.update');
+        Route::delete('/{pinjam:slug}/delete', [PeminjamanController::class, 'destroy'])->middleware('can:delete');
     });
 });
 
