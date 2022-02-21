@@ -22,7 +22,7 @@ class PeminjamanController extends Controller
     {
         $role_id = Auth::user()->role_id;
         if ($role_id == 1) {
-            $pinjams = Peminjaman::where('acc_mandiv_id', 3)->latest()->simplePaginate(12);
+            $pinjams = Peminjaman::where('acc_hrd_id', 1)->latest()->simplePaginate(12);
         } else {
             $pinjams = Peminjaman::whereHas('user', function ($query) {
                 $divisi_id = Auth::user()->divisi_id;
@@ -73,17 +73,16 @@ class PeminjamanController extends Controller
 
         return redirect(route('pinjam.index'));
     }
-    public function show(Peminjaman $peminjaman)
+    public function show(Peminjaman $pinjam)
     {
-        return view('peminjaman.show', compact('peminjaman'));
+        return view('peminjaman.show', compact('pinjam'));
     }
-    public function edit(Peminjaman $peminjaman)
+    public function edit(Peminjaman $pinjam)
     {
         $role_id = Auth::user()->role_id;
         return view('peminjaman.edit', [
             'role' => $role_id,
-            'peminjaman' => $peminjaman,
-            'acc_mandivs' => Acc_mandiv::get(),
+            'pinjam' => $pinjam,
             'acc_hrds' => Acc_hrd::get(),
         ]);
     }
@@ -111,7 +110,7 @@ class PeminjamanController extends Controller
 
         session()->flash('success', 'Tanggapan anda sudah disimpan!');
         session()->flash('error', 'Tanggapan anda gagal disimpan!');
-        return redirect(route('peminjaman.admin'));
+        return redirect(route('pinjam.admin'));
     }
 
     public function destroy(Peminjaman $peminjaman)

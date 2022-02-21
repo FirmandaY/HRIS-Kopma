@@ -32,10 +32,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><b>Konfirmasi Mandiv</b></td>
-                    <td> {{ $pinjam->acc_mandiv->nama }}</td>
-                </tr>
-                <tr>
                     <td><b>Konfirmasi HRD</b></td>
                     <td> {{ $pinjam->acc_hrd->nama }}</td>
                 </tr>

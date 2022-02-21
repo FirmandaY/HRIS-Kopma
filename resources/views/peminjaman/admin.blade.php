@@ -78,35 +78,8 @@
                                     @endif
                                     <td>{{$pinjam->user->name}}</td>
                                     <td>{{\Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y')}}</td>
-                                    <td></td>
+                                    <td>{{ $pinjam->created_at->diffForHumans() }}</td>
                                     <td>{{$pinjam->acc_hrd->nama}}</td>
-                                    <td>
-                                        <a href="/pinjam/{{$pinjam->slug}}/edit" class="btn btn-sm btn-info">detail</a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                            @elseif($role_id == 2)
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Tanggal Mengajukan</th>
-                                    <th>Waktu</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($pinjams as $pinjam)
-                                @if($pinjam->acc_mandiv_id == 1)
-                                <tr style="color:tomato;">
-                                    @else
-                                <tr>
-                                    @endif
-                                    <td>{{$pinjam->user->name}}</td>
-                                    <td>{{\Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y')}}</td>
-                                    <td></td>
-                                    <td>{{$pinjam->acc_mandiv->nama}}</td>
                                     <td>
                                         <a href="/pinjam/{{$pinjam->slug}}/edit" class="btn btn-sm btn-info">detail</a>
                                     </td>

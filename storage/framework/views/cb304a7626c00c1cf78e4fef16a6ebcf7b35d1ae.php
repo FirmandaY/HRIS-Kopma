@@ -2,7 +2,7 @@
 <?php $__env->startSection('content'); ?>
 <div class="card card-info col-sm-12 p-0">
     <div class="card-header">
-        <h1 class="card-title">Daftar Pengajuan Peminjaman</h1>
+        <h1 class="card-title">Daftar Pengajuan Izin</h1>
     </div>
 </div>
 
@@ -21,7 +21,7 @@
 
             <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
                 <i class="fas fa-trash-alt">
-                </i> Hapus Semua Data Peminjaman
+                </i> Hapus Semua Data Izin
             </button>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -35,7 +35,7 @@
                         <div class="modal-body">
                             <p>Fungsi ini memungkinkan anda menghapus semua data pengajuan cuti karyawan</p>
                             <p>Biasanya hanya digunakan saat pergantian tahun / kepengurusan.</p>
-                            <form action="/pinjam/delete-all" method="post">
+                            <form action="/izin/delete-all" method="post">
                                 <?php echo method_field('delete'); ?>
                                 <?php echo csrf_field(); ?>
                                 <div class="d-flex justify-content-between">
@@ -54,7 +54,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"><strong>Rekap Permohonan Peminjaman Karyawan</strong></h3>
+                        <h3 class="card-title"><strong>Rekap Permohonan Izin Karyawan</strong></h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
@@ -70,18 +70,45 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $__currentLoopData = $pinjams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pinjam): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php if($pinjam->acc_hrd_id == 1): ?>
+                                <?php $__currentLoopData = $izins; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $izin): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if($izin->acc_hrd_id == 1): ?>
                                 <tr style="color:tomato;">
                                     <?php else: ?>
                                 <tr>
                                     <?php endif; ?>
-                                    <td><?php echo e($pinjam->user->name); ?></td>
-                                    <td><?php echo e(\Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y')); ?></td>
-                                    <td><?php echo e($pinjam->created_at->diffForHumans()); ?></td>
-                                    <td><?php echo e($pinjam->acc_hrd->nama); ?></td>
+                                    <td><?php echo e($izin->user->name); ?></td>
+                                    <td><?php echo e(\Carbon\Carbon::parse($izin->tgl_izin)->format('d/m/Y')); ?></td>
+                                    <td><?php echo e($izin->wkt_mulai); ?>.00 - <?php echo e($izin->wkt_selesai); ?>.00</td>
+                                    <td><?php echo e($izin->acc_hrd->nama); ?></td>
                                     <td>
-                                        <a href="/pinjam/<?php echo e($pinjam->slug); ?>/edit" class="btn btn-sm btn-info">detail</a>
+                                        <a href="/izin/<?php echo e($izin->slug); ?>/edit" class="btn btn-sm btn-info">detail</a>
+                                    </td>
+                                </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </tbody>
+                            <?php elseif($role_id == 2): ?>
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Tanggal Mengajukan</th>
+                                    <th>Waktu</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $__currentLoopData = $izins; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $izin): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if($izin->acc_mandiv_id == 1): ?>
+                                <tr style="color:tomato;">
+                                    <?php else: ?>
+                                <tr>
+                                    <?php endif; ?>
+                                    <td><?php echo e($izin->user->name); ?></td>
+                                    <td><?php echo e(\Carbon\Carbon::parse($izin->tgl_izin)->format('d/m/Y')); ?></td>
+                                    <td><?php echo e($izin->wkt_mulai); ?>.00 - <?php echo e($izin->wkt_selesai); ?>.00</td>
+                                    <td><?php echo e($izin->acc_mandiv->nama); ?></td>
+                                    <td>
+                                        <a href="/izin/<?php echo e($izin->slug); ?>/edit" class="btn btn-sm btn-info">detail</a>
                                     </td>
                                 </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -95,10 +122,10 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            <?php echo e($pinjams->links()); ?>
+            <?php echo e($izins->links()); ?>
 
         </div>
     </div>
 </section>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.main',['title' => 'Daftar Pengajuan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/peminjaman/admin.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.main',['title' => 'Daftar Pengajuan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/izin/admin.blade.php ENDPATH**/ ?>

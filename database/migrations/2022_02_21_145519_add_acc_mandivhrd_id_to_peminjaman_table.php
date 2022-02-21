@@ -14,8 +14,7 @@ class AddAccMandivhrdIdToPeminjamanTable extends Migration
     public function up()
     {
         Schema::table('peminjaman', function (Blueprint $table) {
-            $table->foreignId('acc_mandiv_id')->default(1)->after('user_id');
-            $table->foreignId('acc_hrd_id')->default(4)->after('acc_mandiv_id');
+            $table->foreignId('acc_hrd_id')->default(1);
         });
     }
 
@@ -27,7 +26,6 @@ class AddAccMandivhrdIdToPeminjamanTable extends Migration
     public function down()
     {
         Schema::table('peminjaman', function (Blueprint $table) {
-            $table->dropColumn('acc_mandiv_id');
             $table->dropColumn('acc_hrd_id');
         });
     }

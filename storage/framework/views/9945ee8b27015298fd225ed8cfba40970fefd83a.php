@@ -1,11 +1,11 @@
-@extends('layouts.main',['title' => 'Daftar Pengajuan'])
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <div class="card card-info col-sm-12 p-0">
         <div class="card-header">
             <h1 class="card-title">Daftar Pengajuan Peminjaman</h1>
         </div>
     </div>
-    @include('layouts.alert')
+    <?php echo $__env->make('layouts.alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <section class="container">
 
@@ -20,7 +20,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <a href="{{ route('pinjam.create') }}" class="btn btn-success">
+                    <a href="<?php echo e(route('pinjam.create')); ?>" class="btn btn-success">
                         <i class="fas fa-plus-square"></i>
                         Ajukan Permohonan Peminjaman</a>
                 </div>
@@ -44,15 +44,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pinjams as $pinjam)
+                                    <?php $__currentLoopData = $pinjams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pinjam): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <td>{{ \Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y') }}</td>
-                                            <td>{{ $pinjam->acc_hrd->nama }}</td>
+                                            <td><?php echo e(\Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y')); ?></td>
+                                            <td><?php echo e($pinjam->acc_hrd->nama); ?></td>
                                             <td>
-                                                <a href="/pinjam/{{ $pinjam->slug }}" class="btn btn-sm btn-info">detail</a>
+                                                <a href="/pinjam/<?php echo e($pinjam->slug); ?>" class="btn btn-sm btn-info">detail</a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
@@ -62,8 +62,11 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                {{ $pinjams->links() }}
+                <?php echo e($pinjams->links()); ?>
+
             </div>
         </div>
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.main',['title' => 'Daftar Pengajuan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/peminjaman/index.blade.php ENDPATH**/ ?>

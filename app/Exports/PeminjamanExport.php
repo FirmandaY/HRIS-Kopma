@@ -28,7 +28,6 @@ class IzinExport implements FromCollection, withMapping, withHeadings
             Carbon::parse($peminjaman->tgl_izin)->toFormattedDateString(),
             $peminjaman->wkt_mulai,
             $peminjaman->wkt_selesai,
-            $peminjaman->acc_mandiv->nama,
             $peminjaman->acc_hrd->nama,
         ];
     }
@@ -43,7 +42,6 @@ class IzinExport implements FromCollection, withMapping, withHeadings
             'Tanggal Peminjaman',
             'Mulai',
             'Selesai',
-            'Acc Mandiv',
             'Acc HRD'
         ];
     }
