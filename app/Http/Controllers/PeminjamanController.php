@@ -57,14 +57,6 @@ class PeminjamanController extends Controller
         $attr['lampiran'] = $lampiran;
 
         //jika divisi non divisi,langsung menuju hrd
-        if ($divisi_id == 5) {
-            $attr['acc_mandiv_id'] = 3;
-            $attr['acc_hrd_id'] = 1;
-        }
-        if ($role_id == 2) {
-            $attr['acc_mandiv_id'] = 3;
-            $attr['acc_hrd_id'] = 1;
-        }
 
         //create peminjaman
         auth()->user()->pinjams()->create($attr);
