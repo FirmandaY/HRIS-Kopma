@@ -100,6 +100,12 @@
                                 <p>Persetujuan Izin</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="<?php echo e(route('pinjam.admin')); ?>" class="nav-link<?php echo e(request()->is('pinjam/admin') ? ' active' : ''); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Persetujuan Peminjaman</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <?php endif; ?>
