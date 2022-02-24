@@ -17,8 +17,11 @@ class CreatePeminjamanTable extends Migration
             $table->id();
             $table->foreignId('user_id', 20);
             $table->string('slug', 191);
+            $table->integer('nominal');
             $table->date('wkt_pinjam');
             $table->date('wkt_selesai');
+            $table->string('email');
+            $table->string('no_telp');
             $table->text('keterangan');
             $table->string('lampiran')->nullable();
             $table->timestamps();

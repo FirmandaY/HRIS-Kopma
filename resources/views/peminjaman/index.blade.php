@@ -38,15 +38,24 @@
 
                                 <thead>
                                     <tr>
-                                        <th>Tanggal Mengajukan</th>
+                                        <th>Waktu Mengajukan</th>
+                                        <th>Waktu Pengembalian</th>
+                                        <th>Nominal</th>
                                         <th>Konfirmasi HRD</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($pinjams as $pinjam)
+                                    @if($pinjam->acc_hrd_id == 1)
+                                        <tr style="color:tomato;">
+                                            @else
                                         <tr>
+                                            @endif
+                                            
                                             <td>{{ \Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($pinjam->wkt_selesai)->format('d/m/Y') }}</td>
+                                            <td> {{ "Rp".number_format($pinjam->nominal, 2, ',', '.') }}</td>
                                             <td>{{ $pinjam->acc_hrd->nama }}</td>
                                             <td>
                                                 <a href="/pinjam/{{ $pinjam->slug }}" class="btn btn-sm btn-info">detail</a>

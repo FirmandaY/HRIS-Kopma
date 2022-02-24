@@ -28,7 +28,7 @@
 </div> -->
 <div class="card card-info col-sm-12">
     <div class="card-header">
-        <h3 class="card-title">Persetujuan pinjam Oleh Karyawan</h3>
+        <h3 class="card-title">Persetujuan Peminjaman Karyawan</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -57,6 +57,18 @@
                 <tr>
                     <td><b>Jenis Kelamin</b></td>
                     <td> <?php echo e($pinjam->user->gender); ?></td>
+                </tr>
+                <tr>
+                    <td><b>Nomor Telepon</b></td>
+                    <td> <?php echo e($pinjam->no_telp); ?> 
+                        <a href="https://wa.me/<?php echo e($pinjam->no_telp); ?>">
+                            <i class="fab fa-whatsapp" style="font-size:16px; color:green; margin-left:8px;"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Alamat Email</b></td>
+                    <td> <?php echo e($pinjam->email); ?></td>
                 </tr>
             </table>
         </div>
@@ -112,6 +124,15 @@ unset($__errorArgs, $__bag); ?>
 
             <div class="row">
                 <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Nominal Peminjaman</label> <br>
+                        <bold><h4><?php echo e("Rp".number_format($pinjam->nominal, 2, ',', '.')); ?></h4 ></bold>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
                     <!-- textarea -->
                     <div class="form-group">
                         <label>Keterangan</label>
@@ -143,7 +164,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <div class="row">
 
-                <div class="col-sm-3">
+                <div class="col-sm-3" >
                     <div class="form-group">
                         <label for="exampleSelectRounded0">Acc HRD</label>
                         <select class="custom-select rounded-0" id="acc_hrd" name="acc_hrd">

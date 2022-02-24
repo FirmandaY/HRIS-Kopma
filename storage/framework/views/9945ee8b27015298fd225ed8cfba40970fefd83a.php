@@ -38,15 +38,24 @@
 
                                 <thead>
                                     <tr>
-                                        <th>Tanggal Mengajukan</th>
+                                        <th>Waktu Mengajukan</th>
+                                        <th>Waktu Pengembalian</th>
+                                        <th>Nominal</th>
                                         <th>Konfirmasi HRD</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $__currentLoopData = $pinjams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pinjam): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($pinjam->acc_hrd_id == 1): ?>
+                                        <tr style="color:tomato;">
+                                            <?php else: ?>
                                         <tr>
+                                            <?php endif; ?>
+                                            
                                             <td><?php echo e(\Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y')); ?></td>
+                                            <td><?php echo e(\Carbon\Carbon::parse($pinjam->wkt_selesai)->format('d/m/Y')); ?></td>
+                                            <td> <?php echo e("Rp".number_format($pinjam->nominal, 2, ',', '.')); ?></td>
                                             <td><?php echo e($pinjam->acc_hrd->nama); ?></td>
                                             <td>
                                                 <a href="/pinjam/<?php echo e($pinjam->slug); ?>" class="btn btn-sm btn-info">detail</a>

@@ -22,7 +22,7 @@ class PeminjamanController extends Controller
     {
         $role_id = Auth::user()->role_id;
         if ($role_id == 1) {
-            $pinjams = Peminjaman::where('acc_hrd_id', 1)->latest()->simplePaginate(12);
+            $pinjams = Peminjaman::orderBy('id', 'desc')->latest()->simplePaginate(12);
         } else {
             $pinjams = Peminjaman::whereHas('user', function ($query) {
                 $divisi_id = Auth::user()->divisi_id;
@@ -41,7 +41,9 @@ class PeminjamanController extends Controller
     {
         //validasi lampiran
         $request->validate([
-            'lampiran' => 'image|mimes:jpg,jpeg,png,svg|max:2048'
+            'lampiran' => 'image|mimes:jpg,jpeg,png,svg|max:2048',
+            'email' => 'required|email',
+            'no_telp'=> 'required'
         ]);
         if (request()->file('lampiran')) {
             $lampiran = request()->file('lampiran')->store("images/peminjaman");
@@ -78,27 +80,17 @@ class PeminjamanController extends Controller
             'acc_hrds' => Acc_hrd::get(),
         ]);
     }
-    public function update(PeminjamanRequest $request, Peminjaman $peminjaman)
+    public function update(PeminjamanRequest $request, Peminjaman $pinjam)
     {
         $role_id = Auth::user()->role_id;
         $attr = $request->all();
-        $attr['acc_mandiv_id'] = request('acc_mandiv');
+       
         $attr['acc_hrd_id'] = request('acc_hrd');
 
         //pengkondisian status acc, saling berelasi antara acc mandiv dan acc hrd
         // 1 = diproses, 2 = ditolak, 3 = disetujui, (acc hrd, 4 = - ) 
-        if (request('acc_mandiv') == 1) {
-            $attr['acc_hrd_id'] = 4;
-        } elseif (request('acc_mandiv') == 2) {
-            $attr['acc_hrd_id'] = 2;
-        } elseif (request('acc_mandiv') == 3 && !request('acc_hrd')) {
-            $attr['acc_hrd_id'] = 1;
-        } elseif (request('acc_mandiv') == 3 && request('acc_hrd') == 4) {
-            $attr['acc_hrd_id'] = 1;
-        } elseif (request('acc_mandiv') == 3 && request('acc_hrd') == 2 && $role_id == 2) {
-            $attr['acc_hrd_id'] = 1;
-        }
-        $peminjaman->update($attr);
+        
+        $pinjam->update($attr);
 
         session()->flash('success', 'Tanggapan anda sudah disimpan!');
         session()->flash('error', 'Tanggapan anda gagal disimpan!');

@@ -13,7 +13,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $roles = collect(['Admin', 'Manajer Divisi', 'Karyawan']);
+        $roles = collect(['Admin', 'Manajer Divisi', 'Karyawan', 'Pengurus']);
         $roles->each(function ($c) {
             \App\Models\Role::create([
                 'nama' => $c

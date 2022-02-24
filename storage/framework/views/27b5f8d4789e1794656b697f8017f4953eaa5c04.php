@@ -9,12 +9,28 @@
         <div class="row">
             <table class="table table-bordered">
                 <tr>
+                    <td><b>Tanggal Pengajuan</b></td>
+                    <td> <?php echo e(\Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y')); ?></td>
+                </tr>
+                <tr>
                     <td><b>Tanggal Pinjam</b></td>
                     <td> <?php echo e(\Carbon\Carbon::parse($pinjam->wkt_pinjam)->format('d/m/Y')); ?></td>
                 </tr>
                 <tr>
                     <td><b>Tanggal Kembali</b></td>
-                    <td> <?php echo e($pinjam->wkt_selesai); ?></td>
+                    <td> <?php echo e(\Carbon\Carbon::parse($pinjam->wkt_selesai)->format('d/m/Y')); ?></td>
+                </tr>
+                <tr>
+                    <td><b>Nominal Uang</b></td>
+                    <td> <?php echo e("Rp".number_format($pinjam->nominal, 2, ',', '.')); ?></td>
+                </tr>
+                <tr>
+                    <td><b>Nomor Telepon</b></td>
+                    <td> <?php echo e($pinjam->no_telp); ?></td>
+                </tr>
+                <tr>
+                    <td><b>Alamat Email</b></td>
+                    <td> <?php echo e($pinjam->email); ?></td>
                 </tr>
                 <tr>
                     <td><b>Keterangan</b></td>
