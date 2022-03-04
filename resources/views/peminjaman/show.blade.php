@@ -13,12 +13,8 @@
                     <td> {{\Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y')}}</td>
                 </tr>
                 <tr>
-                    <td><b>Tanggal Pinjam</b></td>
-                    <td> {{\Carbon\Carbon::parse($pinjam->wkt_pinjam)->format('d/m/Y')}}</td>
-                </tr>
-                <tr>
-                    <td><b>Tanggal Kembali</b></td>
-                    <td> {{\Carbon\Carbon::parse($pinjam->wkt_selesai)->format('d/m/Y')}}</td>
+                    <td><b>Bulan Pinjam</b></td>
+                    <td> {{\Carbon\Carbon::parse($pinjam->bln_pinjam)->format('F')}}</td>
                 </tr>
                 <tr>
                     <td><b>Nominal Uang</b></td>

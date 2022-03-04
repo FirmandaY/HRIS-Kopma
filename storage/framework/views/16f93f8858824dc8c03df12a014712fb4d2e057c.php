@@ -83,11 +83,11 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <div class="form-group">
-                        <label>Tanggal Mulai</label>
-                        <input type="date" class="form-control" id="wkt_pinjam" name="wkt_pinjam" value="<?php echo e(old('wkt_pinjam') ?? $pinjam->wkt_pinjam); ?>">
+                <div class="form-group">
+                        <label for="exampleSelectRounded0">Bulan Pengajuan</label>
+                        <input type="month" class="form-control" id="bln_pinjam" name="bln_pinjam" value="<?php echo e($pinjam->bln_pinjam); ?>">
                         <div class="text-danger">
-                            <?php $__errorArgs = ['wkt_pinjam'];
+                            <?php $__errorArgs = ['bln_pinjam'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -101,25 +101,7 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label>Tanggal Selesai</label>
-                        <input type="date" class="form-control" id="wkt_selesai" name="wkt_selesai" value="<?php echo e(old('wkt_selesai') ?? $pinjam->wkt_selesai); ?>">
-                        <div class="text-danger">
-                            <?php $__errorArgs = ['wkt_selesai'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                            <?php echo e($message); ?>
-
-                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
 
             <div class="row">

@@ -14,11 +14,7 @@
                 </tr>
                 <tr>
                     <td><b>Tanggal Pinjam</b></td>
-                    <td> <?php echo e(\Carbon\Carbon::parse($pinjam->wkt_pinjam)->format('d/m/Y')); ?></td>
-                </tr>
-                <tr>
-                    <td><b>Tanggal Kembali</b></td>
-                    <td> <?php echo e(\Carbon\Carbon::parse($pinjam->wkt_selesai)->format('d/m/Y')); ?></td>
+                    <td> <?php echo e(\Carbon\Carbon::parse($pinjam->bln_pinjam)->format('F')); ?></td>
                 </tr>
                 <tr>
                     <td><b>Nominal Uang</b></td>

@@ -41,7 +41,7 @@
                                 <thead>
                                     <tr>
                                         <th>Waktu Mengajukan</th>
-                                        <th>Waktu Pengembalian</th>
+                                        <th>Bulan Pengajuan</th>
                                         <th>Nominal</th>
                                         <th>Konfirmasi HRD</th>
                                         <th>Aksi</th>
@@ -56,7 +56,7 @@
                                             @endif
                                             
                                             <td>{{ \Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y') }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($pinjam->wkt_selesai)->format('d/m/Y') }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($pinjam->bln_pinjam)->format('F') }}</td>
                                             <td> {{ "Rp".number_format($pinjam->nominal, 2, ',', '.') }}</td>
                                             <td>{{ $pinjam->acc_hrd->nama }}</td>
                                             <td>

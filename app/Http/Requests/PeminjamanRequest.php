@@ -24,8 +24,7 @@ class PeminjamanRequest extends FormRequest
     public function rules()
     {
         return [
-            'wkt_pinjam' => 'required|date',
-            'wkt_selesai' => 'required|date|after_or_equal:wkt_pinjam',
+            'bln_pinjam' => 'required',
             'keterangan' => 'required',
         ];
     }

@@ -83,8 +83,13 @@
                 </div>
                 <div class="col-sm-3">
                 <div class="form-group">
-                        <label>Bulan pinjam</label> <br>
-                        <bold><h4>{{ $pinjam->bln_pinjam }}</h4 ></bold>
+                        <label for="exampleSelectRounded0">Bulan Pengajuan</label>
+                        <input type="month" class="form-control" id="bln_pinjam" name="bln_pinjam" value="{{ $pinjam->bln_pinjam }}">
+                        <div class="text-danger">
+                            @error('bln_pinjam')
+                            {{$message}}
+                            @enderror
+                        </div>
                     </div>
                 </div>
                

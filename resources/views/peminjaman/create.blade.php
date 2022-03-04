@@ -13,20 +13,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="exampleSelectRounded0">Bulan Pengajuan</label>
-                        <select class="custom-select rounded-0" id="bln_pinjam" name="bln_pinjam">
-                            <option value="">Januari</option>
-                            <option value="">Februari</option>
-                            <option value="">Maret</option>
-                            <option value="">April</option>
-                            <option value="">Mei</option>
-                            <option value="">Juni</option>
-                            <option value="">Juli</option>
-                            <option value="">Agustus</option>
-                            <option value="">September</option>
-                            <option value="">Oktober</option>
-                            <option value="">November</option>
-                            <option value="">Desember</option>
-                        </select>
+                        <input type="month" class="form-control" id="bln_pinjam" name="bln_pinjam">
                         <div class="text-danger">
                             @error('bln_pinjam')
                             {{$message}}
