@@ -13,7 +13,7 @@ class KategorisTableSeeder extends Seeder
      */
     public function run()
     {
-        $kategoris = collect(['Cuti Tahunan', 'Cuti Haid', 'Cuti Melahirkan']);
+        $kategoris = collect(['Cuti Tahunan', 'Cuti Haid', 'Cuti Melahirkan', 'Cuti Khusus']);
         $kategoris->each(function ($c) {
             \App\Models\Kategori::create([
                 'nama' => $c

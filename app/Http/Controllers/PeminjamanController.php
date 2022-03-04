@@ -22,7 +22,7 @@ class PeminjamanController extends Controller
     {
         $role_id = Auth::user()->role_id;
         if ($role_id == 1) {
-            $pinjams = Peminjaman::orderBy('id', 'desc')->latest()->simplePaginate(12);
+            $pinjams = Peminjaman::orderBy('id', 'asc')->latest()->simplePaginate(12);
         } else {
             $pinjams = Peminjaman::whereHas('user', function ($query) {
                 $divisi_id = Auth::user()->divisi_id;

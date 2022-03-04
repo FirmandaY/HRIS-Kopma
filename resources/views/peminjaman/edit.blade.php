@@ -82,34 +82,22 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <div class="form-group">
-                        <label>Tanggal Mulai</label>
-                        <input type="date" class="form-control" id="wkt_pinjam" name="wkt_pinjam" value="{{old('wkt_pinjam') ?? $pinjam->wkt_pinjam}}">
-                        <div class="text-danger">
-                            @error('wkt_pinjam')
-                            {{$message}}
-                            @enderror
-                        </div>
+                <div class="form-group">
+                        <label>Bulan pinjam</label> <br>
+                        <bold><h4>{{ $pinjam->bln_pinjam }}</h4 ></bold>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label>Tanggal Selesai</label>
-                        <input type="date" class="form-control" id="wkt_selesai" name="wkt_selesai" value="{{old('wkt_selesai') ?? $pinjam->wkt_selesai}}">
-                        <div class="text-danger">
-                            @error('wkt_selesai')
-                            {{$message}}
-                            @enderror
-                        </div>
-                    </div>
-                </div>
+               
             </div>
 
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Nominal Peminjaman</label> <br>
-                        <bold><h4>{{ "Rp".number_format($pinjam->nominal, 2, ',', '.') }}</h4 ></bold>
+                        <bold>
+                            <h4>{{ "Rp.".number_format($pinjam->nominal, 2, ',', '.') }}</h4 > <h6> Diangsur {{ $pinjam->angsuran }} x </h6>
+                            
+                        </bold>
                     </div>
                 </div>
             </div>

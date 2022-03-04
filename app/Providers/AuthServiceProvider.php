@@ -43,6 +43,9 @@ class AuthServiceProvider extends ServiceProvider
         //--------------------- Ini adalah role authorization tindakan user -----------------
 
         Gate::define('pengajuan', function ($user) {
+            return $user->role_id === 2 || $user->role_id === 3;
+        });
+        Gate::define('pengajuanUniversal', function ($user) {
             return $user->role_id === 2 || $user->role_id === 3 || $user->role_id === 4;
         });
         Gate::define('peminjaman', function ($user) {

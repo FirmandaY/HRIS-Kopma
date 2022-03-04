@@ -10,23 +10,25 @@
         <form action="{{ route('pinjam.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-6">
                     <div class="form-group">
-                        <label>Tanggal Peminjaman</label>
-                        <input type="date" class="form-control" id="wkt_pinjam" name="wkt_pinjam" value="{{ old('wkt_pinjam') }}">
+                        <label for="exampleSelectRounded0">Bulan Pengajuan</label>
+                        <select class="custom-select rounded-0" id="bln_pinjam" name="bln_pinjam">
+                            <option value="">Januari</option>
+                            <option value="">Februari</option>
+                            <option value="">Maret</option>
+                            <option value="">April</option>
+                            <option value="">Mei</option>
+                            <option value="">Juni</option>
+                            <option value="">Juli</option>
+                            <option value="">Agustus</option>
+                            <option value="">September</option>
+                            <option value="">Oktober</option>
+                            <option value="">November</option>
+                            <option value="">Desember</option>
+                        </select>
                         <div class="text-danger">
-                            @error('wkt_pinjam')
-                            {{$message}}
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label>Tanggal Pengembalian</label>
-                        <input type="date" class="form-control" id="wkt_selesai" name="wkt_selesai" value="{{ old('wkt_selesai') }}">
-                        <div class="text-danger">
-                            @error('wkt_selesai')
+                            @error('bln_pinjam')
                             {{$message}}
                             @enderror
                         </div>
@@ -35,13 +37,28 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label>Nominal Peminjaman</label><br>
-                        <small><i>*Batas Peminjaman Maksimal Rp.1.000.000,00</i></small>
+                        
                         <input type="text" class="form-control" id="nominal" name="nominal" value="{{ old('nominal') }}">
                         <div class="text-danger">
                             @error('nominal')
+                            {{$message}}
+                            @enderror
+                        </div>
+                        <small><i>*Peminjaman Minimal Rp.500.000,00 Maksimal Rp.800.000,00</i></small>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="exampleSelectRounded0">Angsuran Perbulan</label>
+                        <select class="custom-select rounded-0" id="angsuran" name="angsuran">
+                            @for ($i = 2; $i < 5; $i++) <option value="{{$i}}">{{$i}} x angsur</option>
+                                @endfor
+                        </select>
+                        <div class="text-danger">
+                            @error('angsuran')
                             {{$message}}
                             @enderror
                         </div>
@@ -78,7 +95,7 @@
                 <div class="col-sm-6">
                     <!-- textarea -->
                     <div class="form-group">
-                        <label>Keterangan</label>
+                        <label>Alasan Peminjaman</label>
                         <textarea class="form-control" rows="3" id="keterangan" name="keterangan" placeholder="Tambahkan keterangan ...">{{ old('keterangan') }}</textarea>
                         <div class="text-danger">
                             @error('keterangan')

@@ -52,5 +52,18 @@ class UsersTableSeeder extends Seeder
                 'email' => 'malfoy@mail.com'
             ]
         );
+        \App\Models\User::create(
+            [
+                'name' => 'Hadi',
+                'role_id' => 4,
+                'divisi_id' => 6,
+                'nik' => '19800607',
+                'tgl_lahir' => now(),
+                'gender' => 'Pria',
+                'no_hp' => '081828312345',
+                'password' => bcrypt('password'),
+                'email' => 'hadi@mail.com'
+            ]
+        );
     }
 }

@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/cuti')->group(function () {
         Route::get('/', [CutiController::class, 'index'])->name('cuti.index');
         Route::get('/admin', [CutiController::class, 'admin'])->middleware('can:edit')->name('cuti.admin');
-        Route::get('/create', [CutiController::class, 'create'])->middleware('can:pengajuan')->name('cuti.create');
+        Route::get('/create', [CutiController::class, 'create'])->middleware('can:pengajuanUniversal')->name('cuti.create');
         Route::post('/create', [CutiController::class, 'store'])->name('cuti.store');
         Route::get('/export', [CutiController::class, 'export'])->middleware('can:isAdmin')->name('cuti.export');
         Route::delete('/delete-all', [CutiController::class, 'destroyAll'])->middleware('can:isAdmin')->name('cuti.delete.all');

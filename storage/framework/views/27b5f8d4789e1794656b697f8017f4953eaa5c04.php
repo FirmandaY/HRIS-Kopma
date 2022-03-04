@@ -25,6 +25,10 @@
                     <td> <?php echo e("Rp".number_format($pinjam->nominal, 2, ',', '.')); ?></td>
                 </tr>
                 <tr>
+                    <td><b>Jumlah Angsuran</b></td>
+                    <td> <?php echo e($pinjam->angsuran); ?> x angsuran</td>
+                </tr>
+                <tr>
                     <td><b>Nomor Telepon</b></td>
                     <td> <?php echo e($pinjam->no_telp); ?></td>
                 </tr>

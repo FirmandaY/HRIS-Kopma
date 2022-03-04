@@ -126,7 +126,10 @@ unset($__errorArgs, $__bag); ?>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>Nominal Peminjaman</label> <br>
-                        <bold><h4><?php echo e("Rp".number_format($pinjam->nominal, 2, ',', '.')); ?></h4 ></bold>
+                        <bold>
+                            <h4><?php echo e("Rp.".number_format($pinjam->nominal, 2, ',', '.')); ?></h4 > <h6> Diangsur <?php echo e($pinjam->angsuran); ?> x </h6>
+                            
+                        </bold>
                     </div>
                 </div>
             </div>

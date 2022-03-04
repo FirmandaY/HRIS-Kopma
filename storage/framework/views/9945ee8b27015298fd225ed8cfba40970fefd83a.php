@@ -13,13 +13,14 @@
             <div class="callout callout-info col-sm-12 mb-4">
                 <h6><b>Informasi</b></h6>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed condimentum nunc, in porta sapien.
-                    Vestibulum lacinia est magna. Suspendisse at venenatis risus, nec laoreet eros. Donec ex diam, dapibus
-                    sed rhoncus sit amet, rhoncus sit amet nulla. Fusce commodo dapibus velit. Etiam dui sapien,
-                    sollicitudin vel quam eget, mollis tempor lacus.</p>
+                <p>
+                    Silahkan Konfirmasi Pinjaman Anda ke nomor WhatsApp di bawah ini. <br>
+                    Amanda : 0812-8690-0347 <br>
+                    Fishio : 0896-7357-5487
+                </p>
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-10">
                     <a href="<?php echo e(route('pinjam.create')); ?>" class="btn btn-success">
                         <i class="fas fa-plus-square"></i>
                         Ajukan Permohonan Peminjaman</a>
@@ -31,6 +32,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"><strong>Riwayat Pengajuan Peminjaman Anda</strong></h3>
+                            
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
