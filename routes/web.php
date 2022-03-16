@@ -33,7 +33,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('/anggota')->middleware('can:isAdmin')->group(function () {
-        Route::get('/', [KelolaController::class, 'index'])->name('kelola.index');
+        Route::get('/pengurus', [KelolaController::class, 'indexPengurus'])->name('kelola.indexPengurus');
+        Route::get('/karyawan', [KelolaController::class, 'index'])->name('kelola.index');
         
         Route::get('/trashed', [KelolaController::class, 'trashed'])->name('kelola.trashed');
         Route::get('/daftar', [KelolaController::class, 'create'])->name('kelola.daftar');

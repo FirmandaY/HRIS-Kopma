@@ -13,7 +13,7 @@
                     <td> <?php echo e(\Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y')); ?></td>
                 </tr>
                 <tr>
-                    <td><b>Tanggal Pinjam</b></td>
+                    <td><b>Bulan Pinjam</b></td>
                     <td> <?php echo e(\Carbon\Carbon::parse($pinjam->bln_pinjam)->format('F')); ?></td>
                 </tr>
                 <tr>

@@ -17,8 +17,14 @@ class KelolaController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('divisi_id', 'ASC')->get();
-        return view('user.index', compact('users'));
+        $users = User::whereBetween('role_id', [2, 3])->get();
+        $role = User::where('role_id', 3)->get();
+        return view('user.index', compact('users', 'role'));
+    }
+    public function indexPengurus()
+    {
+        $users = User::where('role_id', 4, 'ASC')->get();
+        return view('user.indexPengurus', compact('users'));
     }
     public function trashed()
     {
@@ -59,7 +65,7 @@ class KelolaController extends Controller
         User::create($attr);
         session()->flash('success', 'Data akun karyawan berhasil dibuat');
         session()->flash('error', 'Data akun karyawan gagal dibuat');
-        return redirect(route('kelola.index'));
+        return redirect()->back();
     }
 
 

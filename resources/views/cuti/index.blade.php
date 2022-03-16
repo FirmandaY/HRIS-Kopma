@@ -37,7 +37,11 @@
                                 <tr>
                                     <th>Jenis Cuti</th>
                                     <th>Tanggal Mengajukan</th>
+                                    
+                                    @if($role != 4)
                                     <th>Konfirmasi Mandiv</th>
+                                    @endif
+                                    
                                     <th>Konfirmasi HRD</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -47,7 +51,11 @@
                                 <tr>
                                     <td>{{$cuti->kategori->nama}}</td>
                                     <td>{{\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')}}</td>
+
+                                    @if($role != 4)
                                     <td>{{$cuti->acc_mandiv->nama}}</td>
+                                    @endif
+
                                     <td>{{$cuti->acc_hrd->nama}}</td>
                                     <td>
                                         <a href="/cuti/{{$cuti->slug}}" class="btn btn-sm btn-info">detail</a>

@@ -39,6 +39,7 @@
                 <li class="nav-item
                 {{request()->is('cuti') || request()->is('cuti/create') || request()->is('izin') || request()->is('izin/create')  ? 
                 ' menu-open' : ''}}">
+                @can('pengajuanUniversal')
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-plus-square"></i>
                         <p>
@@ -48,7 +49,7 @@
                     </a>
                     
                     <ul class="nav nav-treeview">
-                        @can('pengajuanUniversal')
+                        
                         <li class="nav-item">
                             <a href="{{route('cuti.index')}}" class="nav-link
                             {{request()->is('cuti') || request()->is('cuti/create') ?
@@ -57,7 +58,7 @@
                                 <p>Pengajuan Cuti</p>
                             </a>
                         </li>
-                        @endcan
+                        
 
                         @can('pengajuan')
                         <li class="nav-item">
@@ -84,7 +85,8 @@
                     </ul>
                     
                 </li>
-                
+                @endcan
+
                 @can('persetujuan')
                 <li class="nav-item{{request()->is('cuti/admin') ||  request()->is('izin/admin')   ? ' menu-open' : ''}}">
                     <a href="#" class="nav-link">
@@ -128,8 +130,8 @@
                 </li>
 
                 @can('isAdmin')
-                <li class="nav-item{{request()->is('anggota') || request()->is('anggota/*') ? ' menu-open':''}}">
-                    <a href="{{route('kelola.index')}}" class="nav-link">
+                <li class="nav-item{{request()->is('angota') || request()->is('anggota/*') ? ' menu-open':''}}">
+                    <a href="{{route('kelola.indexPengurus')}}" class="nav-link">
                         <i class="nav-icon fas fa-user-friends"></i>
                         <p>
                             Kelola Pengurus

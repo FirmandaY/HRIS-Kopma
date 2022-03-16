@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CutiRequest;
-use App\Models\{Cuti, Kategori, Acc_mandiv, Acc_hrd};
+use App\Models\{Cuti, Kategori, Acc_mandiv, Acc_hrd, User};
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +16,10 @@ class CutiController extends Controller
     public function index()
     {
         $id = Auth::id();
+        $role = Auth::user()->role_id;
         $cutis = Cuti::where('user_id', $id)->orderBy('created_at', 'desc')->simplePaginate(12);
 
-        return view('cuti.index', compact('cutis'));
+        return view('cuti.index', compact('cutis', 'role'));
     }
     public function admin()
     {
@@ -40,6 +41,7 @@ class CutiController extends Controller
 
     public function create()
     {
+        $role_id = Auth::user()->role_id;
         $user = Auth::user();
         $kategoris = Kategori::get();
         $cutis = Cuti::where([
@@ -107,6 +109,12 @@ class CutiController extends Controller
             $attr['acc_hrd_id'] = 1;
         }
         if ($role_id == 2) {
+            $attr['acc_mandiv_id'] = 3;
+            $attr['acc_hrd_id'] = 1;
+        }
+
+        //Pengurus tidak membutuhkan izin dari Mandiv, maka langsung lurus ke hrd
+        if ($role_id == 4) {
             $attr['acc_mandiv_id'] = 3;
             $attr['acc_hrd_id'] = 1;
         }

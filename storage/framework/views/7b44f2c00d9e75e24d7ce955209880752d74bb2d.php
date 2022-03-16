@@ -37,7 +37,11 @@
                                 <tr>
                                     <th>Jenis Cuti</th>
                                     <th>Tanggal Mengajukan</th>
+                                    
+                                    <?php if($role != 4): ?>
                                     <th>Konfirmasi Mandiv</th>
+                                    <?php endif; ?>
+                                    
                                     <th>Konfirmasi HRD</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -47,7 +51,11 @@
                                 <tr>
                                     <td><?php echo e($cuti->kategori->nama); ?></td>
                                     <td><?php echo e(\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')); ?></td>
+
+                                    <?php if($role != 4): ?>
                                     <td><?php echo e($cuti->acc_mandiv->nama); ?></td>
+                                    <?php endif; ?>
+
                                     <td><?php echo e($cuti->acc_hrd->nama); ?></td>
                                     <td>
                                         <a href="/cuti/<?php echo e($cuti->slug); ?>" class="btn btn-sm btn-info">detail</a>
