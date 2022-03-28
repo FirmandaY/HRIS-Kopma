@@ -37,7 +37,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/karyawan', [KelolaController::class, 'index'])->name('kelola.index');
         
         Route::get('/trashed', [KelolaController::class, 'trashed'])->name('kelola.trashed');
-        Route::get('/daftar', [KelolaController::class, 'create'])->name('kelola.daftar');
+
+        Route::get('/daftarKaryawan', [KelolaController::class, 'create'])->name('kelola.daftarKaryawan');
+        Route::get('/daftarPengurus', [KelolaController::class, 'createPengurus'])->name('kelola.daftarPengurus');
+
         Route::post('/daftar', [KelolaController::class, 'store'])->name('kelola.store');
         Route::get('/{user:nik}/edit', [KelolaController::class, 'edit']);
         Route::patch('/{user:nik}/edit', [KelolaController::class, 'update']);

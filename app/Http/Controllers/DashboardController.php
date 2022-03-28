@@ -29,7 +29,12 @@ class DashboardController extends Controller
             ->get();
         $cuti = Cuti::count();
         $izin = Izin::count();
-        return view('dashboard', compact('user', 'cuti', 'izin', 'isCuti', 'isIzin'));
+
+        $usersKaryawan = User::whereBetween('role_id', [2, 3])->get();
+        $usersPengurus = User::where('role_id', 4, 'ASC')->get();
+
+
+        return view('dashboard', compact('user', 'cuti', 'izin', 'isCuti', 'isIzin', 'usersKaryawan', 'usersPengurus'));
     }
     public function cuti(Request $request)
     {

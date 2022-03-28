@@ -2,7 +2,7 @@
 <?php $__env->startSection('content'); ?>
 <div class="card card-info col-sm-12">
     <div class="card-header">
-        <h3 class="card-title">Isikan data pada formulir berikut</h3>
+        <h3 class="card-title">Isikan data Pengurus pada formulir berikut</h3>
     </div>
     <?php echo $__env->make('layouts.alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- /.card-header -->
@@ -234,4 +234,4 @@ unset($__errorArgs, $__bag); ?>
     }
 </script>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.main',['title' => 'Tambah Karyawan|Pengurus'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/user/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.main',['title' => 'Tambah Karyawan|Pengurus'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/user/createPengurus.blade.php ENDPATH**/ ?>

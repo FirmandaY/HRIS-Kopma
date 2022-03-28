@@ -35,7 +35,14 @@ class KelolaController extends Controller
 
     public function create()
     {
-        return view('user.create', [
+        return view('user.createKaryawan', [
+            'roles' => Role::get(),
+            'divisis' => Divisi::get(),
+        ]);
+    }
+    public function createPengurus()
+    {
+        return view('user.createPengurus', [
             'roles' => Role::get(),
             'divisis' => Divisi::get(),
         ]);
@@ -63,8 +70,8 @@ class KelolaController extends Controller
             return redirect(route('kelola.index'));
         }
         User::create($attr);
-        session()->flash('success', 'Data akun karyawan berhasil dibuat');
-        session()->flash('error', 'Data akun karyawan gagal dibuat');
+        session()->flash('success', 'Data akun berhasil dibuat');
+        session()->flash('error', 'Data akun gagal dibuat');
         return redirect()->back();
     }
 
@@ -150,9 +157,9 @@ class KelolaController extends Controller
             return redirect(route('kelola.index'));
         }
         $user->update($attr);
-        session()->flash('success', 'Data akun karyawan berhasil diperbarui');
-        session()->flash('error', 'Data akun karyawan gagal diperbarui');
-        return redirect(route('kelola.index'));
+        session()->flash('success', 'Data akun berhasil diperbarui');
+        session()->flash('error', 'Data akun gagal diperbarui');
+        return redirect()->back();
     }
 
 

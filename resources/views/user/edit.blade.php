@@ -1,9 +1,10 @@
-@extends('layouts.main',['title' => 'Edit Karyawan'])
+@extends('layouts.main',['title' => 'Edit Profil Pengurus | Karyawan'])
 @section('content')
 <div class="card card-info col-sm-12">
     <div class="card-header">
         <h3 class="card-title">Profil</h3>
     </div>
+    @include('layouts.alert')
     <div class="d-flex justify-content-end">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
@@ -14,7 +15,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title" id="exampleModalLabel">Yakin ingin menghapus data akun karyawan {{$user->name}} ?</h6>
+                        <h6 class="modal-title" id="exampleModalLabel">Yakin ingin menghapus data akun {{$user->name}} ?</h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

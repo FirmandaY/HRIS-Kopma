@@ -43,13 +43,28 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3><?php echo e($user); ?></h3>
+                        <h3><?php echo e(count($usersKaryawan)); ?></h3>
                         <p>Kelola Data Karyawan</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
                     <a href="<?php echo e(route('kelola.index')); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+
+            </div>
+
+            <div class="col">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3><?php echo e(count($usersPengurus)); ?></h3>
+                        <p>Kelola Data Pengurus</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="<?php echo e(route('kelola.indexPengurus')); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
 
             </div>

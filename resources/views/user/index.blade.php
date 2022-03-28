@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row justify-content-between">
 
-            <a href="{{ route('kelola.daftar') }}" class="btn btn-success">
+            <a href="{{ route('kelola.daftarKaryawan') }}" class="btn btn-success">
                 <i class="fas fa-plus-square"></i>
                 Tambah Karyawan Baru</a>
 

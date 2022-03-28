@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row justify-content-between">
 
-            <a href="{{ route('kelola.daftar') }}" class="btn btn-success">
+            <a href="{{ route('kelola.daftarPengurus') }}" class="btn btn-success">
                 <i class="fas fa-plus-square"></i>
                 Tambah Pengurus Baru</a>
 

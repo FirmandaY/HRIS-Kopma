@@ -4,6 +4,7 @@
     <div class="card-header">
         <h3 class="card-title">Profil</h3>
     </div>
+    <?php echo $__env->make('layouts.alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="d-flex justify-content-end">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
@@ -14,7 +15,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title" id="exampleModalLabel">Yakin ingin menghapus data akun karyawan <?php echo e($user->name); ?> ?</h6>
+                        <h6 class="modal-title" id="exampleModalLabel">Yakin ingin menghapus data akun <?php echo e($user->name); ?> ?</h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -226,4 +227,4 @@ unset($__errorArgs, $__bag); ?>
 </div>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.main',['title' => 'Edit Karyawan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/user/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.main',['title' => 'Edit Profil Pengurus | Karyawan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/user/edit.blade.php ENDPATH**/ ?>

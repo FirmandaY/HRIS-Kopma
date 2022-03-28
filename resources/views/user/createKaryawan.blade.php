@@ -1,9 +1,10 @@
-@extends('layouts.main',['title' => 'Tambah Karyawan'])
+@extends('layouts.main',['title' => 'Tambah Karyawan|Pengurus'])
 @section('content')
 <div class="card card-info col-sm-12">
     <div class="card-header">
-        <h3 class="card-title">Tambah Karyawan</h3>
+        <h3 class="card-title">Isikan data Karyawan pada formulir berikut</h3>
     </div>
+    @include('layouts.alert')
     <!-- /.card-header -->
     <div class="card-body">
 
