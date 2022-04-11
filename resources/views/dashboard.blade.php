@@ -16,7 +16,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{$cuti}}</h3>
-                        <p>Rekap Data Cuti Karyawan</p>
+                        <p>Rekap Data Cuti</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
@@ -29,15 +29,17 @@
                 <div class="small-box bg-teal">
                     <div class="inner">
                         <h3>{{$izin}}</h3>
-                        <p>Rekap Data Izin Karyawan</p>
+                        <p>Rekap Data Izin</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
                     <a href="{{route('rekap.izin', ['year' => now()->year])}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-
             </div>
+            
+        </div>
+        <div class="row">
             @can('isAdmin')
             <div class="col">
                 <!-- small box -->

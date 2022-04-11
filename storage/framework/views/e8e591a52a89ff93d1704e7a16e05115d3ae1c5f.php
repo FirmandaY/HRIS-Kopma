@@ -13,7 +13,7 @@
         <div class="callout callout-info col-sm-12 mb-4">
             <h6><b>Informasi</b></h6>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed condimentum nunc, in porta sapien. Vestibulum lacinia est magna. Suspendisse at venenatis risus, nec laoreet eros. Donec ex diam, dapibus sed rhoncus sit amet, rhoncus sit amet nulla. Fusce commodo dapibus velit. Etiam dui sapien, sollicitudin vel quam eget, mollis tempor lacus.</p>
+            <p>Seluruh pengajuan cuti dari karyawan (bagi Mandiv dan AdminHRD), dan Pengurus (Khusus AdminHRD) akan ditampilkan di sini.</p>
         </div>
         <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('isAdmin')): ?>
         <div class="row">
@@ -58,61 +58,61 @@
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
                             <?php if($role_id == 1): ?>
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Divisi</th>
-                                    <th>Jenis Cuti</th>
-                                    <th>Tanggal Mengajukan</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $__currentLoopData = $cutis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cuti): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php if($cuti->acc_hrd_id == 1): ?>
-                                <tr style="color:tomato;">
-                                    <?php else: ?>
-                                <tr>
-                                    <?php endif; ?>
-                                    <td><?php echo e($cuti->user->name); ?></td>
-                                    <td><?php echo e($cuti->user->divisi->nama); ?></td>
-                                    <td><?php echo e($cuti->kategori->nama); ?></td>
-                                    <td><?php echo e(\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')); ?></td>
-                                    <td><?php echo e($cuti->acc_hrd->nama); ?></td>
-                                    <td>
-                                        <a href="/cuti/<?php echo e($cuti->slug); ?>/edit" class="btn btn-sm btn-info">detail</a>
-                                    </td>
-                                </tr>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </tbody>
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Divisi</th>
+                                        <th>Jenis Cuti</th>
+                                        <th>Tanggal Mengajukan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $__currentLoopData = $cutis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cuti): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($cuti->acc_hrd_id == 1): ?>
+                                    <tr style="color:tomato;">
+                                        <?php else: ?>
+                                    <tr>
+                                        <?php endif; ?>
+                                        <td><?php echo e($cuti->user->name); ?></td>
+                                        <td><?php echo e($cuti->user->divisi->nama); ?></td>
+                                        <td><?php echo e($cuti->kategori->nama); ?></td>
+                                        <td><?php echo e(\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')); ?></td>
+                                        <td><?php echo e($cuti->acc_hrd->nama); ?></td>
+                                        <td>
+                                            <a href="/cuti/<?php echo e($cuti->slug); ?>/edit" class="btn btn-sm btn-info">detail</a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </tbody>
                             <?php elseif($role_id == 2): ?>
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Jenis Cuti</th>
-                                    <th>Tanggal Mengajukan</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $__currentLoopData = $cutis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cuti): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php if($cuti->acc_mandiv_id == 1): ?>
-                                <tr style="color:tomato;">
-                                    <?php else: ?>
-                                <tr>
-                                    <?php endif; ?>
-                                    <td><?php echo e($cuti->user->name); ?></td>
-                                    <td><?php echo e($cuti->kategori->nama); ?></td>
-                                    <td><?php echo e(\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')); ?></td>
-                                    <td><?php echo e($cuti->acc_mandiv->nama); ?></td>
-                                    <td>
-                                        <a href="/cuti/<?php echo e($cuti->slug); ?>/edit" class="btn btn-sm btn-info">detail</a>
-                                    </td>
-                                </tr>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </tbody>
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Jenis Cuti</th>
+                                        <th>Tanggal Mengajukan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $__currentLoopData = $cutis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cuti): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($cuti->acc_mandiv_id == 1): ?>
+                                    <tr style="color:tomato;">
+                                        <?php else: ?>
+                                    <tr>
+                                        <?php endif; ?>
+                                        <td><?php echo e($cuti->user->name); ?></td>
+                                        <td><?php echo e($cuti->kategori->nama); ?></td>
+                                        <td><?php echo e(\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')); ?></td>
+                                        <td><?php echo e($cuti->acc_mandiv->nama); ?></td>
+                                        <td>
+                                            <a href="/cuti/<?php echo e($cuti->slug); ?>/edit" class="btn btn-sm btn-info">detail</a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </tbody>
                             <?php endif; ?>
 
                         </table>

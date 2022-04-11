@@ -13,7 +13,7 @@
         <div class="callout callout-info col-sm-12 mb-4">
             <h6><b>Informasi</b></h6>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed condimentum nunc, in porta sapien. Vestibulum lacinia est magna. Suspendisse at venenatis risus, nec laoreet eros. Donec ex diam, dapibus sed rhoncus sit amet, rhoncus sit amet nulla. Fusce commodo dapibus velit. Etiam dui sapien, sollicitudin vel quam eget, mollis tempor lacus.</p>
+            <p>Halaman ini berisi riwayat pengajuan izin anda. Semua izin yang pernah anda ajukan akan tercatat di sini.</p>
         </div>
         <div class="row">
             <div class="col-sm-12">

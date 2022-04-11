@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/rekap/cuti', [DashboardController::class, 'cuti'])->name('rekap.cuti');
     Route::get('/rekap/izin', [DashboardController::class, 'izin'])->name('rekap.izin');
+    Route::get('/rekap/cutiPengurus', [DashboardController::class, 'cutiPengurus'])->name('rekap.cutiPengurus');
 
     Route::prefix('/profil')->group(function () {
         Route::get('/', [ProfilController::class, 'show'])->name('profil.show');

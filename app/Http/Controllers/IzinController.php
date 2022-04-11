@@ -24,10 +24,11 @@ class IzinController extends Controller
         if ($role_id == 1) {
             $izins = Izin::where('acc_mandiv_id', 3)->latest()->simplePaginate(12);
         } else {
-            $izins = Izin::whereHas('user', function ($query) {
-                $divisi_id = Auth::user()->divisi_id;
-                $query->whereDivisiId($divisi_id);
-            })->latest()->simplePaginate(12);
+            $izins = Izin::whereBetween('acc_mandiv_id', [1,2])->latest()->simplePaginate(20);
+            //$izins = Izin::whereHas('user', function ($query) {
+            //    $divisi_id = Auth::user()->divisi_id;
+            //    $query->whereDivisiId($divisi_id);
+            //})->latest()->simplePaginate(12);
         }
 
         return view('izin.admin', compact('izins', 'role_id'));

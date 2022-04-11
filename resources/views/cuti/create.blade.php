@@ -22,9 +22,15 @@
                         <label for="exampleSelectRounded0">Jenis Cuti</label>
                         <select class="custom-select rounded-0" id="kategori" name="kategori">
                             <option disabled selected>-Pilih Cuti-</option>
+                            @if($role_id == 4)
+                            @foreach($kategoris as $kategori)
+                            <option value="{{$kategori->id}}">{{ $kategori->nama }}</option>
+                            @endforeach
+                            @else
                             @foreach($kategoris as $kategori)
                             <option value="{{$kategori->id}}">{{$kategori->nama}}</option>
                             @endforeach
+                            @endif
                         </select>
                         <div class="text-danger">
                             @error('kategori')

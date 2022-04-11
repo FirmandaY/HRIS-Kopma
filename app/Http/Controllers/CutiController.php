@@ -25,12 +25,13 @@ class CutiController extends Controller
     {
         $role_id = Auth::user()->role_id;
         if ($role_id == 1) {
-            $cutis = Cuti::where('acc_mandiv_id', 3)->latest()->simplePaginate(20);
+            $cutis = Cuti::where('acc_mandiv_id', 3)->latest()->simplePaginate(20); // $cutis untuk khusus halaman adminhrd
         } else {
-            $cutis = Cuti::whereHas('user', function ($query) {
-                $divisi_id = Auth::user()->divisi_id;
-                $query->whereDivisiId($divisi_id);
-            })->latest()->simplePaginate(20);
+            $cutis = Cuti::whereBetween('acc_mandiv_id', [1,2])->latest()->simplePaginate(20);
+            //$cutis = Cuti::whereHas('user', function ($query) {
+            //    $divisi_id = Auth::user()->divisi_id;
+            //    $query->whereDivisiId($divisi_id);
+            //})->latest()->simplePaginate(20);
         }
         return view('cuti.admin', compact('cutis', 'role_id'));
     }
@@ -57,9 +58,13 @@ class CutiController extends Controller
             $days = $interval->format('%a') + 1;
             $totalCuti += $days;
         }
-        $sisaCutis = 12 - $totalCuti;
-
-        return view('cuti.create', compact('kategoris', 'sisaCutis'));
+        if($role_id == 4){
+            $sisaCutis = 15 - $totalCuti;
+        } else{
+            $sisaCutis = 12 - $totalCuti;
+        }
+        
+        return view('cuti.create', compact('kategoris', 'sisaCutis', 'role_id'));
     }
     public function store(CutiRequest $request)
     {   $role_id = Auth::user()->role_id;

@@ -20,7 +20,7 @@
         <div class="card card-outline card-info">
             <div class="card-header text-center">
                 <img src="{{ asset('layout/dist/img/logo-kopma.png') }}" style="height: 5em;" alt="User Image">
-                <h4>Sistem Informasi Cuti dan Izin Karyawan</h4>
+                <h4>Human Resource Information System</h4>
                 <h4><strong>KOPMA UGM</strong></h4>
                 @if(session()->has('error'))
                 <b style="color: red;">GAGAL! Kesalahan pada NIK atau Kata Sandi</b>
@@ -30,7 +30,7 @@
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" name="nik" id="nik" class="form-control" placeholder="Nomor Induk Karyawan" autocomplete="off">
+                        <input type="text" name="nik" id="nik" class="form-control" placeholder="No. Induk Karyawan / NAK Pengurus" autocomplete="off">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>

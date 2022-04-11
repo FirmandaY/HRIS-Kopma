@@ -13,7 +13,7 @@
         <div class="callout callout-info col-sm-12 mb-4">
             <h6><b>Informasi</b></h6>
 
-            <p> Halaman ini berisi riwayat pengajuan cuti anda</p>
+            <p> Halaman ini berisi riwayat pengajuan cuti anda. Semua Cuti yang pernah anda ajukan akan tercatat di sini.</p>
         </div>
         <div class="row">
             <div class="col-sm-12">

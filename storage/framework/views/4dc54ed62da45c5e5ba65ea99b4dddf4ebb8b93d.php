@@ -22,9 +22,15 @@
                         <label for="exampleSelectRounded0">Jenis Cuti</label>
                         <select class="custom-select rounded-0" id="kategori" name="kategori">
                             <option disabled selected>-Pilih Cuti-</option>
+                            <?php if($role_id == 4): ?>
                             <?php $__currentLoopData = $kategoris; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kategori): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <option value="<?php echo e($kategori->id); ?>"><?php echo e($kategori->nama); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php else: ?>
+                            <?php $__currentLoopData = $kategoris; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $kategori): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <option value="<?php echo e($kategori->id); ?>"><?php echo e($kategori->nama); ?></option>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
                         </select>
                         <div class="text-danger">
                             <?php $__errorArgs = ['kategori'];

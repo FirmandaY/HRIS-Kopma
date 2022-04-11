@@ -13,7 +13,7 @@
         <div class="callout callout-info col-sm-12 mb-4">
             <h6><b>Informasi</b></h6>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed condimentum nunc, in porta sapien. Vestibulum lacinia est magna. Suspendisse at venenatis risus, nec laoreet eros. Donec ex diam, dapibus sed rhoncus sit amet, rhoncus sit amet nulla. Fusce commodo dapibus velit. Etiam dui sapien, sollicitudin vel quam eget, mollis tempor lacus.</p>
+            <p>Seluruh pengajuan cuti dari karyawan (bagi Mandiv dan AdminHRD), dan Pengurus (Khusus AdminHRD) akan ditampilkan di sini.</p>
         </div>
         <!-- @can('isAdmin')
         <div class="row">
@@ -58,61 +58,61 @@
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
                             @if($role_id == 1)
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Divisi</th>
-                                    <th>Jenis Cuti</th>
-                                    <th>Tanggal Mengajukan</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($cutis as $cuti)
-                                @if($cuti->acc_hrd_id == 1)
-                                <tr style="color:tomato;">
-                                    @else
-                                <tr>
-                                    @endif
-                                    <td>{{$cuti->user->name}}</td>
-                                    <td>{{$cuti->user->divisi->nama}}</td>
-                                    <td>{{$cuti->kategori->nama}}</td>
-                                    <td>{{\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')}}</td>
-                                    <td>{{$cuti->acc_hrd->nama}}</td>
-                                    <td>
-                                        <a href="/cuti/{{$cuti->slug}}/edit" class="btn btn-sm btn-info">detail</a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Divisi</th>
+                                        <th>Jenis Cuti</th>
+                                        <th>Tanggal Mengajukan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($cutis as $cuti)
+                                    @if($cuti->acc_hrd_id == 1)
+                                    <tr style="color:tomato;">
+                                        @else
+                                    <tr>
+                                        @endif
+                                        <td>{{$cuti->user->name}}</td>
+                                        <td>{{$cuti->user->divisi->nama}}</td>
+                                        <td>{{$cuti->kategori->nama}}</td>
+                                        <td>{{\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')}}</td>
+                                        <td>{{$cuti->acc_hrd->nama}}</td>
+                                        <td>
+                                            <a href="/cuti/{{$cuti->slug}}/edit" class="btn btn-sm btn-info">detail</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
                             @elseif($role_id == 2)
-                            <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Jenis Cuti</th>
-                                    <th>Tanggal Mengajukan</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($cutis as $cuti)
-                                @if($cuti->acc_mandiv_id == 1)
-                                <tr style="color:tomato;">
-                                    @else
-                                <tr>
-                                    @endif
-                                    <td>{{$cuti->user->name}}</td>
-                                    <td>{{$cuti->kategori->nama}}</td>
-                                    <td>{{\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')}}</td>
-                                    <td>{{$cuti->acc_mandiv->nama}}</td>
-                                    <td>
-                                        <a href="/cuti/{{$cuti->slug}}/edit" class="btn btn-sm btn-info">detail</a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Jenis Cuti</th>
+                                        <th>Tanggal Mengajukan</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($cutis as $cuti)
+                                    @if($cuti->acc_mandiv_id == 1)
+                                    <tr style="color:tomato;">
+                                        @else
+                                    <tr>
+                                        @endif
+                                        <td>{{$cuti->user->name}}</td>
+                                        <td>{{$cuti->kategori->nama}}</td>
+                                        <td>{{\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')}}</td>
+                                        <td>{{$cuti->acc_mandiv->nama}}</td>
+                                        <td>
+                                            <a href="/cuti/{{$cuti->slug}}/edit" class="btn btn-sm btn-info">detail</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
                             @endif
 
                         </table>
