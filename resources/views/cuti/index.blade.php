@@ -58,7 +58,7 @@
 
                                     <td>{{$cuti->acc_hrd->nama}}</td>
                                     <td>
-                                        <a href="{{ route('cuti.show') }}" class="btn btn-sm btn-info">detail</a>
+                                        <a href="/cuti/{{$cuti->slug}}" class="btn btn-sm btn-info">detail</a>
                                     </td>
                                 </tr>
                                 @endforeach
