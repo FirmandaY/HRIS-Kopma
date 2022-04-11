@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/export', [CutiController::class, 'export'])->middleware('can:isAdmin')->name('cuti.export');
         Route::delete('/delete-all', [CutiController::class, 'destroyAll'])->middleware('can:isAdmin')->name('cuti.delete.all');
         Route::get('/lampiran/{cuti:slug}', [CutiController::class, 'lampiran'])->name('cuti.lampiran');
-        Route::get('/{cuti:slug}', [CutiController::class, 'show']);
+        Route::get('/{cuti:slug}', [CutiController::class, 'show'])->name('cuti.show');
         Route::get('/{cuti:slug}/edit', [CutiController::class, 'edit'])->middleware('can:edit')->name('cuti.edit');
         Route::patch('/{cuti:slug}/edit', [CutiController::class, 'update'])->middleware('can:update')->name('cuti.update');
         Route::delete('/{cuti:slug}/delete', [CutiController::class, 'destroy'])->middleware('can:delete');
