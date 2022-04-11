@@ -43,34 +43,34 @@ class AuthServiceProvider extends ServiceProvider
         //--------------------- Ini adalah role authorization tindakan user -----------------
 
         Gate::define('pengajuan', function ($user) {
-            return $user->role_id === 2 || $user->role_id === 3;
+            return $user->role_id == 2 || $user->role_id == 3;
         });
         Gate::define('pengajuanUniversal', function ($user) {
-            return $user->role_id === 2 || $user->role_id === 3 || $user->role_id === 4;
+            return $user->role_id == 2 || $user->role_id == 3 || $user->role_id == 4;
         });
         Gate::define('peminjaman', function ($user) {
-            return $user->role_id === 2 || $user->role_id === 3;
+            return $user->role_id == 2 || $user->role_id == 3;
         });
         Gate::define('persetujuan', function ($user) {
-            return $user->role_id === 1 || $user->role_id === 2;
+            return $user->role_id == 1 || $user->role_id == 2;
         });
         Gate::define('persetujuanPinjam', function ($user) {
-            return $user->role_id === 1;
+            return $user->role_id == 1;
         });
         Gate::define('pengelolaan', function ($user) {
-            return $user->role_id === 1;
+            return $user->role_id == 1;
         });
         Gate::define('edit', function ($user) {
-            return $user->role_id === 1 || $user->role_id === 2;
+            return $user->role_id == 1 || $user->role_id == 2;
         });
         Gate::define('update', function ($user) {
-            return $user->role_id === 1 || $user->role_id === 2;
+            return $user->role_id == 1 || $user->role_id == 2;
         });
         Gate::define('delete', function ($user) {
-            return $user->role_id === 1 || $user->role_id === 2;
+            return $user->role_id == 1 || $user->role_id == 2;
         });
         Gate::define('daftar', function ($user) {
-            return $user->role_id === 1;
+            return $user->role_id == 1;
         });
     }
 }
