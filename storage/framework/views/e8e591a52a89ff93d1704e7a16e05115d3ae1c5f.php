@@ -81,7 +81,14 @@
                                         <td><?php echo e(\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')); ?></td>
                                         <td><?php echo e($cuti->acc_hrd->nama); ?></td>
                                         <td>
-                                            <a href="/cuti/<?php echo e($cuti->slug); ?>/edit" class="btn btn-sm btn-info">detail</a>
+                                            <form action="<?php echo e(route('cuti.edit', $cuti->slug)); ?>" method="get">
+                                                <?php echo csrf_field(); ?>
+                                                <button class="btn btn-warning" onClick="return confirm ('Yakin mau diubah?')"
+                                                style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
+                                                    <i class="fa fa-pencil"></i>Edit 
+                                                </button>
+                                            </form>
+                                            
                                         </td>
                                     </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

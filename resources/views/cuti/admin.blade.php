@@ -81,7 +81,14 @@
                                         <td>{{\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')}}</td>
                                         <td>{{$cuti->acc_hrd->nama}}</td>
                                         <td>
-                                            <a href="/cuti/{{$cuti->slug}}/edit" class="btn btn-sm btn-info">detail</a>
+                                            <form action="{{ route('cuti.edit', $cuti->slug) }}" method="get">
+                                                @csrf
+                                                <button class="btn btn-warning" onClick="return confirm ('Yakin mau diubah?')"
+                                                style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
+                                                    <i class="fa fa-pencil"></i>Edit 
+                                                </button>
+                                            </form>
+                                            
                                         </td>
                                     </tr>
                                     @endforeach
