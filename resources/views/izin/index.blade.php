@@ -48,7 +48,16 @@
                                     <td>{{$izin->acc_mandiv->nama}}</td>
                                     <td>{{$izin->acc_hrd->nama}}</td>
                                     <td>
-                                        <a href="/izin/{{$izin->slug}}" class="btn btn-sm btn-info">detail</a>
+                                        <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
+                                        <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
+
+                                        <form action="{{ route('izin.show', $izin->slug) }}" method="get">
+                                            @csrf
+                                            <button class="btn btn-info" onClick="return confirm ('Yakin mau diubah?')"
+                                            style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
+                                                <i class="fa fa-pencil"></i>Detail 
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

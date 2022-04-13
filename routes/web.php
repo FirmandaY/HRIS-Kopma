@@ -71,7 +71,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/export', [IzinController::class, 'export'])->middleware('can:isAdmin')->name('izin.export');
         Route::delete('/delete-all', [IzinController::class, 'destroyAll'])->middleware('can:isAdmin')->name('izin.delete.all');
         Route::get('/lampiran/{izin:slug}', [IzinController::class, 'lampiran'])->name('izin.lampiran');
-        Route::get('/{izin:slug}', [IzinController::class, 'show']);
+        Route::get('/{izin:slug}', [IzinController::class, 'show'])->name('izin.show');
         Route::get('/{izin:slug}/edit', [IzinController::class, 'edit'])->middleware('can:edit')->name('izin.edit');
         Route::patch('/{izin:slug}/edit', [IzinController::class, 'update'])->middleware('can:update')->name('izin.update');
         Route::delete('/{izin:slug}/delete', [IzinController::class, 'destroy'])->middleware('can:delete');

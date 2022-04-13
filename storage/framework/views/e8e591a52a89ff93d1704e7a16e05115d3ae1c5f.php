@@ -81,6 +81,9 @@
                                         <td><?php echo e(\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')); ?></td>
                                         <td><?php echo e($cuti->acc_hrd->nama); ?></td>
                                         <td>
+                                            <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
+                                            <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
+
                                             <form action="<?php echo e(route('cuti.edit', $cuti->slug)); ?>" method="get">
                                                 <?php echo csrf_field(); ?>
                                                 <button class="btn btn-warning" onClick="return confirm ('Yakin mau diubah?')"

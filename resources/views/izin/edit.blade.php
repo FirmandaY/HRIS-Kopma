@@ -130,7 +130,7 @@
                 </tr>
             </table>
         </div>
-        <form action="/izin/{{$izin->slug}}/edit" method="post">
+        <form action="{{route('izin.update',$izin->slug)}}" method="post">
             @method('patch')
             @csrf
             <div class="row">

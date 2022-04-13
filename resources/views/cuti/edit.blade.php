@@ -202,7 +202,18 @@
                             <p>Perubahan data pengajuan harap hubungi karyawan yang bersangkutan </p>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button class="btn btn-sm btn-success" type="submit">Simpan</button>
+                                    
+                                    <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
+                                    <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
+
+                                    <form action="{{ route('cuti.update', $cuti->slug) }}" method="get">
+                                        @csrf
+                                        <button class="btn btn-success" onClick="return confirm ('Yakin mau diubah?')"
+                                        style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
+                                            <i class="fa fa-pencil"></i>Simpan 
+                                        </button>
+                                    </form>
+
                                 </div>
                         </div>
                     </div>
