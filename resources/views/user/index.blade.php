@@ -47,7 +47,16 @@
                                     <td>{{$user['role']['nama']}}</td>
                                     <td>{{$user['divisi']['nama']}}</td>
                                     <td>
-                                        <a href="/anggota/{{$user['nik']}}/edit" class="btn btn-sm btn-info">ubah</a>
+                                        <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
+                                        <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
+
+                                        <form action="{{ route('kelola.edit', $user->nik) }}" method="get">
+                                            @csrf
+                                            <button class="btn btn-warning" onClick="return confirm ('Yakin mau diubah?')"
+                                            style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
+                                                <i class="fa fa-pencil"></i>Ubah 
+                                            </button>
+                                        </form>
                                     </td>
 
 

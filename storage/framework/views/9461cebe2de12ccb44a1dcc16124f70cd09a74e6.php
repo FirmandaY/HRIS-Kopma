@@ -36,7 +36,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <form action="/anggota/<?php echo e($user->nik); ?>/edit" method="post">
+        <form action="<?php echo e(route('kelola.update',$user->nik)); ?>" method="post">
             <?php echo method_field('patch'); ?>
             <?php echo csrf_field(); ?>
             <div class="row">

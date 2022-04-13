@@ -81,7 +81,16 @@
                                     <td>{{ $pinjam->created_at->diffForHumans() }}</td>
                                     <td>{{$pinjam->acc_hrd->nama}}</td>
                                     <td>
-                                        <a href="/pinjam/{{$pinjam->slug}}/edit" class="btn btn-sm btn-info">detail</a>
+                                        <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
+                                        <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
+
+                                        <form action="{{ route('pinjam.edit', $pinjam->slug) }}" method="get">
+                                            @csrf
+                                            <button class="btn btn-warning" onClick="return confirm ('Yakin mau diubah?')"
+                                            style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
+                                                <i class="fa fa-pencil"></i>Edit
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -43,9 +43,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/daftarPengurus', [KelolaController::class, 'createPengurus'])->name('kelola.daftarPengurus');
 
         Route::post('/daftar', [KelolaController::class, 'store'])->name('kelola.store');
-        Route::get('/{user:nik}/edit', [KelolaController::class, 'edit']);
-        Route::patch('/{user:nik}/edit', [KelolaController::class, 'update']);
-        Route::delete('/{user:nik}/delete', [KelolaController::class, 'destroy']);
+        Route::get('/{user:nik}/edit', [KelolaController::class, 'edit'])->name('kelola.edit');
+        Route::patch('/{user:nik}/edit', [KelolaController::class, 'update'])->name('kelola.update');
+        Route::delete('/{user:nik}/delete', [KelolaController::class, 'destroy'])->name('kelola.delete');
         Route::get('/{user:nik}/restore', [KelolaController::class, 'restore']);
     });
 
@@ -85,7 +85,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/export', [PeminjamanController::class, 'export'])->middleware('can:isAdmin')->name('pinjam.export');
         Route::delete('/delete-all', [PeminjamanController::class, 'destroyAll'])->middleware('can:isAdmin')->name('pinjam.delete.all');
         Route::get('/lampiran/{pinjam:slug}', [PeminjamanController::class, 'lampiran'])->name('pinjam.lampiran');
-        Route::get('/{pinjam:slug}', [PeminjamanController::class, 'show']);
+        Route::get('/{pinjam:slug}', [PeminjamanController::class, 'show'])->name('pinjam.show');
         Route::get('/{pinjam:slug}/edit', [PeminjamanController::class, 'edit'])->middleware('can:edit')->name('pinjam.edit');
         Route::patch('/{pinjam:slug}/edit', [PeminjamanController::class, 'update'])->middleware('can:update')->name('pinjam.update');
         Route::delete('/{pinjam:slug}/delete', [PeminjamanController::class, 'destroy'])->middleware('can:delete');

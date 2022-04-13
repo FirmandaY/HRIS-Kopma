@@ -71,7 +71,7 @@
                 </tr>
             </table>
         </div>
-        <form action="/pinjam/{{$pinjam->slug}}/edit" method="post">
+        <form action="{{route('pinjam.update',$pinjam->slug)}}" method="post">
             @method('patch')
             @csrf
             <div class="row">

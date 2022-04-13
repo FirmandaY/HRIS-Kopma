@@ -21,7 +21,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/anggota/{{$user->nik}}/delete" method="post">
+                        <form action="{{route('kelola.delete',$user->nik)}}" method="post">
                             @method('delete')
                             @csrf
                             <div class="d-flex justify-content-between">
@@ -36,7 +36,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <form action="/anggota/{{$user->nik}}/edit" method="post">
+        <form action="{{route('kelola.update',$user->nik)}}" method="post">
             @method('patch')
             @csrf
             <div class="row">
