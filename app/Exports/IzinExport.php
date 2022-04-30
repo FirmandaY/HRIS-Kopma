@@ -5,10 +5,10 @@ namespace App\Exports;
 use App\Models\Izin;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\withHeadings;
-use Maatwebsite\Excel\Concerns\withMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class IzinExport implements FromCollection, withMapping, withHeadings
+class IzinExport implements FromCollection, WithMapping, WithHeadings
 {
     /**
      * @return \Illuminate\Support\Collection

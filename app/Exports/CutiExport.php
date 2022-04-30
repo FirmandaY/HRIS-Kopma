@@ -5,10 +5,10 @@ namespace App\Exports;
 use App\Models\Cuti;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\withHeadings;
-use Maatwebsite\Excel\Concerns\withMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class CutiExport implements FromCollection, withMapping, withHeadings
+class CutiExport implements FromCollection, WithHeadings, WithMapping
 {
     /**
      * @return \Illuminate\Support\Collection
