@@ -20,10 +20,10 @@ class IzinExport implements FromCollection, WithMapping, WithHeadings
     public function map($izin): array
     {
         return [
-            $izin->user->name,
-            $izin->user->nik,
-            $izin->user->role->nama,
-            $izin->user->divisi->nama,
+            $izin->user->name ?? 'None',
+            $izin->user->nik ?? 'None',
+            $izin->user->role->nama ?? 'None',
+            $izin->user->divisi->nama ?? 'None',
             Carbon::parse($izin->created_at)->toFormattedDateString(),
             Carbon::parse($izin->tgl_izin)->toFormattedDateString(),
             $izin->wkt_mulai,

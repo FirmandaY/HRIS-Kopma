@@ -46,6 +46,7 @@
                             <tbody>
                                 @foreach($izins as $izin)
                                 <tr>
+                                    <!-- ?? 'None' update 2 Juni Untuk mengatasi Akses Null di Environment Hosting -->
                                     <td>{{$izin->user->name ?? 'None'}}</td>
                                     <td>{{$izin->user->nik ?? 'None'}}</td>
                                     <td>{{$izin->user->role->nama ?? 'None'}}</td>

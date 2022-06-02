@@ -20,10 +20,10 @@ class IzinExport implements FromCollection, WithMapping, WithHeadings
     public function map($peminjaman): array
     {
         return [
-            $peminjaman->user->name,
-            $peminjaman->user->nik,
-            $peminjaman->user->role->nama,
-            $peminjaman->user->divisi->nama,
+            $peminjaman->user->name ?? 'None',
+            $peminjaman->user->nik ?? 'None',
+            $peminjaman->user->role->nama ?? 'None',
+            $peminjaman->user->divisi->nama ?? 'None',
             Carbon::parse($peminjaman->created_at)->toFormattedDateString(),
             Carbon::parse($peminjaman->tgl_izin)->toFormattedDateString(),
             $peminjaman->wkt_mulai,

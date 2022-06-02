@@ -42,13 +42,13 @@
                 <!-- small box -->
                 <div class="small-box bg-teal">
                     <div class="inner">
-                        <h3>{{$izin}}</h3>
+                        <h3>{{$pinjam}}</h3>
                         <p>Rekap Data Peminjaman</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="{{route('rekap.izin', ['year' => now()->year])}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{route('rekap.pinjam', ['year' => now()->year])}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             

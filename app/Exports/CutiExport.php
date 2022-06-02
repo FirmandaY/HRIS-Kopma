@@ -20,15 +20,15 @@ class CutiExport implements FromCollection, WithHeadings, WithMapping
     public function map($cuti): array
     {
         return [
-            $cuti->user->name,
-            $cuti->user->nik,
-            $cuti->user->role->nama,
-            $cuti->user->divisi->nama,
+            $cuti->user->name ?? 'None',
+            $cuti->user->nik ?? 'None',
+            $cuti->user->role->nama ?? 'None',
+            $cuti->user->divisi->nama ?? 'None',
             Carbon::parse($cuti->created_at)->toFormattedDateString(),
             Carbon::parse($cuti->tgl_mulai)->toFormattedDateString(),
             Carbon::parse($cuti->tgl_selesai)->toFormattedDateString(),
-            $cuti->acc_mandiv->nama,
-            $cuti->acc_hrd->nama,
+            $cuti->acc_mandiv->nama ?? 'None',
+            $cuti->acc_hrd->nama ?? 'None',
         ];
     }
     public function headings(): array

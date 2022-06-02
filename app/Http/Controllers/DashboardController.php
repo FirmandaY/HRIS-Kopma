@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cuti;
 use App\Models\Izin;
 use App\Models\User;
+use App\Models\Peminjaman;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -29,12 +30,13 @@ class DashboardController extends Controller
             ->get();
         $cuti = Cuti::count();
         $izin = Izin::count();
+        $pinjam = Peminjaman::count();
 
         $usersKaryawan = User::whereBetween('role_id', [2, 3])->get();
         $usersPengurus = User::where('role_id', 4, 'ASC')->get();
 
 
-        return view('dashboard', compact('user', 'cuti', 'izin', 'isCuti', 'isIzin', 'usersKaryawan', 'usersPengurus'));
+        return view('dashboard', compact('user', 'cuti', 'pinjam', 'izin', 'isCuti', 'isIzin', 'usersKaryawan', 'usersPengurus'));
     }
     public function cuti(Request $request)
     {
@@ -53,5 +55,14 @@ class DashboardController extends Controller
             $years[$i] = now()->year - $i;
         }
         return view('izin.rekap', compact('izins', 'years'));
+    }
+    public function pinjam(Request $request)
+    {
+        $pinjams = Peminjaman::latest()->whereYear('created_at', '=', $request->query("year"))->get();
+        $years = [];
+        for ($i = 0; $i < 5; $i++) {
+            $years[$i] = now()->year - $i;
+        }
+        return view('peminjaman.rekap', compact('pinjams', 'years'));
     }
 }

@@ -35,27 +35,24 @@
                                     <th>NIK</th>
                                     <th>Jabatan</th>
                                     <th>Divisi</th>
-                                    <th>Tanggal Pengajuan</th>
-                                    <th>Tanggal Izin</th>
-                                    <th>Jam Mulai</th>
-                                    <th>Jam Selesai</th>
+                                    <th>Waktu Pengajuan</th>
+                                    <th>Bulan Pinjam</th>
                                     <th>Acc Mandiv</th>
                                     <th>Acc HRD</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($izins as $izin)
+                                @foreach($pinjams as $pinjam)
                                 <tr>
-                                    <td>{{$izin->user->name ?? 'None'}}</td>
-                                    <td>{{$izin->user->nik ?? 'None'}}</td>
-                                    <td>{{$izin->user->role->nama ?? 'None'}}</td>
-                                    <td>{{$izin->user->divisi->nama ?? 'None'}}</td>
-                                    <td>{{$izin->created_at->format('d/m/Y')}}</td>
-                                    <td>{{\Carbon\Carbon::parse($izin->tgl_izin)->format('d/m/Y')}}</td>
-                                    <td>{{$izin->wkt_mulai}}</td>
-                                    <td>{{$izin->wkt_selesai}}</td>
-                                    <td>{{$izin->acc_mandiv->nama ?? 'None'}}</td>
-                                    <td>{{$izin->acc_hrd->nama ?? 'None'}}</td>
+                                    <!-- ?? 'None' update 2 Juni Untuk mengatasi Akses Null di Environment Hosting -->
+                                    <td>{{$pinjam->user->name ?? 'None'}}</td>
+                                    <td>{{$pinjam->user->nik ?? 'None'}}</td>
+                                    <td>{{$pinjam->user->role->nama ?? 'None'}}</td>
+                                    <td>{{$pinjam->user->divisi->nama ?? 'None'}}</td>
+                                    <td>{{$pinjam->created_at->format('d/m/Y')}}</td>
+                                    <td>{{\Carbon\Carbon::parse($pinjam->bln_pinjam)->format('m/Y')}}</td>
+                                    <td>{{$pinjam->acc_mandiv->nama ?? 'None'}}</td>
+                                    <td>{{$pinjam->acc_hrd->nama ?? 'None'}}</td>
 
                                 </tr>
                                 @endforeach
