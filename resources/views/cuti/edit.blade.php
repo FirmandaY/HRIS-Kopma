@@ -73,28 +73,28 @@
         <div class="row">
             <div class="callout callout-info col-sm-12 mb-4">
                 <h6><b>Informasi</b></h6>
-                <p>Sisa Cuti Tahunan {{$cuti->user->name}}: {{$sisaCutis}} Hari</p>
+                <p>Sisa Cuti Tahunan {{$cuti->user->name ?? 'None'}}: {{$sisaCutis}} Hari</p>
             </div>
             <table class="table table-bordered">
                 <tr>
                     <td> <b>Nama Lengkap</b></td>
-                    <td> {{$cuti->user->name}}</td>
+                    <td> {{$cuti->user->name ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td> <b>Nomor Induk Karyawan</b></td>
-                    <td> {{$cuti->user->nik}}</td>
+                    <td> {{$cuti->user->nik ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Jabatan</b></td>
-                    <td> {{$cuti->user->role->nama}}</td>
+                    <td> {{$cuti->user->role->nama ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Divisi</b></td>
-                    <td> {{$cuti->user->divisi->nama}}</td>
+                    <td> {{$cuti->user->divisi->nama ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Jenis Kelamin</b></td>
-                    <td> {{$cuti->user->gender}}</td>
+                    <td> {{$cuti->user->gender ?? 'None'}}</td>
                 </tr>
             </table>
         </div>
@@ -109,7 +109,7 @@
                     <div class="form-group">
                         <label for="exampleSelectRounded0">Jenis Cuti</label>
                         <select class="custom-select rounded-0" id="kategori" name="kategori">
-                            <option value="{{$cuti->kategori->id}}">{{$cuti->kategori->nama}}</option>
+                            <option value="{{$cuti->kategori->id }}">{{$cuti->kategori->nama ?? 'None'}}</option>
                         </select>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                     <label>Lampiran</label><br>
                     @if($cuti->lampiran)
                     <a href="/cuti/lampiran/{{$cuti->slug}}" target="_blank">
-                        <img class="img-fluid" src="{{asset($cuti->takeImageCuti)}}" width="100" height="120">
+                        <img class="img-fluid" src="{{ asset('thumb/'.$cuti->lampiran) }}" width="100" height="120">
                     </a>
                     @else -
                     @endif

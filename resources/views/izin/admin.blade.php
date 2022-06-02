@@ -76,10 +76,10 @@
                                     @else
                                 <tr>
                                     @endif
-                                    <td>{{$izin->user->name}}</td>
+                                    <td>{{$izin->user->name ?? 'None'}}</td>
                                     <td>{{\Carbon\Carbon::parse($izin->tgl_izin)->format('d/m/Y')}}</td>
                                     <td>{{$izin->wkt_mulai}}.00 - {{$izin->wkt_selesai}}.00</td>
-                                    <td>{{$izin->acc_hrd->nama}}</td>
+                                    <td>{{$izin->acc_hrd->nama ?? 'None'}}</td>
                                     <td>
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
@@ -112,10 +112,10 @@
                                     @else
                                 <tr>
                                     @endif
-                                    <td>{{$izin->user->name}}</td>
+                                    <td>{{$izin->user->name ?? 'None'}}</td>
                                     <td>{{\Carbon\Carbon::parse($izin->tgl_izin)->format('d/m/Y')}}</td>
                                     <td>{{$izin->wkt_mulai}}.00 - {{$izin->wkt_selesai}}.00</td>
-                                    <td>{{$izin->acc_mandiv->nama}}</td>
+                                    <td>{{$izin->acc_mandiv->nama ?? 'None'}}</td>
                                     <td>
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->

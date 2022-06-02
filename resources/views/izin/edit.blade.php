@@ -44,23 +44,23 @@
             <table class="table table-bordered">
                 <tr>
                     <td style="width:20em"> <b>Nama Lengkap</b></td>
-                    <td> {{$izin->user->name}}</td>
+                    <td> {{$izin->user->name ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td> <b>Nomor Induk Karyawan</b></td>
-                    <td> {{$izin->user->nik}}</td>
+                    <td> {{$izin->user->nik ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Jabatan</b></td>
-                    <td> {{$izin->user->role->nama}}</td>
+                    <td> {{$izin->user->role->nama ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Divisi</b></td>
-                    <td> {{$izin->user->divisi->nama}}</td>
+                    <td> {{$izin->user->divisi->nama ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Jenis Kelamin</b></td>
-                    <td> {{$izin->user->gender}}</td>
+                    <td> {{$izin->user->gender ?? 'None'}}</td>
                 </tr>
             </table>
         </div>
@@ -96,11 +96,11 @@
                 </tr>
                 <tr>
                     <td><b>Acc Mandiv</b></td>
-                    <td> {{$izin->acc_mandiv->nama}}</td>
+                    <td> {{$izin->acc_mandiv->nama ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Acc HRD</b></td>
-                    <td> {{$izin->acc_hrd->nama}}</td>
+                    <td> {{$izin->acc_hrd->nama ?? 'None'}}</td>
                 </tr>
             </table>
         </div>
@@ -110,23 +110,23 @@
             <table class="table table-bordered">
                 <tr>
                     <td style="width:20em"> <b>Nama Lengkap</b></td>
-                    <td> {{$izin->user->name}}</td>
+                    <td> {{$izin->user->name ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td> <b>Nomor Induk Karyawan</b></td>
-                    <td> {{$izin->user->nik}}</td>
+                    <td> {{$izin->user->nik ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Jabatan</b></td>
-                    <td> {{$izin->user->role->nama}}</td>
+                    <td> {{$izin->user->role->nama ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Divisi</b></td>
-                    <td> {{$izin->user->divisi->nama}}</td>
+                    <td> {{$izin->user->divisi->nama ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Jenis Kelamin</b></td>
-                    <td> {{$izin->user->gender}}</td>
+                    <td> {{$izin->user->gender ?? 'None'}}</td>
                 </tr>
             </table>
         </div>

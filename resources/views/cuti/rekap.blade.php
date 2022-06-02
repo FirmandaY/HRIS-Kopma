@@ -46,16 +46,17 @@
                         <tbody>
                             @foreach($cutis as $cuti)
                             <tr>
-                                <td>{{$cuti->user->name}}</td>
-                                <td>{{$cuti->user->nik}}</td>
-                                <td>{{$cuti->user->role->nama}}</td>
-                                <td>{{$cuti->user->divisi->nama}}</td>
-                                <td>{{$cuti->kategori->nama}}</td>
+                                <!-- ?? 'None' update 2 Juni Untuk mengatasi Akses Null di Environment Hosting -->
+                                <td>{{$cuti->user->name ?? 'None'}}</td>
+                                <td>{{$cuti->user->nik ?? 'None'}}</td>
+                                <td>{{$cuti->user->role->nama ?? 'None'}}</td>
+                                <td>{{$cuti->user->divisi->nama ?? 'None'}}</td>
+                                <td>{{$cuti->kategori->nama ?? 'None'}}</td>
                                 <td>{{$cuti->created_at->format('d/m/Y')}}</td>
                                 <td>{{\Carbon\Carbon::parse($cuti->tgl_mulai)->format('d/m/Y')}}</td>
                                 <td>{{\Carbon\Carbon::parse($cuti->tgl_selesai)->format('d/m/Y')}}</td>
-                                <td>{{$cuti->acc_mandiv->nama}}</td>
-                                <td>{{$cuti->acc_hrd->nama}}</td>
+                                <td>{{$cuti->acc_mandiv->nama ?? 'None'}}</td>
+                                <td>{{$cuti->acc_hrd->nama ?? 'None'}}</td>
                             </tr>
                             @endforeach
                         </tbody>

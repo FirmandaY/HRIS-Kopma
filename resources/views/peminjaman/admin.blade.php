@@ -76,10 +76,10 @@
                                     @else
                                 <tr>
                                     @endif
-                                    <td>{{$pinjam->user->name}}</td>
+                                    <td>{{$pinjam->user->name ?? 'None'}}</td>
                                     <td>{{\Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y')}}</td>
                                     <td>{{ $pinjam->created_at->diffForHumans() }}</td>
-                                    <td>{{$pinjam->acc_hrd->nama}}</td>
+                                    <td>{{$pinjam->acc_hrd->nama ?? 'None'}}</td>
                                     <td>
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->

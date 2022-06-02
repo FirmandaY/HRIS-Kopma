@@ -38,24 +38,24 @@
             <table class="table table-bordered">
                 <tr>
                     <td style="width:20em"> <b>Nama Lengkap</b></td>
-                    <td> {{$pinjam->user->name}}
+                    <td> {{$pinjam->user->name ?? 'None'}}
                     </td>
                 </tr>
                 <tr>
                     <td> <b>Nomor Induk Karyawan</b></td>
-                    <td> {{$pinjam->user->nik}}</td>
+                    <td> {{$pinjam->user->nik ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Jabatan</b></td>
-                    <td> {{$pinjam->user->role->nama}}</td>
+                    <td> {{$pinjam->user->role->nama ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Divisi</b></td>
-                    <td> {{$pinjam->user->divisi->nama}}</td>
+                    <td> {{$pinjam->user->divisi->nama ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Jenis Kelamin</b></td>
-                    <td> {{$pinjam->user->gender}}</td>
+                    <td> {{$pinjam->user->gender ?? 'None'}}</td>
                 </tr>
                 <tr>
                     <td><b>Nomor Telepon</b></td>
