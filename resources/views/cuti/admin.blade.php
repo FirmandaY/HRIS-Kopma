@@ -113,10 +113,10 @@
                                         @else
                                     <tr>
                                         @endif
-                                        <td>{{$cuti->user->name}}</td>
-                                        <td>{{$cuti->kategori->nama}}</td>
+                                        <td>{{$cuti->user->name ?? 'None'}}</td>
+                                        <td>{{$cuti->kategori->nama ?? 'None'}}</td>
                                         <td>{{\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')}}</td>
-                                        <td>{{$cuti->acc_mandiv->nama}}</td>
+                                        <td>{{$cuti->acc_mandiv->nama ?? 'None'}}</td>
                                         <td>
                                             <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
                                             <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->

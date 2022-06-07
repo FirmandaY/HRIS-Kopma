@@ -1,8 +1,8 @@
-@extends('layouts.main',['title' => 'Rekap Data Izin'])
+@extends('layouts.main',['title' => 'Rekap Data Peminjaman'])
 @section('content')
 <div class="card card-info col-sm-12 p-0">
     <div class="card-header">
-        <h1 class="card-title">Rekap Pengajuan Izin Karyawan</h1>
+        <h1 class="card-title">Rekap Pengajuan Peminjaman Karyawan</h1>
     </div>
 </div>
 <section class="container">
@@ -18,7 +18,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"><strong>Rekap Permohonan Izin Karyawan</strong></h3>
+                        <h3 class="card-title"><strong>Rekap Permohonan Peminjaman Karyawan</strong></h3>
                         <div class="d-flex justify-content-end">
                             @foreach($years as $year)
                             <a href={{route('rekap.izin', ['year' => $year])}}> {{$year}}</a>&nbsp;

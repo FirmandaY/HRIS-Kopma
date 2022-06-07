@@ -13,7 +13,11 @@
         <div class="callout callout-info col-sm-12 mb-4">
             <h6><b>Informasi</b></h6>
 
-            <p> Halaman ini berisi riwayat pengajuan cuti anda. Semua Cuti yang pernah anda ajukan akan tercatat di sini.</p>
+            <p> 
+                Halaman ini berisi riwayat pengajuan cuti anda. Semua Cuti yang pernah anda ajukan akan tercatat di sini.
+                Silahkan Konfirmasi Pengajuan Cuti Anda ke nomor WhatsApp di bawah ini. <br>
+                Amanda : 0812-8690-0347 <br>
+            </p>
         </div>
         <div class="row">
             <div class="col-sm-12">
