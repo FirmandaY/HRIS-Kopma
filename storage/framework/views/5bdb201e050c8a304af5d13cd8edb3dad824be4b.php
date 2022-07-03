@@ -46,16 +46,17 @@
                         <tbody>
                             <?php $__currentLoopData = $cutis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cuti): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td><?php echo e($cuti->user->name); ?></td>
-                                <td><?php echo e($cuti->user->nik); ?></td>
-                                <td><?php echo e($cuti->user->role->nama); ?></td>
-                                <td><?php echo e($cuti->user->divisi->nama); ?></td>
-                                <td><?php echo e($cuti->kategori->nama); ?></td>
+                                <!-- ?? 'None' update 2 Juni Untuk mengatasi Akses Null di Environment Hosting -->
+                                <td><?php echo e($cuti->user->name ?? 'None'); ?></td>
+                                <td><?php echo e($cuti->user->nik ?? 'None'); ?></td>
+                                <td><?php echo e($cuti->user->role->nama ?? 'None'); ?></td>
+                                <td><?php echo e($cuti->user->divisi->nama ?? 'None'); ?></td>
+                                <td><?php echo e($cuti->kategori->nama ?? 'None'); ?></td>
                                 <td><?php echo e($cuti->created_at->format('d/m/Y')); ?></td>
                                 <td><?php echo e(\Carbon\Carbon::parse($cuti->tgl_mulai)->format('d/m/Y')); ?></td>
                                 <td><?php echo e(\Carbon\Carbon::parse($cuti->tgl_selesai)->format('d/m/Y')); ?></td>
-                                <td><?php echo e($cuti->acc_mandiv->nama); ?></td>
-                                <td><?php echo e($cuti->acc_hrd->nama); ?></td>
+                                <td><?php echo e($cuti->acc_mandiv->nama ?? 'None'); ?></td>
+                                <td><?php echo e($cuti->acc_hrd->nama ?? 'None'); ?></td>
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>

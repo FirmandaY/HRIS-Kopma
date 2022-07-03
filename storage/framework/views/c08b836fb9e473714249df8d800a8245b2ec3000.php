@@ -73,33 +73,33 @@
         <div class="row">
             <div class="callout callout-info col-sm-12 mb-4">
                 <h6><b>Informasi</b></h6>
-                <p>Sisa Cuti Tahunan <?php echo e($cuti->user->name); ?>: <?php echo e($sisaCutis); ?> Hari</p>
+                <p>Sisa Cuti Tahunan <?php echo e($cuti->user->name ?? 'None'); ?>: <?php echo e($sisaCutis); ?> Hari</p>
             </div>
             <table class="table table-bordered">
                 <tr>
                     <td> <b>Nama Lengkap</b></td>
-                    <td> <?php echo e($cuti->user->name); ?></td>
+                    <td> <?php echo e($cuti->user->name ?? 'None'); ?></td>
                 </tr>
                 <tr>
                     <td> <b>Nomor Induk Karyawan</b></td>
-                    <td> <?php echo e($cuti->user->nik); ?></td>
+                    <td> <?php echo e($cuti->user->nik ?? 'None'); ?></td>
                 </tr>
                 <tr>
                     <td><b>Jabatan</b></td>
-                    <td> <?php echo e($cuti->user->role->nama); ?></td>
+                    <td> <?php echo e($cuti->user->role->nama ?? 'None'); ?></td>
                 </tr>
                 <tr>
                     <td><b>Divisi</b></td>
-                    <td> <?php echo e($cuti->user->divisi->nama); ?></td>
+                    <td> <?php echo e($cuti->user->divisi->nama ?? 'None'); ?></td>
                 </tr>
                 <tr>
                     <td><b>Jenis Kelamin</b></td>
-                    <td> <?php echo e($cuti->user->gender); ?></td>
+                    <td> <?php echo e($cuti->user->gender ?? 'None'); ?></td>
                 </tr>
             </table>
         </div>
 
-        <form action="/cuti/<?php echo e($cuti->slug); ?>/edit" method="post">
+        <form action="<?php echo e(route('cuti.update', $cuti->slug)); ?>" method="post">
             <?php echo method_field('patch'); ?>
             <?php echo csrf_field(); ?>
 
@@ -109,7 +109,7 @@
                     <div class="form-group">
                         <label for="exampleSelectRounded0">Jenis Cuti</label>
                         <select class="custom-select rounded-0" id="kategori" name="kategori">
-                            <option value="<?php echo e($cuti->kategori->id); ?>"><?php echo e($cuti->kategori->nama); ?></option>
+                            <option value="<?php echo e($cuti->kategori->id); ?>"><?php echo e($cuti->kategori->nama ?? 'None'); ?></option>
                         </select>
                     </div>
                 </div>
@@ -176,7 +176,7 @@ unset($__errorArgs, $__bag); ?>
                     <label>Lampiran</label><br>
                     <?php if($cuti->lampiran): ?>
                     <a href="/cuti/lampiran/<?php echo e($cuti->slug); ?>" target="_blank">
-                        <img class="img-fluid" src="<?php echo e(asset($cuti->takeImageCuti)); ?>" width="100" height="120">
+                        <img class="img-fluid" src="<?php echo e(asset('thumb/'.$cuti->lampiran)); ?>" width="100" height="120">
                     </a>
                     <?php else: ?> -
                     <?php endif; ?>
@@ -226,18 +226,7 @@ unset($__errorArgs, $__bag); ?>
                             <p>Perubahan data pengajuan harap hubungi karyawan yang bersangkutan </p>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    
-                                    <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
-                                    <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
-
-                                    <form action="<?php echo e(route('cuti.update', $cuti->slug)); ?>" method="get">
-                                        <?php echo csrf_field(); ?>
-                                        <button class="btn btn-success" onClick="return confirm ('Yakin mau diubah?')"
-                                        style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
-                                            <i class="fa fa-pencil"></i>Simpan 
-                                        </button>
-                                    </form>
-
+                                    <button class="btn btn-sm btn-success" type="submit">Simpan</button>
                                 </div>
                         </div>
                     </div>

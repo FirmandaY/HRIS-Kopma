@@ -76,12 +76,21 @@
                                     <?php else: ?>
                                 <tr>
                                     <?php endif; ?>
-                                    <td><?php echo e($izin->user->name); ?></td>
+                                    <td><?php echo e($izin->user->name ?? 'None'); ?></td>
                                     <td><?php echo e(\Carbon\Carbon::parse($izin->tgl_izin)->format('d/m/Y')); ?></td>
                                     <td><?php echo e($izin->wkt_mulai); ?>.00 - <?php echo e($izin->wkt_selesai); ?>.00</td>
-                                    <td><?php echo e($izin->acc_hrd->nama); ?></td>
+                                    <td><?php echo e($izin->acc_hrd->nama ?? 'None'); ?></td>
                                     <td>
-                                        <a href="/izin/<?php echo e($izin->slug); ?>/edit" class="btn btn-sm btn-info">detail</a>
+                                        <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
+                                        <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
+
+                                        <form action="<?php echo e(route('izin.edit', $izin->slug)); ?>" method="get">
+                                            <?php echo csrf_field(); ?>
+                                            <button class="btn btn-warning" onClick="return confirm ('Yakin mau diubah?')"
+                                            style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
+                                                <i class="fa fa-pencil"></i>Edit 
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -103,12 +112,21 @@
                                     <?php else: ?>
                                 <tr>
                                     <?php endif; ?>
-                                    <td><?php echo e($izin->user->name); ?></td>
+                                    <td><?php echo e($izin->user->name ?? 'None'); ?></td>
                                     <td><?php echo e(\Carbon\Carbon::parse($izin->tgl_izin)->format('d/m/Y')); ?></td>
                                     <td><?php echo e($izin->wkt_mulai); ?>.00 - <?php echo e($izin->wkt_selesai); ?>.00</td>
-                                    <td><?php echo e($izin->acc_mandiv->nama); ?></td>
+                                    <td><?php echo e($izin->acc_mandiv->nama ?? 'None'); ?></td>
                                     <td>
-                                        <a href="/izin/<?php echo e($izin->slug); ?>/edit" class="btn btn-sm btn-info">detail</a>
+                                        <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
+                                        <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
+
+                                        <form action="<?php echo e(route('izin.edit', $izin->slug)); ?>" method="get">
+                                            <?php echo csrf_field(); ?>
+                                            <button class="btn btn-warning" onClick="return confirm ('Yakin mau diubah?')"
+                                            style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
+                                                <i class="fa fa-pencil"></i>Edit 
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

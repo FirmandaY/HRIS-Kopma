@@ -35,28 +35,24 @@
                                     <th>NIK</th>
                                     <th>Jabatan</th>
                                     <th>Divisi</th>
-                                    <th>Tanggal Pengajuan</th>
-                                    <th>Tanggal Izin</th>
-                                    <th>Jam Mulai</th>
-                                    <th>Jam Selesai</th>
+                                    <th>Waktu Pengajuan</th>
+                                    <th>Bulan Pinjam</th>
                                     <th>Acc Mandiv</th>
                                     <th>Acc HRD</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $__currentLoopData = $izins; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $izin): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $pinjams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pinjam): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <!-- ?? 'None' update 2 Juni Untuk mengatasi Akses Null di Environment Hosting -->
-                                    <td><?php echo e($izin->user->name ?? 'None'); ?></td>
-                                    <td><?php echo e($izin->user->nik ?? 'None'); ?></td>
-                                    <td><?php echo e($izin->user->role->nama ?? 'None'); ?></td>
-                                    <td><?php echo e($izin->user->divisi->nama ?? 'None'); ?></td>
-                                    <td><?php echo e($izin->created_at->format('d/m/Y')); ?></td>
-                                    <td><?php echo e(\Carbon\Carbon::parse($izin->tgl_izin)->format('d/m/Y')); ?></td>
-                                    <td><?php echo e($izin->wkt_mulai); ?></td>
-                                    <td><?php echo e($izin->wkt_selesai); ?></td>
-                                    <td><?php echo e($izin->acc_mandiv->nama ?? 'None'); ?></td>
-                                    <td><?php echo e($izin->acc_hrd->nama ?? 'None'); ?></td>
+                                    <td><?php echo e($pinjam->user->name ?? 'None'); ?></td>
+                                    <td><?php echo e($pinjam->user->nik ?? 'None'); ?></td>
+                                    <td><?php echo e($pinjam->user->role->nama ?? 'None'); ?></td>
+                                    <td><?php echo e($pinjam->user->divisi->nama ?? 'None'); ?></td>
+                                    <td><?php echo e($pinjam->created_at->format('d/m/Y')); ?></td>
+                                    <td><?php echo e(\Carbon\Carbon::parse($pinjam->bln_pinjam)->format('m/Y')); ?></td>
+                                    <td><?php echo e($pinjam->acc_mandiv->nama ?? 'None'); ?></td>
+                                    <td><?php echo e($pinjam->acc_hrd->nama ?? 'None'); ?></td>
 
                                 </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -72,4 +68,4 @@
 </section>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.main',['title' => 'Rekap Data Izin'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/izin/rekap.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.main',['title' => 'Rekap Data Izin'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/peminjaman/rekap.blade.php ENDPATH**/ ?>

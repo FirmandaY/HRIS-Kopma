@@ -92,8 +92,9 @@ class CutiController extends Controller
 
         //validasi lampiran
         $request->validate([
-            'lampiran' => 'image|mimes:jpg,jpeg,png,svg|max:2048'
+            'lampiran' => 'image|mimes:jpg,jpeg,png|max:2048'
         ]);
+        
         if ($request->kategori == 2) {
             $request->validate([
                 'tgl_selesai' => 'date_equals:tgl_mulai'
@@ -132,6 +133,8 @@ class CutiController extends Controller
     }
     public function edit(Cuti $cuti)
     {
+        $role_id = Auth::user()->role_id; //role_id yang diambil adalah milik admin!
+        $role_id_requester = $cuti->user->role_id; // role_id yang diambil adalah milik pemohon!
         $cutis = Cuti::where([
             ['user_id', '=', $cuti->user->id],
             ['kategori_id', '=', 1],
@@ -145,8 +148,14 @@ class CutiController extends Controller
             $days = $interval->format('%a') + 1;
             $totalCuti += $days;
         }
-        $sisaCutis = 12 - $totalCuti;
-        $role_id = Auth::user()->role_id;
+
+        if($role_id_requester == 4){
+            $sisaCutis = 15 - $totalCuti;
+        }else{
+            $sisaCutis = 12 - $totalCuti;
+        }
+    
+        
         return view('cuti.edit', [
             'role' => $role_id,
             'cuti' => $cuti,

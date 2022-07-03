@@ -38,25 +38,25 @@
             <table class="table table-bordered">
                 <tr>
                     <td style="width:20em"> <b>Nama Lengkap</b></td>
-                    <td> <?php echo e($pinjam->user->name); ?>
+                    <td> <?php echo e($pinjam->user->name ?? 'None'); ?>
 
                     </td>
                 </tr>
                 <tr>
                     <td> <b>Nomor Induk Karyawan</b></td>
-                    <td> <?php echo e($pinjam->user->nik); ?></td>
+                    <td> <?php echo e($pinjam->user->nik ?? 'None'); ?></td>
                 </tr>
                 <tr>
                     <td><b>Jabatan</b></td>
-                    <td> <?php echo e($pinjam->user->role->nama); ?></td>
+                    <td> <?php echo e($pinjam->user->role->nama ?? 'None'); ?></td>
                 </tr>
                 <tr>
                     <td><b>Divisi</b></td>
-                    <td> <?php echo e($pinjam->user->divisi->nama); ?></td>
+                    <td> <?php echo e($pinjam->user->divisi->nama ?? 'None'); ?></td>
                 </tr>
                 <tr>
                     <td><b>Jenis Kelamin</b></td>
-                    <td> <?php echo e($pinjam->user->gender); ?></td>
+                    <td> <?php echo e($pinjam->user->gender ?? 'None'); ?></td>
                 </tr>
                 <tr>
                     <td><b>Nomor Telepon</b></td>
@@ -72,7 +72,7 @@
                 </tr>
             </table>
         </div>
-        <form action="/pinjam/<?php echo e($pinjam->slug); ?>/edit" method="post">
+        <form action="<?php echo e(route('pinjam.update',$pinjam->slug)); ?>" method="post">
             <?php echo method_field('patch'); ?>
             <?php echo csrf_field(); ?>
             <div class="row">
