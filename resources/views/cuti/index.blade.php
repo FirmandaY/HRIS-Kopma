@@ -14,9 +14,15 @@
             <h6><b>Informasi</b></h6>
 
             <p> 
-                Halaman ini berisi riwayat pengajuan cuti anda. Semua Cuti yang pernah anda ajukan akan tercatat di sini.
+                Halaman ini berisi riwayat pengajuan cuti anda. Semua Cuti yang pernah anda ajukan akan tercatat di sini. <br>
                 Silahkan Konfirmasi Pengajuan Cuti Anda ke nomor WhatsApp di bawah ini. <br>
                 Amanda : 0812-8690-0347 <br>
+
+                @if($role == 4)
+                    <br>
+                    <p style="color: red;"><i> PERHATIAN ! </i></p> 
+                    <p><i> Mohon Pastikan Anda Menghubungi Ketua Bidang Terlebih dahulu sebelum mengajukan cuti ya! </i></p>
+                @endif
             </p>
         </div>
         <div class="row">

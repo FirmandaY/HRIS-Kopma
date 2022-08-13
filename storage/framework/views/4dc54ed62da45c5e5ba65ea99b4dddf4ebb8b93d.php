@@ -147,6 +147,17 @@ unset($__errorArgs, $__bag); ?>
                         <div class="modal-body">
                             <p>Pastikan data yang anda ajukan sudah benar.</p>
                             <p>Data yang diajukan tidak dapat diubah</p>
+                            <?php if($role_id == 4): ?>
+                                <p style="color: red;">
+                                    <i>PERHATIAN !</i>
+                                </p>
+                                <p>
+                                    <i>
+                                        Mohon pastikan untuk menghubungi Ketua Bidang Terlebih dahulu, sebelum mengajukan pengajuan Cuti ya.
+                                        Jika sudah, silahkan lanjutkan pengajuan, dan konfirmasi ke SDM. 
+                                    </i>
+                                </p>
+                            <?php endif; ?>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     <button class="btn btn-sm btn-success" type="submit">Ajukan</button>
