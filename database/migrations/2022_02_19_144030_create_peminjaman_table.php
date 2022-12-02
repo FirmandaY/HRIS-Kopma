@@ -19,7 +19,7 @@ class CreatePeminjamanTable extends Migration
             $table->string('slug', 191);
             $table->integer('nominal');
             $table->string('angsuran');
-            $table->string('bln_pinjam');
+            $table->date('bln_pinjam');
             $table->string('email');
             $table->string('no_telp');
             $table->text('keterangan');

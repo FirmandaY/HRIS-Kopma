@@ -13,7 +13,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="exampleSelectRounded0">Bulan Pengajuan</label>
-                        <input type="month" class="form-control" id="bln_pinjam" name="bln_pinjam">
+                        <input type="date" class="form-control" id="bln_pinjam" name="bln_pinjam">
                         <div class="text-danger">
                             @error('bln_pinjam')
                             {{$message}}
