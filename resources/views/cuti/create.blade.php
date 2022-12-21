@@ -11,9 +11,7 @@
             <h6><b>Informasi</b></h6>
             <p>Sisa Cuti Tahunan : {{$sisaCutis}} Hari</p>
         </div>
-
-
-
+        
         <form action="{{ route('cuti.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">

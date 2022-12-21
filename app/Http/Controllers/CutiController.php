@@ -45,13 +45,13 @@ class CutiController extends Controller
         $role_id = Auth::user()->role_id;
         $user = Auth::user();
         $kategoris = Kategori::get();
-        $cutis = Cuti::where([
+        $cutis = Cuti::where([ // Tipe cuti yang diizinkan
             ['user_id', '=', $user->id],
-            ['kategori_id', '=', 1],
-            ['acc_hrd_id', '=', 3]
+            ['kategori_id', '=', 1], //Cuti tahunan
+            ['acc_hrd_id', '=', 3]  //Jika sudah disetujui
         ])->whereYear('tgl_mulai', '=', now()->year)->get();
         $totalCuti = 0;
-        foreach ($cutis as $cuti) {
+        foreach ($cutis as $cuti) { //Penghitungan total cuti
             $datetime1 = new DateTime($cuti->tgl_mulai);
             $datetime2 = new DateTime($cuti->tgl_selesai);
             $interval = $datetime1->diff($datetime2);
@@ -59,7 +59,7 @@ class CutiController extends Controller
             $totalCuti += $days;
         }
         if($role_id == 4){
-            $sisaCutis = 15 - $totalCuti;
+            $sisaCutis = 30 - $totalCuti;
         } else{
             $sisaCutis = 12 - $totalCuti;
         }
@@ -83,9 +83,13 @@ class CutiController extends Controller
             $datetime2 = new DateTime($request->tgl_selesai);
             $interval = $datetime1->diff($datetime2);
             $days = $interval->format('%a') + 1;
-
+            // dd($days);
             if ($days > $request->sisa_cuti) {
-                session()->flash('error', 'Permintaan anda gagal diajukan, Melebihi kuota cuti tahunan');
+                session()->flash('error', 'Permintaan anda gagal diajukan, Melebihi kuota cuti tahunan!');
+                return redirect(route('cuti.create'));
+            }
+            if ($days > 15) {
+                session()->flash('error', 'Permintaan anda gagal diajukan, Cuti tahunan yang dizinkan adalah 15 Hari per 6 bulan!');
                 return redirect(route('cuti.create'));
             }
         }
