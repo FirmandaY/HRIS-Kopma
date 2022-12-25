@@ -154,7 +154,7 @@ class CutiController extends Controller
         }
 
         if($role_id_requester == 4){
-            $sisaCutis = 15 - $totalCuti;
+            $sisaCutis = 30 - $totalCuti;
         }else{
             $sisaCutis = 12 - $totalCuti;
         }
@@ -188,6 +188,10 @@ class CutiController extends Controller
             if ($days > $request->sisa_cuti) {
                 session()->flash('error', 'Permintaan anda gagal diajukan, Melebihi kuota cuti tahunan');
                 return redirect(route('cuti.admin'));
+            }
+            if ($days > 15) {
+                session()->flash('error', 'Permintaan anda gagal diajukan, Cuti tahunan yang dizinkan adalah 15 Hari per 6 bulan!');
+                return redirect(route('cuti.create'));
             }
         }
 
