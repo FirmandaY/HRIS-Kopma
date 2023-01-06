@@ -7,6 +7,7 @@ use App\Http\Controllers\IzinController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\KelolaController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,8 +22,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome.page');
+Route::get('/gatewaytosystem', [LoginController::class, 'showLoginForm'])->name('login');
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/rekap/cuti', [DashboardController::class, 'cuti'])->name('rekap.cuti');
@@ -96,6 +97,7 @@ Route::middleware('auth')->group(function () {
 
 Auth::routes([
     'register' => false,
-    'reset' => false
+    'reset' => false,
+    // 'login' => false,
 ]);
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

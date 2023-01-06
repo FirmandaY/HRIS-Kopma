@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     /*
@@ -38,6 +39,16 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function validateLogin(Request $request) //validate no more special symbol!
+    {
+        $request->validate([
+            $this->username() => 'required|alpha_num|min:5|max:15',
+            'password' => 'required|alpha_num|min:8|max:15',
+        ]);
+        
+    }
+
     public function showLoginForm()
     {
         return view('page.auth.login');
