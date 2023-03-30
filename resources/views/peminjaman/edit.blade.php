@@ -84,7 +84,9 @@
                 <div class="col-sm-3">
                 <div class="form-group">
                         <label for="exampleSelectRounded0">Bulan Pengajuan</label>
-                        <input type="month" class="form-control" id="bln_pinjam" name="bln_pinjam" value="{{ $pinjam->bln_pinjam }}">
+                        <input type="date" class="form-control" id="bln_pinjam" name="bln_pinjam" value="{{ $pinjam->bln_pinjam }}">
+                        <h6 style="margin-top: 5px; margin-left: 5px;"><i>{{ \Carbon\Carbon::parse($pinjam->bln_pinjam)->format('F Y') }}</i></h6>
+                        
                         <div class="text-danger">
                             @error('bln_pinjam')
                             {{$message}}

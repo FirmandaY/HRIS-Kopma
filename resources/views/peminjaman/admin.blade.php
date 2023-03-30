@@ -14,7 +14,7 @@
         <div class="callout callout-info col-sm-12 mb-4">
             <h6><b>Informasi</b></h6>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed condimentum nunc, in porta sapien. Vestibulum lacinia est magna. Suspendisse at venenatis risus, nec laoreet eros. Donec ex diam, dapibus sed rhoncus sit amet, rhoncus sit amet nulla. Fusce commodo dapibus velit. Etiam dui sapien, sollicitudin vel quam eget, mollis tempor lacus.</p>
+            <p>Seluruh pengajuan peminjaman dari karyawan akan ditampilkan di sini.</p>
         </div>
         <!-- @can('isAdmin')
         <div class="row">

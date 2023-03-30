@@ -56,7 +56,7 @@
                                             @endif
                                             
                                             <td>{{ \Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y') }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($pinjam->bln_pinjam)->format('F') }}</td>
+                                            <td>{{ $pinjam->bln_pinjam }}</td>
                                             <td> {{ "Rp".number_format($pinjam->nominal, 2, ',', '.') }}</td>
                                             <td>{{ $pinjam->acc_hrd->nama }}</td>
                                             <td>

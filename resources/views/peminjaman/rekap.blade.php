@@ -50,7 +50,7 @@
                                     <td>{{$pinjam->user->role->nama ?? 'None'}}</td>
                                     <td>{{$pinjam->user->divisi->nama ?? 'None'}}</td>
                                     <td>{{$pinjam->created_at->format('d/m/Y')}}</td>
-                                    <td>{{\Carbon\Carbon::parse($pinjam->bln_pinjam)->format('F/Y')}}</td>
+                                    <td>{{ \Carbon\Carbon::parse($pinjam->bln_pinjam)->format('F Y') }}</td>
                                     <td>{{$pinjam->acc_mandiv->nama ?? 'None'}}</td>
                                     <td>{{$pinjam->acc_hrd->nama ?? 'None'}}</td>
 
