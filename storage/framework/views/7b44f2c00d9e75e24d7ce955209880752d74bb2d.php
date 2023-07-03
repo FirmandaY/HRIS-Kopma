@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> e72a41e7998df1584a0bed7ef7e656b8fd254848
 <?php $__env->startSection('content'); ?>
 <div class="card card-info col-sm-12 p-0">
     <div class="card-header">
@@ -46,16 +50,25 @@
                                 <tr>
                                     <th>Jenis Cuti</th>
                                     <th>Tanggal Mengajukan</th>
+<<<<<<< HEAD
 
                                     <?php if ($role != 4) : ?>
                                         <th>Konfirmasi Mandiv</th>
                                     <?php endif; ?>
 
+=======
+                                    
+                                    <?php if($role != 4): ?>
+                                    <th>Konfirmasi Mandiv</th>
+                                    <?php endif; ?>
+                                    
+>>>>>>> e72a41e7998df1584a0bed7ef7e656b8fd254848
                                     <th>Konfirmasi HRD</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+<<<<<<< HEAD
                                 <?php $__currentLoopData = $cutis;
                                 $__env->addLoop($__currentLoopData);
                                 foreach ($__currentLoopData as $cuti) : $__env->incrementLoopIndices();
@@ -84,6 +97,32 @@
                                 <?php endforeach;
                                 $__env->popLoop();
                                 $loop = $__env->getLastLoop(); ?>
+=======
+                                <?php $__currentLoopData = $cutis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cuti): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <tr>
+                                    <td><?php echo e($cuti->kategori->nama); ?></td>
+                                    <td><?php echo e(\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')); ?></td>
+
+                                    <?php if($role != 4): ?>
+                                    <td><?php echo e($cuti->acc_mandiv->nama); ?></td>
+                                    <?php endif; ?>
+
+                                    <td><?php echo e($cuti->acc_hrd->nama); ?></td>
+                                    <td>
+                                        <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
+                                        <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
+
+                                        <form action="<?php echo e(route('cuti.show', $cuti->slug)); ?>" method="get">
+                                            <?php echo csrf_field(); ?>
+                                            <button class="btn btn-info" onClick="return confirm ('Yakin mau diubah?')"
+                                            style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
+                                                <i class="fa fa-pencil"></i>Detail 
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+>>>>>>> e72a41e7998df1584a0bed7ef7e656b8fd254848
                             </tbody>
                         </table>
                     </div>
@@ -109,4 +148,8 @@
     });
 </script>
 <?php $__env->stopSection(); ?>
+<<<<<<< HEAD
 <?php echo $__env->make('layouts.main', ['title' => 'Daftar Pengajuan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/cuti/index.blade.php ENDPATH**/ ?>
+=======
+<?php echo $__env->make('layouts.main',['title' => 'Daftar Pengajuan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/cuti/index.blade.php ENDPATH**/ ?>
+>>>>>>> e72a41e7998df1584a0bed7ef7e656b8fd254848
