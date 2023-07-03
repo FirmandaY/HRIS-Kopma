@@ -13,16 +13,16 @@
         <div class="callout callout-info col-sm-12 mb-4">
             <h6><b>Informasi</b></h6>
 
-            <p> 
+            <p>
                 Halaman ini berisi riwayat pengajuan cuti anda. Semua Cuti yang pernah anda ajukan akan tercatat di sini. <br>
                 Silahkan Konfirmasi Pengajuan Cuti Anda ke nomor WhatsApp di bawah ini. <br>
-                Amanda : 0812-8690-0347 <br>
+                Tiur : 0815-7428-2376 <br>
 
                 @if($role == 4)
-                    <br>
-                    <p style="color: red;"><i> PERHATIAN ! </i></p> 
-                    <p><i> Mohon Pastikan Anda Menghubungi Ketua Bidang Terlebih dahulu sebelum mengajukan cuti ya! </i></p>
-                @endif
+                <br>
+            <p style="color: red;"><i> PERHATIAN ! </i></p>
+            <p><i> Mohon Pastikan Anda Menghubungi Ketua Bidang Terlebih dahulu sebelum mengajukan cuti ya! </i></p>
+            @endif
             </p>
         </div>
         <div class="row">
@@ -47,11 +47,11 @@
                                 <tr>
                                     <th>Jenis Cuti</th>
                                     <th>Tanggal Mengajukan</th>
-                                    
+
                                     @if($role != 4)
                                     <th>Konfirmasi Mandiv</th>
                                     @endif
-                                    
+
                                     <th>Konfirmasi HRD</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -73,9 +73,8 @@
 
                                         <form action="{{ route('cuti.show', $cuti->slug) }}" method="get">
                                             @csrf
-                                            <button class="btn btn-info" onClick="return confirm ('Yakin mau diubah?')"
-                                            style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
-                                                <i class="fa fa-pencil"></i>Detail 
+                                            <button class="btn btn-info" onClick="return confirm ('Yakin mau diubah?')" style="padding-right:20px; padding-left:20px; margin-top:5px;">
+                                                <i class="fa fa-pencil"></i>Detail
                                             </button>
                                         </form>
                                     </td>
