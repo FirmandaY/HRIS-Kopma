@@ -74,6 +74,13 @@
                                 <p>Pengajuan Peminjaman</p>
                             </a>
                         </li>
+                        @can('pengajuan-anggaran')
+                        <li class="nav-item">
+                            <a href="{{ route('izin.index') }}" class="nav-link{{request()->is('izin') || request()->is('izin/create')||request()->is('izin') ? ' active' : ''}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengajuan Anggaran</p>
+                            </a>
+                        </li>
                         @endcan
                         <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
