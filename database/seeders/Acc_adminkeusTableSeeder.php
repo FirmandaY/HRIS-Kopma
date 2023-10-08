@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class RolesTableSeeder extends Seeder
+class Acc_adminkeusTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,9 +13,9 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $roles = collect(['Admin', 'Manajer Divisi', 'Karyawan', 'Pengurus', 'Adminkeu', 'Bidang']);
-        $roles->each(function ($c) {
-            \App\Models\Role::create([
+        $divisis = collect(['Diproses', 'Ditolak', 'Disetujui']);
+        $divisis->each(function ($c) {
+            \App\Models\Acc_hrd::create([
                 'nama' => $c
             ]);
         });

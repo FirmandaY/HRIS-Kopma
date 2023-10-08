@@ -67,6 +67,7 @@
                                 <p>Pengajuan Izin</p>
                             </a>
                         </li>
+                        @endcan
                         @can('peminjaman')
                         <li class="nav-item">
                             <a href="{{ route('pinjam.index') }}" class="nav-link{{request()->is('pinjam') || request()->is('pinjam/create')||request()->is('pinjam') ? ' active' : ''}}">
@@ -74,6 +75,7 @@
                                 <p>Pengajuan Peminjaman</p>
                             </a>
                         </li>
+                        @endcan
                         @can('pengajuan-anggaran')
                         <li class="nav-item">
                             <a href="{{ route('izin.index') }}" class="nav-link{{request()->is('izin') || request()->is('izin/create')||request()->is('izin') ? ' active' : ''}}">
@@ -88,7 +90,6 @@
                                 <p>Inactive Page</p>
                             </a>
                         </li> -->
-                        @endcan
                     </ul>
                     
                 </li>

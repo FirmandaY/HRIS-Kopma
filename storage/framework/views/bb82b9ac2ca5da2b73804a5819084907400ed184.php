@@ -67,11 +67,20 @@
                                 <p>Pengajuan Izin</p>
                             </a>
                         </li>
+                        <?php endif; ?>
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('peminjaman')): ?>
                         <li class="nav-item">
                             <a href="<?php echo e(route('pinjam.index')); ?>" class="nav-link<?php echo e(request()->is('pinjam') || request()->is('pinjam/create')||request()->is('pinjam') ? ' active' : ''); ?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pengajuan Peminjaman</p>
+                            </a>
+                        </li>
+                        <?php endif; ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('pengajuan-anggaran')): ?>
+                        <li class="nav-item">
+                            <a href="<?php echo e(route('izin.index')); ?>" class="nav-link<?php echo e(request()->is('izin') || request()->is('izin/create')||request()->is('izin') ? ' active' : ''); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengajuan Anggaran</p>
                             </a>
                         </li>
                         <?php endif; ?>
@@ -81,7 +90,6 @@
                                 <p>Inactive Page</p>
                             </a>
                         </li> -->
-                        <?php endif; ?>
                     </ul>
                     
                 </li>

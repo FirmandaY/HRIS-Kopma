@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('content'); ?>
 <div class="card card-info col-sm-12 p-0">
     <div class="card-header">
@@ -47,27 +48,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $__currentLoopData = $pinjams;
-                                $__env->addLoop($__currentLoopData);
-                                foreach ($__currentLoopData as $pinjam) : $__env->incrementLoopIndices();
-                                    $loop = $__env->getLastLoop(); ?>
-                                    <?php if ($pinjam->acc_hrd_id == 1) : ?>
-                                        <tr style="color:tomato;">
-                                        <?php else : ?>
-                                        <tr>
-                                        <?php endif; ?>
+                                <?php $__currentLoopData = $pinjams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pinjam): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if($pinjam->acc_hrd_id == 1): ?>
+                                <tr style="color:tomato;">
+                                    <?php else: ?>
+                                <tr>
+                                    <?php endif; ?>
 
-                                        <td><?php echo e(\Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y')); ?></td>
-                                        <td><?php echo e(\Carbon\Carbon::parse($pinjam->bln_pinjam)->format('F')); ?></td>
-                                        <td> <?php echo e("Rp" . number_format($pinjam->nominal, 2, ',', '.')); ?></td>
-                                        <td><?php echo e($pinjam->acc_hrd->nama); ?></td>
-                                        <td>
-                                            <a href="/pinjam/<?php echo e($pinjam->slug); ?>" class="btn btn-sm btn-info">detail</a>
-                                        </td>
-                                        </tr>
-                                    <?php endforeach;
-                                $__env->popLoop();
-                                $loop = $__env->getLastLoop(); ?>
+                                    <td><?php echo e(\Carbon\Carbon::parse($pinjam->created_at)->format('d/m/Y')); ?></td>
+                                    <td><?php echo e($pinjam->bln_pinjam); ?></td>
+                                    <td> <?php echo e("Rp".number_format($pinjam->nominal, 2, ',', '.')); ?></td>
+                                    <td><?php echo e($pinjam->acc_hrd->nama); ?></td>
+                                    <td>
+                                        <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
+                                        <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
+
+                                        <form action="<?php echo e(route('pinjam.show', $pinjam->slug)); ?>" method="get">
+                                            <?php echo csrf_field(); ?>
+                                            <button class="btn btn-info" onClick="return confirm ('Yakin mau diubah?')" style="padding-right:20px; padding-left:20px; margin-top:5px;">
+                                                <i class="fa fa-pencil"></i>Detail
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                     </div>
@@ -84,4 +88,4 @@
 </section>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.main', ['title' => 'Daftar Pengajuan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/peminjaman/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.main',['title' => 'Daftar Pengajuan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/peminjaman/index.blade.php ENDPATH**/ ?>
