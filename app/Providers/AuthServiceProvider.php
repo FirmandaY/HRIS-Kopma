@@ -40,15 +40,22 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role_id == '4';
         });
 
+        Gate::define('isAdminkeu', function ($user) {
+            return $user->role_id == '5';
+        });
+        Gate::define('isBidang', function ($user) {
+            return $user->role_id == '6';
+        });
+
         //--------------------- Ini adalah role authorization tindakan user -----------------
 
-        Gate::define('pengajuan', function ($user) {
+        Gate::define('pengajuan', function ($user) { //pengajuann izin
             return $user->role_id == 2 || $user->role_id == 3;
         });
-        Gate::define('pengajuanUniversal', function ($user) {
+        Gate::define('pengajuanUniversal', function ($user) { //pengajuan cuti
             return $user->role_id == 2 || $user->role_id == 3 || $user->role_id == 4;
         });
-        Gate::define('peminjaman', function ($user) {
+        Gate::define('peminjaman', function ($user) { //pengajuan peminjaman dana
             return $user->role_id == 2 || $user->role_id == 3;
         });
         Gate::define('persetujuan', function ($user) {
@@ -71,6 +78,13 @@ class AuthServiceProvider extends ServiceProvider
         });
         Gate::define('daftar', function ($user) {
             return $user->role_id == 1;
+        });
+
+        Gate::define('pengajuan_anggaran', function($user) {
+            return $user->role_id == 6;
+        });
+        Gate::define('persetujuan_anggaran', function ($user) {
+            return $user->role_id == 5;
         });
     }
 }

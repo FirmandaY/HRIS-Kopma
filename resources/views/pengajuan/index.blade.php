@@ -14,20 +14,18 @@
             <h6><b>Informasi</b></h6>
 
             <p>
-                Halaman ini berisi riwayat pengajuan anggaran anda. Semua anggaran yang pernah anda ajukan akan tercatat di sini. <br>
+                Halaman ini berisi riwayat pengajuan anggaran anda. Semua anggaran yang pernah bidang anda ajukan akan tercatat di sini. <br>
                 Silahkan Konfirmasi Pengajuan anggaran Anda ke nomor WhatsApp di bawah ini. <br>
                 Efina : 0853-2741-0870 <br>
 
-                @if($role == 4)
                 <br>
             <p style="color: red;"><i> PERHATIAN ! </i></p>
             <p><i> Mohon Pastikan Anda Menghubungi Ketua Bidang Terlebih dahulu sebelum mengajukan anggaran ya! </i></p>
-            @endif
             </p>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <a href="{{ route('cuti.create') }}" class="btn btn-success">
+                <a href="{{ route('pengajuan.create') }}" class="btn btn-success">
                     <i class="fas fa-plus-square"></i>
                     Ajukan Anggaran</a>
             </div>
@@ -45,33 +43,32 @@
 
                             <thead>
                                 <tr>
+                                    <th>Nama Staff</th>
                                     <th>File Anggaran</th>
                                     <th>Tanggal Mengajukan</th>
 
-                                    @if($role != 4)
-                                    <th>Konfirmasi Mandiv</th>
-                                    @endif
-
-                                    <th>Konfirmasi HRD</th>
+                                    <th>Konfirmasi Adminkeu Kopma UGM</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($cutis as $cuti)
+                                @foreach($pengajuans as $pengajuan)
                                 <tr>
-                                    <td>{{$cuti->kategori->nama}}</td>
-                                    <td>{{\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')}}</td>
+                                    <td>{{$pengajuan->nama_user}}</td>
+                                    <td>
+                                        {{$pengajuan->file_anggaran}}
+                                        <p style="margin-top: 8px;">
+                                            <a class="btn btn-primary" href="{{ asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran) }}">Open PDF file</a>
+                                        </p>
+                                    </td>
+                                    <td>{{\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')}}</td>
 
-                                    @if($role != 4)
-                                    <td>{{$cuti->acc_mandiv->nama}}</td>
-                                    @endif
-
-                                    <td>{{$cuti->acc_hrd->nama}}</td>
+                                    {{-- <td>{{$pengajuan->acc_hrd->nama}}</td> --}}
                                     <td>
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
 
-                                        <form action="{{ route('cuti.show', $cuti->slug) }}" method="get">
+                                        <form action="{{ route('pengajuan.show', $pengajuan->slug) }}" method="get">
                                             @csrf
                                             <button class="btn btn-info" onClick="return confirm ('Yakin mau diubah?')" style="padding-right:20px; padding-left:20px; margin-top:5px;">
                                                 <i class="fa fa-pencil"></i>Detail
@@ -89,7 +86,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            {{$cutis->links()}}
+            {{$pengajuans->links()}}
         </div>
     </div>
 </section>

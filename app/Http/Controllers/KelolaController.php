@@ -15,7 +15,12 @@ use Illuminate\Support\Facades\Hash;
 
 class KelolaController extends Controller
 {
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    public function index() //karyawan
     {
         $users = User::whereBetween('role_id', [2, 3])->get();
         $role = User::where('role_id', 3)->get();
@@ -33,7 +38,7 @@ class KelolaController extends Controller
     }
 
 
-    public function create()
+    public function create() //karyawan
     {
         return view('user.createKaryawan', [
             'roles' => Role::get(),

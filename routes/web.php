@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IzinController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\KelolaController;
+use App\Http\Controllers\PengajuanAnggaranController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
@@ -91,6 +92,20 @@ Route::middleware('auth')->group(function () {
         Route::get('/{pinjam:slug}/edit', [PeminjamanController::class, 'edit'])->middleware('can:edit')->name('pinjam.edit');
         Route::patch('/{pinjam:slug}/edit', [PeminjamanController::class, 'update'])->middleware('can:update')->name('pinjam.update');
         Route::delete('/{pinjam:slug}/delete', [PeminjamanController::class, 'destroy'])->middleware('can:delete');
+    });
+
+    Route::prefix('/pengajuan')->group(function () {
+        Route::get('/', [PengajuanAnggaranController::class, 'index'])->name('pengajuan.index');
+        Route::get('/admin', [PengajuanAnggaranController::class, 'admin'])->middleware('can:edit')->name('pengajuan.admin');
+        Route::get('/create', [PengajuanAnggaranController::class, 'create'])->middleware('can:pengajuan_anggaran')->name('pengajuan.create');
+        Route::post('/create', [PengajuanAnggaranController::class, 'store'])->name('pengajuan.store');
+        Route::get('/export', [PengajuanAnggaranController::class, 'export'])->middleware('can:isAdmin')->name('pengajuan.export');
+        Route::delete('/delete-all', [PengajuanAnggaranController::class, 'destroyAll'])->middleware('can:isAdmin')->name('pengajuan.delete.all');
+        Route::get('/lampiran/{pinjam:slug}', [PengajuanAnggaranController::class, 'lampiran'])->name('pengajuan.lampiran');
+        Route::get('/{pinjam:slug}', [PengajuanAnggaranController::class, 'show'])->name('pengajuan.show');
+        Route::get('/{pinjam:slug}/edit', [PengajuanAnggaranController::class, 'edit'])->middleware('can:edit')->name('pengajuan.edit');
+        Route::patch('/{pinjam:slug}/edit', [PengajuanAnggaranController::class, 'update'])->middleware('can:update')->name('pengajuan.update');
+        Route::delete('/{pinjam:slug}/delete', [PengajuanAnggaranController::class, 'destroy'])->middleware('can:delete');
     });
 });
 

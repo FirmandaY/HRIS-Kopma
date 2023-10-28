@@ -3,43 +3,47 @@
 @include('layouts.alert')
 <div class="card card-info col-sm-12">
     <div class="card-header">
-        <h3 class="card-title">Formulir Pengajuan Anggaran</h3>
+        <h3 class="card-title">Formulir Pengajuan Anggaran Bidang</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <form action="{{ route('cuti.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('pengajuan.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleSelectRounded0">Nama Lengkap Anda</label>
+                        <input type="text" class="form-control" id="nama_user" name="nama_user" required>
+                        <div class="text-danger">
+                            @error('nama_user')
+                            {{$message}}
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleSelectRounded0">Nomor Telepon / WhatsApp</label>
+                        <input type="number" class="form-control" id="no_tlp" name="no_tlp" required>
+                        <div class="text-danger">
+                            @error('no_tlp')
+                            {{$message}}
+                            @enderror
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="exampleSelectRounded0">Email</label>
-                        <input type="email" class="form-control tgl_mulai" id="tgl_mulai" name="tgl_mulai">
+                        <input type="email" class="form-control" id="email" name="email" required>
                         <div class="text-danger">
-                            @error('kategori')
+                            @error('email')
                             {{$message}}
                             @enderror
                         </div>
-
-                        <input value="{{$sisaCutis}}" id="sisa_cuti" name="sisa_cuti" hidden>
                     </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label for="exampleSelectRounded0">Nama Lengkap</label>
-                        <input type="text" class="form-control tgl_mulai" id="tgl_mulai" name="tgl_mulai">
-                        <div class="text-danger">
-                            @error('kategori')
-                            {{$message}}
-                            @enderror
-                        </div>
 
-                        <input value="{{$sisaCutis}}" id="sisa_cuti" name="sisa_cuti" hidden>
-                    </div>
-                </div>
-                <div class="col-sm-3">
                     <div class="form-group">
-                        <label for="exampleSelectRounded0">Bidang</label>
-                        <select class="custom-select rounded-0" id="kategori" name="kategori">
+                        <label for="exampleSelectRounded0">Bidang Asal</label>
+                        <select class="custom-select rounded-0" id="bidang" name="bidang" required>
                             <option disabled selected>-Pilih Bidang-</option>
                             <option>Keanggotaan</option>
                             <option>Bisnis</option>
@@ -52,39 +56,29 @@
                             <option>Pengawas</option>
                         </select>
                         <div class="text-danger">
-                            @error('kategori')
+                            @error('bidang')
                             {{$message}}
                             @enderror
                         </div>
-
-                        <input value="{{$sisaCutis}}" id="sisa_cuti" name="sisa_cuti" hidden>
                     </div>
                 </div>
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        <label for="exampleSelectRounded0">No. WA</label>
-                        <input type="number" class="form-control tgl_mulai" id="tgl_mulai" name="tgl_mulai">
-                        <div class="text-danger">
-                            @error('kategori')
-                            {{$message}}
-                            @enderror
-                        </div>
-
-                        <input value="{{$sisaCutis}}" id="sisa_cuti" name="sisa_cuti" hidden>
-                    </div>
+                <div class="col-sm-2">
+                    
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="lampiran">Lampiran(optional)</label>
+                        <label for="file_anggaran">Lampiran(optional)</label>
                         <small><i>*format form anggaran dapat diakses melalui <a href="linktr.ee/KeuanganKopma">linktr.ee/KeuanganKopma</a></i></small>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" id="lampiran" name="lampiran">
+                                <input type="file" id="file_anggaran" name="file_anggaran">
                             </div>
                         </div>
-                        @error('lampiran')
+                        <div class="text-danger">
+                            @error('file_anggaran')
                             {{$message}}
                             @enderror
+                        </div>
                     </div>
                 </div>
             </div>
@@ -105,17 +99,15 @@
                         <div class="modal-body">
                             <p>Pastikan data yang anda ajukan sudah benar.</p>
                             <p>Data yang diajukan tidak dapat diubah</p>
-                            @if($role_id == 4)
                                 <p style="color: red;">
                                     <i>PERHATIAN !</i>
                                 </p>
                                 <p>
                                     <i>
                                         Mohon pastikan untuk menghubungi Ketua Bidang Terlebih dahulu, sebelum mengajukan pengajuan anggaran ya.
-                                        Jika sudah, silahkan lanjutkan pengajuan, dan konfirmasi ke SDM. 
+                                        Jika sudah, silahkan lanjutkan pengajuan, dan konfirmasi ke Adminkeu Kopma UGM Melaui kontak yang terlampir. 
                                     </i>
                                 </p>
-                            @endif
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     <button class="btn btn-sm btn-success" type="submit">Ajukan</button>

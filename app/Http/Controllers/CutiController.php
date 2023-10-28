@@ -13,6 +13,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class CutiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $id = Auth::id();

@@ -73,4 +73,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Peminjaman::class);
     }
+    public function pengajuanAnggarans()
+    {
+        return $this->hasMany(Pengajuan_anggaran::class);
+    }
+    public function realisasiAnggarans()
+    {
+        return $this->hasMany(Realisasi_anggaran::class);
+    }
 }
