@@ -16,7 +16,7 @@ class CreatePengajuanAnggaranTable extends Migration
         Schema::create('pengajuan_anggaran', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('acc_adminkeu_id')->default(0);
+            $table->foreignId('acc_adminkeu_id')->default(1);
             $table->string('slug', 191);
             $table->string('email');
             $table->string('nama_user');

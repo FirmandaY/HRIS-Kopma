@@ -2,7 +2,7 @@
 <?php $__env->startSection('content'); ?>
 <div class="card card-info col-sm-12 p-0">
     <div class="card-header">
-        <h3 class="card-title">Kelola Data Pengurus</h3>
+        <h3 class="card-title">Kelola Data Pengurus / Staff</h3>
     </div>
 </div>
 <?php echo $__env->make('layouts.alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -12,7 +12,7 @@
 
             <a href="<?php echo e(route('kelola.daftarPengurus')); ?>" class="btn btn-success">
                 <i class="fas fa-plus-square"></i>
-                Tambah Pengurus Baru</a>
+                Tambah Pengurus / Staff Baru</a>
 
             <!-- <a href="<?php echo e(route('kelola.trashed')); ?>" class="btn btn-danger">
                 <i class="fas fa-file"></i>
@@ -24,7 +24,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"><strong>Daftar Pengurus</strong></h3>
+                        <h3 class="card-title"><strong>Daftar Pengurus / Staff</strong></h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">

@@ -15,7 +15,7 @@ class Acc_adminkeusTableSeeder extends Seeder
     {
         $divisis = collect(['Diproses', 'Ditolak', 'Disetujui']);
         $divisis->each(function ($c) {
-            \App\Models\Acc_hrd::create([
+            \App\Models\Acc_adminkeu::create([
                 'nama' => $c
             ]);
         });

@@ -59,19 +59,19 @@
                                         <?php echo e($pengajuan->file_anggaran); ?>
 
                                         <p style="margin-top: 8px;">
-                                            <a class="btn btn-primary" href="<?php echo e(asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran)); ?>">Open PDF file</a>
+                                            <a class="btn btn-primary" href="<?php echo e(asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran)); ?>" target="_blank">Open PDF file</a>
                                         </p>
                                     </td>
                                     <td><?php echo e(\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')); ?></td>
 
-                                    
+                                    <td><?php echo e($pengajuan->acc_adminkeu->nama); ?></td>
                                     <td>
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
 
                                         <form action="<?php echo e(route('pengajuan.show', $pengajuan->slug)); ?>" method="get">
                                             <?php echo csrf_field(); ?>
-                                            <button class="btn btn-info" onClick="return confirm ('Yakin mau diubah?')" style="padding-right:20px; padding-left:20px; margin-top:5px;">
+                                            <button class="btn btn-info" style="padding-right:20px; padding-left:20px; margin-top:5px;">
                                                 <i class="fa fa-pencil"></i>Detail
                                             </button>
                                         </form>

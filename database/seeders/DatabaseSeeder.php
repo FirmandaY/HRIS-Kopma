@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Acc_hrdsTableSeeder::class);
         $this->call(Acc_mandivsTableSeeder::class);
         $this->call(Acc_adminkeusTableSeeder::class);
+        $this->call(AdminkeuTableSeeder::class);
         $this->call(CutisTableSeeder::class);
     }
 }

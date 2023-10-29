@@ -2,7 +2,7 @@
 <?php $__env->startSection('content'); ?>
 <div class="card card-info col-sm-12">
     <div class="card-header">
-        <h3 class="card-title">Isikan data Pengurus pada formulir berikut</h3>
+        <h3 class="card-title">Isikan data Pengurus/Staff pada formulir berikut</h3>
     </div>
     <?php echo $__env->make('layouts.alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!-- /.card-header -->
@@ -17,7 +17,7 @@
                         <select class="custom-select rounded-0" id="role" name="role">
                             <option disabled selected>-Pilih Jabatan-</option>
                             <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <?php if($role->id !==1): ?>
+                            <?php if($role->id !==1 && $role->id !==5): ?>
                             <option value="<?php echo e($role->id); ?>"><?php echo e($role->nama); ?></option>
                             <?php endif; ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -40,9 +40,9 @@ unset($__errorArgs, $__bag); ?>
 
                 <div class="col-sm-9">
                     <div class="form-group">
-                        <label for="exampleSelectRounded0">Divisi</label>
+                        <label for="exampleSelectRounded0">Bidang</label>
                         <select class="custom-select rounded-0" id="divisi" name="divisi">
-                            <option disabled selected>-Pilih Divisi-</option>
+                            <option disabled selected>-Pilih Bidang-</option>
                             <?php $__currentLoopData = $divisis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $divisi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <?php if($divisi->id !== 1): ?>
                             <option value="<?php echo e($divisi->id); ?>"><?php echo e($divisi->nama); ?></option>
@@ -87,7 +87,7 @@ unset($__errorArgs, $__bag); ?>
                 </div>
                 <div class="col-sm-9">
                     <div class="form-group">
-                        <label>NIK</label>
+                        <label>NAK</label>
                         <input type="text" class="form-control" id="nik" name="nik" autocomplete="off">
                         <div class="text-danger">
                             <?php $__errorArgs = ['nik'];

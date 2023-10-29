@@ -17,7 +17,7 @@
                         <select class="custom-select rounded-0" id="role" name="role">
                             <option disabled selected>-Pilih Jabatan-</option>
                             <?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <?php if($role->id !==1): ?>
+                            <?php if($role->id !==1 && $role->id !==5): ?>
                             <option value="<?php echo e($role->id); ?>"><?php echo e($role->nama); ?></option>
                             <?php endif; ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

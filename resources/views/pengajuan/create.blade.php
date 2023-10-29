@@ -67,11 +67,17 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="file_anggaran">Lampiran(optional)</label>
-                        <small><i>*format form anggaran dapat diakses melalui <a href="linktr.ee/KeuanganKopma">linktr.ee/KeuanganKopma</a></i></small>
+                        <label for="file_anggaran">Lampiran Form Anggaran</label>
+                        <p>
+                            <small><i>*format form anggaran dapat diakses melalui <a href="linktr.ee/KeuanganKopma">linktr.ee/KeuanganKopma</a></i></small>
+                        </p>
+                        <p>
+                            <small><i>*format file: .pdf .xslx | ukuran maksimal file 2MB</i></small>
+                        </p>
+                        
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" id="file_anggaran" name="file_anggaran">
+                                <input type="file" id="file_anggaran" name="file_anggaran" required>
                             </div>
                         </div>
                         <div class="text-danger">
