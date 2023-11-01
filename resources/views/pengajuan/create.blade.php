@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleSelectRounded0">Nomor Telepon / WhatsApp</label>
+                        <label for="exampleSelectRounded0">Nomor Telepon / WhatsApp Anda</label>
                         <input type="number" class="form-control" id="no_tlp" name="no_tlp" required>
                         <div class="text-danger">
                             @error('no_tlp')
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleSelectRounded0">Email</label>
+                        <label for="exampleSelectRounded0">Email Anda</label>
                         <input type="email" class="form-control" id="email" name="email" required>
                         <div class="text-danger">
                             @error('email')

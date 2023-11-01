@@ -58,9 +58,6 @@
                                     <td>
                                         <?php echo e($pengajuan->file_anggaran); ?>
 
-                                        <p style="margin-top: 8px;">
-                                            <a class="btn btn-primary" href="<?php echo e(asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran)); ?>" target="_blank">Open PDF file</a>
-                                        </p>
                                     </td>
                                     <td><?php echo e(\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')); ?></td>
 

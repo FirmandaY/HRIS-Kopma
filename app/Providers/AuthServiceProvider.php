@@ -49,6 +49,9 @@ class AuthServiceProvider extends ServiceProvider
 
         //--------------------- Ini adalah role authorization tindakan user -----------------
 
+        Gate::define('pengajuanMenu', function ($user) { //pengajuan menu sidebar
+            return $user->role_id == 2 || $user->role_id == 3 || $user->role_id == 4 || $user->role_id == 6;
+        });
         Gate::define('pengajuan', function ($user) { //pengajuann izin
             return $user->role_id == 2 || $user->role_id == 3;
         });
@@ -58,13 +61,17 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('peminjaman', function ($user) { //pengajuan peminjaman dana
             return $user->role_id == 2 || $user->role_id == 3;
         });
+
+        Gate::define('persetujuanMenu', function ($user) { //persetujuan menu sidebar
+            return $user->role_id == 1 || $user->role_id == 2 || $user->role_id == 5;
+        });
         Gate::define('persetujuan', function ($user) {
             return $user->role_id == 1 || $user->role_id == 2;
         });
         Gate::define('persetujuanPinjam', function ($user) {
             return $user->role_id == 1;
         });
-        Gate::define('pengelolaan', function ($user) {
+        Gate::define('pengelolaan', function ($user) { //kelola user
             return $user->role_id == 1;
         });
         Gate::define('edit', function ($user) {
@@ -80,10 +87,13 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role_id == 1;
         });
 
-        Gate::define('pengajuan_anggaran', function($user) {
+        Gate::define('pengajuanAnggaran', function($user) {
             return $user->role_id == 6;
         });
-        Gate::define('persetujuan_anggaran', function ($user) {
+        Gate::define('persetujuanAnggaran', function ($user) {
+            return $user->role_id == 5;
+        });
+        Gate::define('adminAnggaran', function ($user) {
             return $user->role_id == 5;
         });
     }

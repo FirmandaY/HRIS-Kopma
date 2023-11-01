@@ -57,9 +57,6 @@
                                     <td>{{$pengajuan->nama_user}}</td>
                                     <td>
                                         {{$pengajuan->file_anggaran}}
-                                        <p style="margin-top: 8px;">
-                                            <a class="btn btn-primary" href="{{ asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran) }}" target="_blank">Open PDF file</a>
-                                        </p>
                                     </td>
                                     <td>{{\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')}}</td>
 

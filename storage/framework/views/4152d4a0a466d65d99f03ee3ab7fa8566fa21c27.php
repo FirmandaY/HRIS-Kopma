@@ -1,11 +1,11 @@
-@extends('layouts.main',['title' => 'Daftar Persetujuan Cuti'])
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 <div class="card card-info col-sm-12 p-0">
     <div class="card-header">
         <h1 class="card-title">Daftar Pengajuan Anggaran</h1>
     </div>
 </div>
-@include('layouts.alert')
+<?php echo $__env->make('layouts.alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <section class="container">
 
@@ -15,7 +15,7 @@
 
             <p>Seluruh pengajuan anggaran dari bidang akan ditampilkan di sini.</p>
         </div>
-        <!-- @can('isAdmin')
+        <!-- <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('isAdmin')): ?>
         <div class="row">
             <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal">
                 <i class="fas fa-trash-alt">
@@ -34,8 +34,8 @@
                             <p>Fungsi ini memungkinkan anda menghapus semua data pengajuan cuti karyawan</p>
                             <p>Biasanya hanya digunakan saat pergantian tahun / kepengurusan.</p>
                             <form action="/cuti/delete-all" method="post">
-                                @method('delete')
-                                @csrf
+                                <?php echo method_field('delete'); ?>
+                                <?php echo csrf_field(); ?>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     <button class="btn btn-sm btn-danger" type="submit">Hapus</button>
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        @endcan
+        <?php endif; ?>
         <hr> -->
         <div class="row">
             <div class="col-12">
@@ -57,7 +57,7 @@
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
-                            @if($role_id == 5)
+                            <?php if($role_id == 5): ?>
                                 <thead>
                                     <tr>
                                         <th>Nama Pemohon</th>
@@ -69,25 +69,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($pengajuans as $pengajuan)
-                                    @if($pengajuan->acc_hrd_id == 1)
+                                    <?php $__currentLoopData = $pengajuans; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pengajuan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($pengajuan->acc_hrd_id == 1): ?>
                                     <tr style="color:tomato;">
-                                        @else
+                                        <?php else: ?>
                                     <tr>
-                                        @endif
-                                        <td>{{$pengajuan->nama_user ?? 'None'}}</td>
-                                        <td>{{$pengajuan->user->divisi->nama ?? 'None'}}</td>
-                                        <td>{{\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')}}</td>
+                                        <?php endif; ?>
+                                        <td><?php echo e($pengajuan->nama_user ?? 'None'); ?></td>
+                                        <td><?php echo e($pengajuan->user->divisi->nama ?? 'None'); ?></td>
+                                        <td><?php echo e(\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')); ?></td>
                                         <td>
-                                            {{ $pengajuan->file_anggaran }}
+                                            <?php echo e($pengajuan->file_anggaran); ?>
+
                                         </td>
-                                        <td>{{$pengajuan->acc_adminkeu->nama ?? 'None'}}</td>
+                                        <td><?php echo e($pengajuan->acc_adminkeu->nama ?? 'None'); ?></td>
                                         <td>
-                                            <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
+                                            <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
                                             <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
 
-                                            <form action="{{ route('pengajuan.edit', $pengajuan->slug) }}" method="get">
-                                                @csrf
+                                            <form action="<?php echo e(route('pengajuan.edit', $pengajuan->slug)); ?>" method="get">
+                                                <?php echo csrf_field(); ?>
                                                 <button class="btn btn-warning" onClick="return confirm ('Yakin mau diubah?')"
                                                 style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
                                                     <i class="fas fa-edit"></i>Edit 
@@ -96,9 +97,9 @@
                                             
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
-                            @endif
+                            <?php endif; ?>
 
                         </table>
                     </div>
@@ -108,8 +109,10 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            {{$pengajuans->links()}}
+            <?php echo e($pengajuans->links()); ?>
+
         </div>
     </div>
 </section>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main',['title' => 'Daftar Persetujuan Cuti'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/pengajuan/admin.blade.php ENDPATH**/ ?>

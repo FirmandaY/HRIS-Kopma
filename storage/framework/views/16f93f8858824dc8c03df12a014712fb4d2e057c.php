@@ -85,7 +85,9 @@
                 <div class="col-sm-3">
                 <div class="form-group">
                         <label for="exampleSelectRounded0">Bulan Pengajuan</label>
-                        <input type="month" class="form-control" id="bln_pinjam" name="bln_pinjam" value="<?php echo e($pinjam->bln_pinjam); ?>">
+                        <input type="date" class="form-control" id="bln_pinjam" name="bln_pinjam" value="<?php echo e($pinjam->bln_pinjam); ?>">
+                        <h6 style="margin-top: 5px; margin-left: 5px;"><i><?php echo e(\Carbon\Carbon::parse($pinjam->bln_pinjam)->format('F Y')); ?></i></h6>
+                        
                         <div class="text-danger">
                             <?php $__errorArgs = ['bln_pinjam'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -194,4 +196,4 @@ unset($__errorArgs, $__bag); ?>
 </div>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.main',['title' => 'Form Pengajuan Izin'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/peminjaman/edit.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.main',['title' => 'Form Pengajuan Peminjaman'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/peminjaman/edit.blade.php ENDPATH**/ ?>

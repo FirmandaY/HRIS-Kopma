@@ -60,10 +60,11 @@
                 <tr>
                     <td><b>File Realisasi</b></td>
                     <td>
-                        @if($cuti->lampiran)
-                        <a href="/cuti/lampiran/{{$cuti->slug}}" target="_blank">
-                            <img class="img-fluid" src="{{asset($cuti->takeImageCuti)}}" width="100" height="120">
-                        </a>
+                        @if($cuti->file_anggaran)
+                            <iframe src="{{ asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran) }}" 
+                                            width="1200"
+                                            height="500"> 
+                            </iframe>
                         @else -
                         @endif
                     </td>

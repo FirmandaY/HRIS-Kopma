@@ -12,6 +12,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PeminjamanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $id = Auth::id();

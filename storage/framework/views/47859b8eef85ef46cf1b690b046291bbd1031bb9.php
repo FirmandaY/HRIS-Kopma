@@ -33,13 +33,11 @@
                 <tr>
                     <td><b>File Anggaran</b></td>
                     <td>
-                        <?php if($pengajuan->file_anggaran): ?>
-                            <iframe src="<?php echo e(asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran)); ?>" 
-                                            width="1200"
-                                            height="500"> 
-                            </iframe>
-                        <?php else: ?> -
-                        <?php endif; ?>
+                        <?php echo e($pengajuan->file_anggaran); ?>
+
+                        <p style="margin-top: 8px;">
+                            <a class="btn btn-primary" href="<?php echo e(asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran)); ?>" target="_blank">Open Excel file</a>
+                        </p>
                     </td>
                 </tr>
                 <tr>

@@ -28,6 +28,21 @@ class PengajuanAnggaranController extends Controller
         return view('pengajuan.index', compact('pengajuans'));
     }
 
+    public function adminkeu()
+    {
+        $role_id = Auth::user()->role_id;
+        if ($role_id == 5) {
+            $pengajuans = Pengajuan_anggaran::orderBy('id', 'desc')->latest()->simplePaginate(12);
+        } else {
+            $pengajuans = Pengajuan_anggaran::whereHas('user', function ($query) {
+                $divisi_id = Auth::user()->divisi_id;
+                $query->whereDivisiId($divisi_id);
+            })->latest()->simplePaginate(12);
+        }
+
+        return view('pengajuan.admin', compact('pengajuans', 'role_id'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -93,9 +108,14 @@ class PengajuanAnggaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Pengajuan_anggaran $pengajuan)
     {
-        //
+        $role_id = Auth::user()->role_id;
+        return view('pengajuan.edit', [
+            'role' => $role_id,
+            'pengajuan' => $pengajuan,
+            'acc_adminkeus' => Acc_adminkeu::get(),
+        ]);
     }
 
     /**

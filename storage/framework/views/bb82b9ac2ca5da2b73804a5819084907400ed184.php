@@ -36,10 +36,8 @@
 
                 </li>
                 
-                <li class="nav-item
-                <?php echo e(request()->is('cuti') || request()->is('cuti/create') || request()->is('izin') || request()->is('izin/create')  ? 
-                ' menu-open' : ''); ?>">
-                
+                <li class="nav-item<?php echo e(request()->is('cuti') || request()->is('cuti/create') || request()->is('izin') || request()->is('izin/create')  ? ' menu-open' : ''); ?>">
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('pengajuanMenu')): ?>
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-plus-square"></i>
                         <p>
@@ -47,6 +45,7 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <?php endif; ?>
                     
                     <ul class="nav nav-treeview">
                         
@@ -60,7 +59,6 @@
                                 </a>
                             </li>
                             
-
                             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('pengajuan')): ?>
                             <li class="nav-item">
                                 <a href="<?php echo e(route('izin.index')); ?>" class="nav-link<?php echo e(request()->is('izin') || request()->is('izin/create')||request()->is('izin') ? ' active' : ''); ?>">
@@ -79,7 +77,7 @@
                             <?php endif; ?>
                         <?php endif; ?>
 
-                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('pengajuan_anggaran')): ?>
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('pengajuanAnggaran')): ?>
                             <li class="nav-item">
                                 <a href="<?php echo e(route('pengajuan.index')); ?>" class="nav-link<?php echo e(request()->is('pengajuan') || request()->is('pengajuan/create')||request()->is('pengajuan') ? ' active' : ''); ?>">
                                     <i class="far fa-circle nav-icon"></i>
@@ -105,8 +103,9 @@
                 </li>
                
 
-                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('persetujuan')): ?>
+                
                 <li class="nav-item<?php echo e(request()->is('cuti/admin') ||  request()->is('izin/admin')   ? ' menu-open' : ''); ?>">
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('persetujuanMenu')): ?>
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-check-square"></i>
                         <p>
@@ -114,7 +113,9 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <?php endif; ?>
                     <ul class="nav nav-treeview">
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('persetujuan')): ?>
                         <li class="nav-item">
                             <a href="<?php echo e(route('cuti.admin')); ?>" class="nav-link<?php echo e(request()->is('cuti/admin') ? ' active' : ''); ?>">
                                 <i class="far fa-circle nav-icon"></i>
@@ -127,6 +128,7 @@
                                 <p>Persetujuan Izin</p>
                             </a>
                         </li>
+                        <?php endif; ?>
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('persetujuanPinjam')): ?>
                         <li class="nav-item">
                             <a href="<?php echo e(route('pinjam.admin')); ?>" class="nav-link<?php echo e(request()->is('pinjam/admin') ? ' active' : ''); ?>">
@@ -135,9 +137,24 @@
                             </a>
                         </li>
                         <?php endif; ?>
+
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('persetujuanAnggaran')): ?>
+                        <li class="nav-item">
+                            <a href="<?php echo e(route('pengajuan.adminkeu')); ?>" class="nav-link<?php echo e(request()->is('pengajuan/admin') ? ' active' : ''); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pengajuan Anggaran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo e(route('pengajuan.adminkeu')); ?>" class="nav-link<?php echo e(request()->is('realisasi/admin') ? ' active' : ''); ?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Realisasi Anggaran</p>
+                            </a>
+                        </li>
+                        <?php endif; ?>
                     </ul>
                 </li>
-                <?php endif; ?>
+                
                 <li class="nav-item <?php echo e(request()->is('profil') ? ' menu-open':''); ?>">
                     <a href="<?php echo e(route('profil.show')); ?>" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
