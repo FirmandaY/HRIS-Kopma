@@ -42,6 +42,18 @@
                     <td> {{ $pengajuan->email }}</td>
                 </tr>
                 <tr>
+                    <td><b>Waktu Pengajuan</b></td>
+                    <td>
+                        <p>{{\Carbon\Carbon::parse($pengajuan->created_at)->format('d M Y')}}</p>
+                        <p>
+                            Pukul {{\Carbon\Carbon::parse($pengajuan->created_at)->format('H:i')}}
+                            <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 15px;">
+                                {{ $pengajuan->created_at->diffForHumans() }}
+                            </i>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
                     <td><b>File Anggaran</b></td>
                     <td>
                         {{ $pengajuan->file_anggaran }}

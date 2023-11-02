@@ -81,7 +81,21 @@
                                         <td>
                                             {{ $pengajuan->file_anggaran }}
                                         </td>
-                                        <td>{{$pengajuan->acc_adminkeu->nama ?? 'None'}}</td>
+                                        <td>
+                                            @if ($pengajuan->acc_adminkeu_id == 3)
+                                                <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 10px;">
+                                                    {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
+                                                </i>
+                                            @elseif ($pengajuan->acc_adminkeu_id == 2)
+                                                <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 15px;">
+                                                    {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
+                                                </i>
+                                            @else
+                                                <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 10px;">
+                                                    {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
+                                                </i>
+                                            @endif
+                                        </td>
                                         <td>
                                             <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
                                             <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->

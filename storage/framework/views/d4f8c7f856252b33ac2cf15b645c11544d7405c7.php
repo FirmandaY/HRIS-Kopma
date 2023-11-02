@@ -41,7 +41,7 @@
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
 
-                            <thead>
+                            <thead align="center">
                                 <tr>
                                     <th>Nama Staff</th>
                                     <th>File Anggaran</th>
@@ -51,7 +51,7 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody align="center">
                                 <?php $__currentLoopData = $pengajuans; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pengajuan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td><?php echo e($pengajuan->nama_user); ?></td>
@@ -61,7 +61,25 @@
                                     </td>
                                     <td><?php echo e(\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')); ?></td>
 
-                                    <td><?php echo e($pengajuan->acc_adminkeu->nama); ?></td>
+                                    <td>
+                                        <?php if($pengajuan->acc_adminkeu_id == 3): ?>
+                                            <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 15px;">
+                                                <?php echo e($pengajuan->acc_adminkeu->nama); ?>
+
+                                            </i>
+                                        <?php elseif($pengajuan->acc_adminkeu_id == 2): ?>
+                                            <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 20px;">
+                                                <?php echo e($pengajuan->acc_adminkeu->nama); ?>
+
+                                            </i>
+                                        <?php else: ?>
+                                            <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 15px;">
+                                                <?php echo e($pengajuan->acc_adminkeu->nama); ?>
+
+                                            </i>
+                                        <?php endif; ?>
+                                    </td>
+
                                     <td>
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->

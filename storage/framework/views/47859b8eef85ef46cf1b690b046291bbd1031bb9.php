@@ -36,7 +36,10 @@
                         <?php echo e($pengajuan->file_anggaran); ?>
 
                         <p style="margin-top: 8px;">
-                            <a class="btn btn-primary" href="<?php echo e(asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran)); ?>" target="_blank">Open Excel file</a>
+                            <a class="btn btn-primary" href="<?php echo e(asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran)); ?>" target="_blank">
+                                <i class="fas fa-file-excel"></i>
+                                Open Excel file
+                            </a>
                         </p>
                     </td>
                 </tr>

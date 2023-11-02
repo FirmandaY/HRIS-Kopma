@@ -41,7 +41,7 @@
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
 
-                            <thead>
+                            <thead align="center">
                                 <tr>
                                     <th>Nama Staff</th>
                                     <th>File Anggaran</th>
@@ -51,7 +51,7 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody align="center">
                                 @foreach($pengajuans as $pengajuan)
                                 <tr>
                                     <td>{{$pengajuan->nama_user}}</td>
@@ -60,7 +60,22 @@
                                     </td>
                                     <td>{{\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')}}</td>
 
-                                    <td>{{$pengajuan->acc_adminkeu->nama}}</td>
+                                    <td>
+                                        @if ($pengajuan->acc_adminkeu_id == 3)
+                                            <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 15px;">
+                                                {{$pengajuan->acc_adminkeu->nama}}
+                                            </i>
+                                        @elseif ($pengajuan->acc_adminkeu_id == 2)
+                                            <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 20px;">
+                                                {{$pengajuan->acc_adminkeu->nama}}
+                                            </i>
+                                        @else
+                                            <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 15px;">
+                                                {{$pengajuan->acc_adminkeu->nama}}
+                                            </i>
+                                        @endif
+                                    </td>
+
                                     <td>
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->

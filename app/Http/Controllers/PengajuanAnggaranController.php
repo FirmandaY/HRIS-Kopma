@@ -125,9 +125,21 @@ class PengajuanAnggaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Pengajuan_anggaran $pengajuan)
     {
-        //
+        $role_id = Auth::user()->role_id;
+        $attr = $request->all();
+       
+        $attr['acc_adminkeu_id'] = request('acc_adminkeu');
+
+        //pengkondisian status acc, saling berelasi antara acc mandiv dan acc hrd
+        // 1 = diproses, 2 = ditolak, 3 = disetujui, (acc hrd, 4 = - ) 
+        
+        $pengajuan->update($attr);
+
+        session()->flash('success', 'Tanggapan anda sudah disimpan!');
+        session()->flash('error', 'Tanggapan anda gagal disimpan!');
+        return redirect(route('pengajuan.adminkeu'));
     }
 
     /**
@@ -136,8 +148,11 @@ class PengajuanAnggaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Pengajuan_anggaran $pengajuan)
     {
-        //
+        $pengajuan->delete();
+        session()->flash('success', 'Data pengajuan terhapus!');
+        session()->flash('error', 'Data pengajuan gagal terhapus!');
+        return redirect(route('pengajuan.adminkeu'));
     }
 }

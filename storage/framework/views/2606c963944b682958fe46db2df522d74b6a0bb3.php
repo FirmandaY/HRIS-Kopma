@@ -43,6 +43,20 @@
                     <td> <?php echo e($pengajuan->email); ?></td>
                 </tr>
                 <tr>
+                    <td><b>Waktu Pengajuan</b></td>
+                    <td>
+                        <p><?php echo e(\Carbon\Carbon::parse($pengajuan->created_at)->format('d M Y')); ?></p>
+                        <p>
+                            Pukul <?php echo e(\Carbon\Carbon::parse($pengajuan->created_at)->format('H:i')); ?>
+
+                            <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 15px;">
+                                <?php echo e($pengajuan->created_at->diffForHumans()); ?>
+
+                            </i>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
                     <td><b>File Anggaran</b></td>
                     <td>
                         <?php echo e($pengajuan->file_anggaran); ?>
