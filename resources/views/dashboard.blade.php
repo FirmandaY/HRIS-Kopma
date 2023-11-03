@@ -38,6 +38,7 @@
                 </div>
             </div>
 
+            @can('isAdmin')
             <div class="col">
                 <!-- small box -->
                 <div class="small-box bg-teal">
@@ -51,39 +52,99 @@
                     <a href="{{route('rekap.pinjam', ['year' => now()->year])}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
+            @endcan
             
         </div>
         <div class="row">
             @can('isAdmin')
-            <div class="col">
-                <!-- small box -->
-                <div class="small-box bg-warning">
-                    <div class="inner">
-                        <h3>{{ count($usersKaryawan) }}</h3>
-                        <p>Kelola Data Karyawan</p>
+                <div class="col">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ count($usersKaryawan) }}</h3>
+                            <p>Kelola Data Karyawan</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="{{route('kelola.index')}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    <a href="{{route('kelola.index')}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+
                 </div>
 
-            </div>
+                <div class="col">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ count($usersPengurus) }}</h3>
+                            <p>Kelola Data Pengurus</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="{{route('kelola.indexPengurus')}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
 
-            <div class="col">
-                <!-- small box -->
-                <div class="small-box bg-warning">
-                    <div class="inner">
-                        <h3>{{ count($usersPengurus) }}</h3>
-                        <p>Kelola Data Pengurus</p>
+                </div>
+            @endcan
+                
+            @can('isAdminkeu')
+                <div class="col">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>
+                                + {{ count($new_pengajuan) }}
+                                @if( count($new_pengajuan) > 0)
+                                    <a href="{{route('pengajuan.adminkeu')}}">
+                                        <i style='
+                                            font-size:16px; 
+                                            margin-left: 5px;
+                                            padding: 0px 12px; 
+                                            border-radius:8px; 
+                                            background-color:rgb(0, 87, 128); 
+                                            color:rgb(255, 255, 255);
+                                        '>Baru</i>
+                                    </a>
+                                    
+                                @endif
+                            </h3>
+                            <p>Pengajuan Anggaran Bidang</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <a href="{{route('rekap.pengajuanAnggaran', ['year' => now()->year])}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    <a href="{{route('kelola.indexPengurus')}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+
                 </div>
 
-            </div>
+                <div class="col">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>
+                                + {{ count($new_pengajuan) }}
+                                @if( count($new_pengajuan) > 0)
+                                    <i style='
+                                        font-size:16px; 
+                                        margin-left: 5px;
+                                        padding: 0px 12px; 
+                                        border-radius:8px; 
+                                        background-color:rgb(0, 87, 128); 
+                                        color:white;
+                                    '>Baru</i>
+                                @endif
+                            </h3>
+                            <p>Realisasi Anggaran Bidang</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <a href="{{route('kelola.indexPengurus')}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+
+                </div>
             @endcan
 
         </div>

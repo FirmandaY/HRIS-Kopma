@@ -38,6 +38,7 @@
                 </div>
             </div>
 
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('isAdmin')): ?>
             <div class="col">
                 <!-- small box -->
                 <div class="small-box bg-teal">
@@ -51,39 +52,101 @@
                     <a href="<?php echo e(route('rekap.pinjam', ['year' => now()->year])); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
+            <?php endif; ?>
             
         </div>
         <div class="row">
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('isAdmin')): ?>
-            <div class="col">
-                <!-- small box -->
-                <div class="small-box bg-warning">
-                    <div class="inner">
-                        <h3><?php echo e(count($usersKaryawan)); ?></h3>
-                        <p>Kelola Data Karyawan</p>
+                <div class="col">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3><?php echo e(count($usersKaryawan)); ?></h3>
+                            <p>Kelola Data Karyawan</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="<?php echo e(route('kelola.index')); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    <a href="<?php echo e(route('kelola.index')); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+
                 </div>
 
-            </div>
+                <div class="col">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3><?php echo e(count($usersPengurus)); ?></h3>
+                            <p>Kelola Data Pengurus</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <a href="<?php echo e(route('kelola.indexPengurus')); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
 
-            <div class="col">
-                <!-- small box -->
-                <div class="small-box bg-warning">
-                    <div class="inner">
-                        <h3><?php echo e(count($usersPengurus)); ?></h3>
-                        <p>Kelola Data Pengurus</p>
+                </div>
+            <?php endif; ?>
+                
+            <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('isAdminkeu')): ?>
+                <div class="col">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>
+                                + <?php echo e(count($new_pengajuan)); ?>
+
+                                <?php if( count($new_pengajuan) > 0): ?>
+                                    <a href="<?php echo e(route('pengajuan.adminkeu')); ?>">
+                                        <i style='
+                                            font-size:16px; 
+                                            margin-left: 5px;
+                                            padding: 0px 12px; 
+                                            border-radius:8px; 
+                                            background-color:rgb(0, 87, 128); 
+                                            color:rgb(255, 255, 255);
+                                        '>Baru</i>
+                                    </a>
+                                    
+                                <?php endif; ?>
+                            </h3>
+                            <p>Pengajuan Anggaran Bidang</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <a href="<?php echo e(route('rekap.pengajuanAnggaran', ['year' => now()->year])); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    <a href="<?php echo e(route('kelola.indexPengurus')); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+
                 </div>
 
-            </div>
+                <div class="col">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>
+                                + <?php echo e(count($new_pengajuan)); ?>
+
+                                <?php if( count($new_pengajuan) > 0): ?>
+                                    <i style='
+                                        font-size:16px; 
+                                        margin-left: 5px;
+                                        padding: 0px 12px; 
+                                        border-radius:8px; 
+                                        background-color:rgb(0, 87, 128); 
+                                        color:white;
+                                    '>Baru</i>
+                                <?php endif; ?>
+                            </h3>
+                            <p>Realisasi Anggaran Bidang</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <a href="<?php echo e(route('kelola.indexPengurus')); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+
+                </div>
             <?php endif; ?>
 
         </div>
@@ -91,7 +154,7 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"><strong>Daftar Karyawan Cuti Hari ini</strong></h3>
+                        <h3 class="card-title"><strong>Daftar Staff dan Karyawan Cuti Hari ini</strong></h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">

@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class IzinExport implements FromCollection, WithMapping, WithHeadings
+class PeminjamanExport implements FromCollection, WithMapping, WithHeadings
 {
     /**
      * @return \Illuminate\Support\Collection
@@ -25,9 +25,6 @@ class IzinExport implements FromCollection, WithMapping, WithHeadings
             $peminjaman->user->role->nama ?? 'None',
             $peminjaman->user->divisi->nama ?? 'None',
             Carbon::parse($peminjaman->created_at)->toFormattedDateString(),
-            Carbon::parse($peminjaman->tgl_izin)->toFormattedDateString(),
-            $peminjaman->wkt_mulai,
-            $peminjaman->wkt_selesai,
             $peminjaman->acc_hrd->nama,
         ];
     }
@@ -38,10 +35,7 @@ class IzinExport implements FromCollection, WithMapping, WithHeadings
             'NIK',
             'Jabatan',
             'Divisi',
-            'Mengajukan',
             'Tanggal Peminjaman',
-            'Mulai',
-            'Selesai',
             'Acc HRD'
         ];
     }

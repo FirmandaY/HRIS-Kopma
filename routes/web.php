@@ -29,8 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/rekap/cuti', [DashboardController::class, 'cuti'])->name('rekap.cuti');
     Route::get('/rekap/izin', [DashboardController::class, 'izin'])->name('rekap.izin');
-    Route::get('/rekap/pinjam', [DashboardController::class, 'pinjam'])->name('rekap.pinjam');
+    Route::get('/rekap/pinjam', [DashboardController::class, 'pinjam'])->middleware('can:isAdmin')->name('rekap.pinjam');
     Route::get('/rekap/cutiPengurus', [DashboardController::class, 'cutiPengurus'])->name('rekap.cutiPengurus');
+    Route::get('/rekap/pengajuan-anggaran', [DashboardController::class, 'pengajuanAnggaran'])->name('rekap.pengajuanAnggaran');
 
     Route::prefix('/profil')->group(function () {
         Route::get('/', [ProfilController::class, 'show'])->name('profil.show');

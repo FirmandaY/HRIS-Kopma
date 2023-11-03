@@ -20,7 +20,7 @@
 
                 <br>
             <p style="color: red;"><i> PERHATIAN ! </i></p>
-            <p><i> Mohon Pastikan Anda Menghubungi Ketua Bidang Terlebih dahulu sebelum mengajukan anggaran ya! </i></p>
+            <p><i> Mohon pastikan anda berkoordinasi dengan Ketua Bidang terlebih dahulu sebelum mengajukan anggaran ya! </i></p>
             </p>
         </div>
         <div class="row">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PengajuanExport;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pengajuan_anggaran;
@@ -9,6 +10,7 @@ use App\Models\Acc_adminkeu;
 use Illuminate\Http\Request;
 use File;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PengajuanAnggaranController extends Controller
 {
@@ -154,5 +156,24 @@ class PengajuanAnggaranController extends Controller
         session()->flash('success', 'Data pengajuan terhapus!');
         session()->flash('error', 'Data pengajuan gagal terhapus!');
         return redirect(route('pengajuan.adminkeu'));
+    }
+
+    //hapus semua data, tidak digunakan di sistem
+    public function destroyAll()
+    {
+        Pengajuan_anggaran::truncate();
+        session()->flash('success', 'Tanggapan anda sudah disimpan!');
+        session()->flash('error', 'Tanggapan anda gagal disimpan!');
+        return redirect(route('cuti.admin'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new PengajuanExport(), 'rekap-pengajuan-anggaran.xlsx');
+        return redirect("route('rekap.pengajuanAnggaran')");
+    }
+    public function lampiran(Pengajuan_anggaran $pengajuan)
+    {
+        return view('pengajuan.lampiran', compact('pengajuan'));
     }
 }

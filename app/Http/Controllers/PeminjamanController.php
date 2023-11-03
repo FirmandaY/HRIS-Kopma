@@ -121,7 +121,7 @@ class PeminjamanController extends Controller
 
     public function export()
     {
-        return Excel::download(new IzinExport(), 'rekap-peminjaman.xlsx');
+        return Excel::download(new PeminjamanExport(), 'rekap-peminjaman.xlsx');
         return redirect("route('rekap.peminjaman')");
     }
     public function lampiran(Peminjaman $peminjaman)

@@ -89,7 +89,7 @@
 
                                                 </i>
                                             <?php elseif($pengajuan->acc_adminkeu_id == 2): ?>
-                                                <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 10px;">
+                                                <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 15px;">
                                                     <?php echo e($pengajuan->acc_adminkeu->nama ?? 'None'); ?>
 
                                                 </i>
