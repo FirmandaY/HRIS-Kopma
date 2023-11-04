@@ -60,20 +60,20 @@
                             </li>
                             
                             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('pengajuan')): ?>
-                            <li class="nav-item">
-                                <a href="<?php echo e(route('izin.index')); ?>" class="nav-link<?php echo e(request()->is('izin') || request()->is('izin/create')||request()->is('izin') ? ' active' : ''); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Pengajuan Izin</p>
-                                </a>
-                            </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo e(route('izin.index')); ?>" class="nav-link<?php echo e(request()->is('izin') || request()->is('izin/create')||request()->is('izin') ? ' active' : ''); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pengajuan Izin</p>
+                                    </a>
+                                </li>
                             <?php endif; ?>
                             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('peminjaman')): ?>
-                            <li class="nav-item">
-                                <a href="<?php echo e(route('pinjam.index')); ?>" class="nav-link<?php echo e(request()->is('pinjam') || request()->is('pinjam/create')||request()->is('pinjam') ? ' active' : ''); ?>">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Pengajuan Peminjaman</p>
-                                </a>
-                            </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo e(route('pinjam.index')); ?>" class="nav-link<?php echo e(request()->is('pinjam') || request()->is('pinjam/create')||request()->is('pinjam') ? ' active' : ''); ?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pengajuan Peminjaman</p>
+                                    </a>
+                                </li>
                             <?php endif; ?>
                         <?php endif; ?>
 
@@ -106,51 +106,51 @@
                 
                 <li class="nav-item<?php echo e(request()->is('cuti/admin') ||  request()->is('izin/admin')   ? ' menu-open' : ''); ?>">
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('persetujuanMenu')): ?>
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-check-square"></i>
-                        <p>
-                            Persetujuan
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-check-square"></i>
+                            <p>
+                                Persetujuan
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
                     <?php endif; ?>
                     <ul class="nav nav-treeview">
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('persetujuan')): ?>
-                        <li class="nav-item">
-                            <a href="<?php echo e(route('cuti.admin')); ?>" class="nav-link<?php echo e(request()->is('cuti/admin') ? ' active' : ''); ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Persetujuan Cuti</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo e(route('izin.admin')); ?>" class="nav-link<?php echo e(request()->is('izin/admin') ? ' active' : ''); ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Persetujuan Izin</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="<?php echo e(route('cuti.admin')); ?>" class="nav-link<?php echo e(request()->is('cuti/admin') ? ' active' : ''); ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Persetujuan Cuti</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo e(route('izin.admin')); ?>" class="nav-link<?php echo e(request()->is('izin/admin') ? ' active' : ''); ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Persetujuan Izin</p>
+                                </a>
+                            </li>
                         <?php endif; ?>
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('persetujuanPinjam')): ?>
-                        <li class="nav-item">
-                            <a href="<?php echo e(route('pinjam.admin')); ?>" class="nav-link<?php echo e(request()->is('pinjam/admin') ? ' active' : ''); ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Persetujuan Peminjaman</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="<?php echo e(route('pinjam.admin')); ?>" class="nav-link<?php echo e(request()->is('pinjam/admin') ? ' active' : ''); ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Persetujuan Peminjaman</p>
+                                </a>
+                            </li>
                         <?php endif; ?>
 
                         <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('persetujuanAnggaran')): ?>
-                        <li class="nav-item">
-                            <a href="<?php echo e(route('pengajuan.adminkeu')); ?>" class="nav-link<?php echo e(request()->is('pengajuan/admin') ? ' active' : ''); ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Pengajuan Anggaran</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo e(route('pengajuan.adminkeu')); ?>" class="nav-link<?php echo e(request()->is('realisasi/admin') ? ' active' : ''); ?>">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Realisasi Anggaran</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="<?php echo e(route('pengajuan.adminkeu')); ?>" class="nav-link<?php echo e(request()->is('pengajuan/admin') ? ' active' : ''); ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Pengajuan Anggaran</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?php echo e(route('pengajuan.adminkeu')); ?>" class="nav-link<?php echo e(request()->is('realisasi/admin') ? ' active' : ''); ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Realisasi Anggaran</p>
+                                </a>
+                            </li>
                         <?php endif; ?>
                     </ul>
                 </li>
@@ -165,22 +165,22 @@
                 </li>
 
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('isAdmin')): ?>
-                <li class="nav-item<?php echo e(request()->is('angota') || request()->is('anggota/*') ? ' menu-open':''); ?>">
-                    <a href="<?php echo e(route('kelola.indexPengurus')); ?>" class="nav-link">
-                        <i class="nav-icon fas fa-user-friends"></i>
-                        <p>
-                            Kelola Pengurus
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item<?php echo e(request()->is('anggota') || request()->is('anggota/*') ? ' menu-open':''); ?>">
-                    <a href="<?php echo e(route('kelola.index')); ?>" class="nav-link">
-                        <i class="nav-icon fas fa-user-friends"></i>
-                        <p>
-                            Kelola Karyawan
-                        </p>
-                    </a>
-                </li>
+                    <li class="nav-item<?php echo e(request()->is('angota') || request()->is('anggota/*') ? ' menu-open':''); ?>">
+                        <a href="<?php echo e(route('kelola.indexPengurus')); ?>" class="nav-link">
+                            <i class="nav-icon fas fa-user-friends"></i>
+                            <p>
+                                Kelola Pengurus
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item<?php echo e(request()->is('anggota') || request()->is('anggota/*') ? ' menu-open':''); ?>">
+                        <a href="<?php echo e(route('kelola.index')); ?>" class="nav-link">
+                            <i class="nav-icon fas fa-user-friends"></i>
+                            <p>
+                                Kelola Karyawan
+                            </p>
+                        </a>
+                    </li>
                 <?php endif; ?>
                 <!-- <li class="nav-item">
                     <a href="#" class="nav-link">

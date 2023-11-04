@@ -22,8 +22,9 @@ class PengajuanExport implements FromCollection, WithMapping, WithHeadings
         return [
             $pengajuan->user->name ?? 'None',
             $pengajuan->user->nik ?? 'None',
-            $pengajuan->user->role->nama ?? 'None',
-            $pengajuan->user->divisi->nama ?? 'None',
+            $pengajuan->user->email ?? 'None',
+            $pengajuan->nama_user ?? 'None',
+            $pengajuan->no_tlp ?? 'None',
             Carbon::parse($pengajuan->created_at)->toFormattedDateString(),
             $pengajuan->acc_adminkeu->nama,
         ];
@@ -31,12 +32,13 @@ class PengajuanExport implements FromCollection, WithMapping, WithHeadings
     public function headings(): array
     {
         return [
-            'Nama',
-            'NIK',
-            'Jabatan',
-            'Divisi',
+            'Nama Bidang',
+            'NIK / NAK / Kode Bidang',
+            'Email Bidang',
+            'Staf Pemohon',
+            'Nomor Telepon',
             'Tanggal Pengajuan',
-            'Acc Adminkeu'
+            'Status'
         ];
     }
 }
