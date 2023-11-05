@@ -19,7 +19,7 @@
                         <p>Rekap Data Cuti</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="fas fa-book"></i>
                     </div>
                     <a href="<?php echo e(route('rekap.cuti', ['year' => now()->year])); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -32,7 +32,7 @@
                         <p>Rekap Data Izin</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="fas fa-file-alt"></i>
                     </div>
                     <a href="<?php echo e(route('rekap.izin', ['year' => now()->year])); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -47,7 +47,7 @@
                         <p>Rekap Data Peminjaman</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-bag"></i>
+                        <i class="fas fa-hand-holding-usd"></i>
                     </div>
                     <a href="<?php echo e(route('rekap.pinjam', ['year' => now()->year])); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -65,7 +65,7 @@
                             <p>Kelola Data Karyawan</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="far fa-id-card"></i>
                         </div>
                         <a href="<?php echo e(route('kelola.index')); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -80,7 +80,7 @@
                             <p>Kelola Data Pengurus</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                            <i class="fas fa-id-card"></i>
                         </div>
                         <a href="<?php echo e(route('kelola.indexPengurus')); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
