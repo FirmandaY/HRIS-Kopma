@@ -86,7 +86,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="<?php echo e(route('izin.index')); ?>" class="nav-link<?php echo e(request()->is('izin') || request()->is('izin/create')||request()->is('izin') ? ' active' : ''); ?>">
+                                <a href="<?php echo e(route('realisasi.index')); ?>" class="nav-link<?php echo e(request()->is('realisasi') || request()->is('realisasi/create')||request()->is('realisasi') ? ' active' : ''); ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Realisasi Anggaran</p>
                                 </a>

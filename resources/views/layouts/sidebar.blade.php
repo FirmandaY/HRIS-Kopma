@@ -86,7 +86,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route('izin.index') }}" class="nav-link{{request()->is('izin') || request()->is('izin/create')||request()->is('izin') ? ' active' : ''}}">
+                                <a href="{{ route('realisasi.index') }}" class="nav-link{{request()->is('realisasi') || request()->is('realisasi/create')||request()->is('realisasi') ? ' active' : ''}}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Realisasi Anggaran</p>
                                 </a>

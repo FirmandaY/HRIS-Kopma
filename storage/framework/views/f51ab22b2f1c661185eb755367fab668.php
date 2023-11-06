@@ -1,11 +1,11 @@
-@extends('layouts.main',['title' => 'Daftar Realisasi Anggaran'])
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 <div class="card card-info col-sm-12 p-0">
     <div class="card-header">
         <h1 class="card-title">Daftar Pengajuan Realisasi Anggaran Bidang</h1>
     </div>
 </div>
-@include('layouts.alert')
+<?php echo $__env->make('layouts.alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <section class="container">
 
@@ -24,7 +24,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <a href="{{ route('realisasi.create') }}" class="btn btn-success">
+                <a href="<?php echo e(route('realisasi.create')); ?>" class="btn btn-success">
                     <i class="fas fa-plus-square"></i>
                     Buat Realisasi</a>
             </div>
@@ -52,54 +52,58 @@
                             </thead>
 
                             <tbody align="center">
-                                @foreach($realisasis as $realisasi)
+                                <?php $__currentLoopData = $realisasis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $realisasi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td> {{$realisasi->nama_user}} </td>
-                                    <td> {{ $realisasi->no_spj }} </td>
-                                    <td> {{ $realisasi->file_realisasi }} </td>
-                                    <td>{{\Carbon\Carbon::parse($realisasi->created_at)->format('d/m/Y')}}</td>
+                                    <td> <?php echo e($realisasi->nama_user); ?> </td>
+                                    <td> <?php echo e($realisasi->no_spj); ?> </td>
+                                    <td> <?php echo e($realisasi->file_realisasi); ?> </td>
+                                    <td><?php echo e(\Carbon\Carbon::parse($realisasi->created_at)->format('d/m/Y')); ?></td>
 
                                     <td>
-                                        @if ($realisasi->acc_adminkeu_id == 4)
+                                        <?php if($realisasi->acc_adminkeu_id == 4): ?>
                                             <i style="background-color: rgb(245, 255, 104); border-radius: 10px; padding: 5px 15px;">
-                                                {{$pengajuan->acc_adminkeu->nama}}
+                                                <?php echo e($pengajuan->acc_adminkeu->nama); ?>
+
                                             </i>
-                                        @elseif ($realisasi->acc_adminkeu_id == 3)
+                                        <?php elseif($realisasi->acc_adminkeu_id == 3): ?>
                                             <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 15px;">
-                                                {{$realisasi->acc_adminkeu->nama}}
+                                                <?php echo e($realisasi->acc_adminkeu->nama); ?>
+
                                             </i>
-                                        @elseif ($realisasi->acc_adminkeu_id == 2)
+                                        <?php elseif($realisasi->acc_adminkeu_id == 2): ?>
                                             <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 20px;">
-                                                {{$realisasi->acc_adminkeu->nama}}
+                                                <?php echo e($realisasi->acc_adminkeu->nama); ?>
+
                                             </i>
-                                        @else
+                                        <?php else: ?>
                                             <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 15px;">
-                                                {{$realisasi->acc_adminkeu->nama}}
+                                                <?php echo e($realisasi->acc_adminkeu->nama); ?>
+
                                             </i>
-                                        @endif
+                                        <?php endif; ?>
                                     </td>
 
                                     <td>
-                                        <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
+                                        <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
-                                        @if($realisasi->acc_adminkeu_id == 4)
-                                            <form action="{{ route('realisasi.edit', $realisasi->slug) }}" method="get">
-                                                @csrf
+                                        <?php if($realisasi->acc_adminkeu_id == 4): ?>
+                                            <form action="<?php echo e(route('realisasi.edit', $realisasi->slug)); ?>" method="get">
+                                                <?php echo csrf_field(); ?>
                                                 <button class="btn btn-warning" style="padding-right:20px; padding-left:20px; margin-top:5px;">
                                                     <i class="fas fa-pencil"></i>Revisi
                                                 </button>
                                             </form>
-                                        @else
-                                            <form action="{{ route('realisasi.show', $realisasi->slug) }}" method="get">
-                                                @csrf
+                                        <?php else: ?>
+                                            <form action="<?php echo e(route('realisasi.show', $realisasi->slug)); ?>" method="get">
+                                                <?php echo csrf_field(); ?>
                                                 <button class="btn btn-info" style="padding-right:20px; padding-left:20px; margin-top:5px;">
                                                     <i style="margin-right: 5px;" class="fas fa-eye"></i>Detail
                                                 </button>
                                             </form>
-                                        @endif
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                         </table>
                     </div>
@@ -109,7 +113,8 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            {{$realisasis->links()}}
+            <?php echo e($realisasis->links()); ?>
+
         </div>
     </div>
 </section>
@@ -123,4 +128,5 @@
         })
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main',['title' => 'Daftar Realisasi Anggaran'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/realisasi/index.blade.php ENDPATH**/ ?>

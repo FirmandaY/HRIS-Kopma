@@ -3,9 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Realisasi_anggaran;
+use App\Models\Acc_adminkeu;
+use Illuminate\Support\Str;
+
 
 class RealisasiAnggaranController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,9 @@ class RealisasiAnggaranController extends Controller
      */
     public function index()
     {
-        //
+        $id = Auth::id();
+        $realisasis = Realisasi_anggaran::where('user_id', $id)->orderBy('created_at', 'desc')->simplePaginate(12);
+        return view('realisasi.index', compact('realisasis'));
     }
 
     /**
@@ -23,7 +35,7 @@ class RealisasiAnggaranController extends Controller
      */
     public function create()
     {
-        //
+        return view('realisasi.create');
     }
 
     /**
@@ -34,7 +46,45 @@ class RealisasiAnggaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi lampiran anggaran dan formulir
+        $request->validate([
+            'foto_spj' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'file_realisasi' => 'required|mimes:PDF,pdf,xlsx,xls|max:1048',
+            'file_bukti_transaksi' => 'required|mimes:PDF,pdf|max:2048',
+            'email' => 'required|email|max:30',
+            'no_tlp'=> 'required|numeric|min:10',
+            'bidang' => 'required',
+            'nama_user'=> 'required|regex:/[a-zA-Z\s]+/|max:30',
+            'no_spj' => 'required|numeric|min:3'
+        ]);
+
+        $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
+        $path_foto_spj = $request->file('foto_spj');
+        $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
+ 
+        $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
+        $path_file_realisasi = $request->file('file_realisasi');
+        $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
+
+        $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
+        $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
+        $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
+
+        $divisi_id = Auth::user()->divisi_id;
+        $role_id = Auth::user()->role_id;
+
+        $attr = $request->all();
+        $attr['slug'] = Str::random(9);
+        $attr['foto_spj'] = $name_foto_spj;
+        $attr['file_realisasi'] = $name_file_realisasi;
+        $attr['file_bukti_transaksi'] = $name_file_bukti_transaksi;
+
+        //create peminjaman
+        auth()->user()->realisasiAnggarans()->create($attr);
+        session()->flash('success', 'Pengajuan realisasi anggaran anda sudah diajukan!');
+        session()->flash('error', 'Pengajuan realisasi anggaran anda gagal diajukan!');
+
+        return redirect(route('realisasi.index'));
     }
 
     /**
@@ -43,9 +93,9 @@ class RealisasiAnggaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Realisasi_anggaran $realisasi)
     {
-        //
+        return view('realisasi.show', compact('realisasi'));
     }
 
     /**

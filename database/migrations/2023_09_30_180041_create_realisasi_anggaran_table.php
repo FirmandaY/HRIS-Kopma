@@ -16,15 +16,17 @@ class CreateRealisasiAnggaranTable extends Migration
         Schema::create('realisasi_anggaran', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->foreignId('acc_adminkeu_id')->default(1);
             $table->string('slug', 191);
             $table->string('email');
             $table->string('nama_user');
             $table->string('bidang');
-            $table->string('no_telp');
+            $table->string('no_tlp');
             $table->string('no_spj');
             $table->string('foto_spj');
             $table->string('file_bukti_transaksi');
             $table->string('file_realisasi');
+            $table->text('catatan')->nullable();
             $table->timestamps();
         });
     }

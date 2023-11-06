@@ -7,6 +7,7 @@ use App\Http\Controllers\IzinController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\KelolaController;
 use App\Http\Controllers\PengajuanAnggaranController;
+use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
@@ -102,11 +103,25 @@ Route::middleware('auth')->group(function () {
         Route::post('/create', [PengajuanAnggaranController::class, 'store'])->name('pengajuan.store');
         Route::get('/export', [PengajuanAnggaranController::class, 'export'])->middleware('can:isAdminkeu')->name('pengajuan.export');
         Route::delete('/delete-all', [PengajuanAnggaranController::class, 'destroyAll'])->middleware('can:isAdminkeu')->name('pengajuan.delete.all');
-        Route::get('/lampiran/{pinjam:slug}', [PengajuanAnggaranController::class, 'lampiran'])->name('pengajuan.lampiran');
+        Route::get('/lampiran/{pengajuan:slug}', [PengajuanAnggaranController::class, 'lampiran'])->name('pengajuan.lampiran');
         Route::get('/{pengajuan:slug}', [PengajuanAnggaranController::class, 'show'])->name('pengajuan.show');
         Route::get('/{pengajuan:slug}/edit', [PengajuanAnggaranController::class, 'edit'])->middleware('can:adminAnggaran')->name('pengajuan.edit');
         Route::patch('/{pengajuan:slug}/edit', [PengajuanAnggaranController::class, 'update'])->middleware('can:adminAnggaran')->name('pengajuan.update');
         Route::delete('/{pengajuan:slug}/delete', [PengajuanAnggaranController::class, 'destroy'])->middleware('can:adminAnggaran');
+    });
+
+    Route::prefix('/realisasi')->group(function () {
+        Route::get('/', [RealisasiAnggaranController::class, 'index'])->name('realisasi.index');
+        Route::get('/admin', [RealisasiAnggaranController::class, 'adminkeu'])->middleware('can:adminAnggaran')->name('realisasi.adminkeu');
+        Route::get('/create', [RealisasiAnggaranController::class, 'create'])->middleware('can:pengajuanAnggaran')->name('realisasi.create');
+        Route::post('/create', [RealisasiAnggaranController::class, 'store'])->name('realisasi.store');
+        Route::get('/export', [RealisasiAnggaranController::class, 'export'])->middleware('can:isAdminkeu')->name('realisasi.export');
+        Route::delete('/delete-all', [RealisasiAnggaranController::class, 'destroyAll'])->middleware('can:isAdminkeu')->name('realisasi.delete.all');
+        Route::get('/lampiran/{realisasi:slug}', [RealisasiAnggaranController::class, 'lampiran'])->name('realisasi.lampiran');
+        Route::get('/{realisasi:slug}', [RealisasiAnggaranController::class, 'show'])->name('realisasi.show');
+        Route::get('/{realisasi:slug}/edit', [RealisasiAnggaranController::class, 'edit'])->middleware('can:editRealisasi')->name('realisasi.edit');
+        Route::patch('/{realisasi:slug}/edit', [RealisasiAnggaranController::class, 'update'])->middleware('can:adminAnggaran')->name('realisasi.update');
+        Route::delete('/{realisasi:slug}/delete', [RealisasiAnggaranController::class, 'destroy'])->middleware('can:adminAnggaran');
     });
 });
 

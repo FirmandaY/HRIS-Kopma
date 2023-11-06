@@ -1,5 +1,5 @@
-@extends('layouts.main',['title' => 'Detail Pengajuan'])
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 <div class="card card-info col-sm-12">
     <div class="card-header justify-content-between">
         <h3 class="card-title">Formulir Pengajuan Anggaran</h3>
@@ -12,30 +12,31 @@
             <table class="table table-bordered">
                 <tr>
                     <td style="width: 14rem;"><b>Tanggal Mengajukan</b></td>
-                    <td> {{\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')}}</td>
+                    <td> <?php echo e(\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')); ?></td>
                 </tr>
                 <tr>
                     <td><b>Email</b></td>
-                    <td> {{$pengajuan->email}}</td>
+                    <td> <?php echo e($pengajuan->email); ?></td>
                 </tr>
                 <tr>
                     <td><b>Nama Lengkap</b></td>
-                    <td> {{ $pengajuan->nama_user }}</td>
+                    <td> <?php echo e($pengajuan->nama_user); ?></td>
                 </tr>
                 <tr>
                     <td><b>Bidang</b></td>
-                    <td> {{ $pengajuan->bidang }}</td>
+                    <td> <?php echo e($pengajuan->bidang); ?></td>
                 </tr>
                 <tr>
                     <td><b>No. WA</b></td>
-                    <td> {{ $pengajuan->no_tlp }}</td>
+                    <td> <?php echo e($pengajuan->no_tlp); ?></td>
                 </tr>
                 <tr>
                     <td><b>File Anggaran</b></td>
                     <td>
-                        {{$pengajuan->file_anggaran}}
+                        <?php echo e($pengajuan->file_anggaran); ?>
+
                         <p style="margin-top: 8px;">
-                            <a class="btn btn-primary" href="{{ asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran) }}" target="_blank">
+                            <a class="btn btn-primary" href="<?php echo e(asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran)); ?>" target="_blank">
                                 <i class="fas fa-file-excel" style="margin-right: 5px;"></i>
                                 Open Excel file
                             </a>
@@ -49,4 +50,5 @@
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main',['title' => 'Detail Pengajuan'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/pengajuan/show.blade.php ENDPATH**/ ?>

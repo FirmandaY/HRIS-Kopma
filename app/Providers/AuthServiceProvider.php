@@ -96,5 +96,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('adminAnggaran', function ($user) {
             return $user->role_id == 5;
         });
+        Gate::define('editRealisasi', function ($user) {
+            return $user->role_id == 5 || $user->role_id == 6;
+        });
     }
 }

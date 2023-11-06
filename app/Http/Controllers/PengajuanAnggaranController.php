@@ -66,10 +66,10 @@ class PengajuanAnggaranController extends Controller
         //validasi lampiran anggaran dan formulir
         $request->validate([
             'file_anggaran' => 'required|mimes:PDF,pdf,xlsx,xls|max:2048',
-            'email' => 'required|email',
-            'no_tlp'=> 'required',
+            'email' => 'required|email|max:30',
+            'no_tlp'=> 'required|numeric|min:10',
             'bidang' => 'required',
-            'nama_user'=> 'required'
+            'nama_user'=> 'required|regex:/[a-zA-Z\s]+/|max:30',
         ]);
  
         $name = $request->file('file_anggaran')->getClientOriginalName();

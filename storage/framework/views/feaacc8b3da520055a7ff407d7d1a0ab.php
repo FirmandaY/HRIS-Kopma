@@ -1,23 +1,31 @@
-@extends('layouts.main',['title' => 'Form Pengajuan Anggaran Bidang'])
-@section('content')
-@include('layouts.alert')
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('layouts.alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <div class="card card-info col-sm-12">
     <div class="card-header">
         <h3 class="card-title">Formulir Pengajuan Anggaran Bidang</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <form action="{{ route('pengajuan.store') }}" method="post" enctype="multipart/form-data">
-            @csrf
+        <form action="<?php echo e(route('pengajuan.store')); ?>" method="post" enctype="multipart/form-data">
+            <?php echo csrf_field(); ?>
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="exampleSelectRounded0">Nama Lengkap Anda</label>
                         <input type="text" class="form-control" id="nama_user" name="nama_user" required>
                         <div class="text-danger">
-                            @error('nama_user')
-                            {{$message}}
-                            @enderror
+                            <?php $__errorArgs = ['nama_user'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <?php echo e($message); ?>
+
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
 
@@ -25,9 +33,17 @@
                         <label for="exampleSelectRounded0">Nomor Telepon / WhatsApp Anda</label>
                         <input type="number" class="form-control" id="no_tlp" name="no_tlp" required>
                         <div class="text-danger">
-                            @error('no_tlp')
-                            {{$message}}
-                            @enderror
+                            <?php $__errorArgs = ['no_tlp'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <?php echo e($message); ?>
+
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
 
@@ -35,9 +51,17 @@
                         <label for="exampleSelectRounded0">Email Anda</label>
                         <input type="email" class="form-control" id="email" name="email" required>
                         <div class="text-danger">
-                            @error('email')
-                            {{$message}}
-                            @enderror
+                            <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <?php echo e($message); ?>
+
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
 
@@ -56,9 +80,17 @@
                             <option>Pengawas</option>
                         </select>
                         <div class="text-danger">
-                            @error('bidang')
-                            {{$message}}
-                            @enderror
+                            <?php $__errorArgs = ['bidang'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <?php echo e($message); ?>
+
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
                 </div>
@@ -69,10 +101,10 @@
                     <div class="form-group">
                         <label for="file_anggaran">Lampiran Form Anggaran</label>
                         <p>
-                            <small><i>*format form pengajuan anggaran dapat diakses melalui <a href="linktr.ee/KeuanganKopma">linktr.ee/KeuanganKopma</a></i></small>
+                            <small><i>*format form anggaran dapat diakses melalui <a href="linktr.ee/KeuanganKopma">linktr.ee/KeuanganKopma</a></i></small>
                         </p>
                         <p>
-                            <small><i>*format file: .xslx | ukuran maksimal file 1MB</i></small>
+                            <small><i>*format file: .pdf .xslx | ukuran maksimal file 2MB</i></small>
                         </p>
                         
                         <div class="input-group">
@@ -81,9 +113,17 @@
                             </div>
                         </div>
                         <div class="text-danger">
-                            @error('file_anggaran')
-                            {{$message}}
-                            @enderror
+                            <?php $__errorArgs = ['file_anggaran'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <?php echo e($message); ?>
+
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
                 </div>
@@ -130,4 +170,5 @@
     <!-- /.card-body -->
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main',['title' => 'Form Pengajuan Cuti'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/pengajuan/create.blade.php ENDPATH**/ ?>
