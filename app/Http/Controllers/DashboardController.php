@@ -34,9 +34,10 @@ class DashboardController extends Controller
         $izin = Izin::count();
         $pinjam = Peminjaman::count();
         $count_pengajuan = Pengajuan_anggaran::count();
-        // $count_realisasi = Realisasi_anggaran::count();
+        $count_realisasi = Realisasi_anggaran::count();
 
         $new_pengajuan = Pengajuan_anggaran::where('acc_adminkeu_id', 1)->get();
+        $new_realisasi = Realisasi_anggaran::where('acc_adminkeu_id', 1)->get();
 
         $usersKaryawan = User::whereBetween('role_id', [2, 3])->get();
         $usersPengurus = User::where('role_id', 4, 'ASC')->get();
@@ -52,7 +53,8 @@ class DashboardController extends Controller
             'usersKaryawan', 
             'usersPengurus',
             'count_pengajuan',
-            'new_pengajuan'
+            'new_pengajuan',
+            'new_realisasi'
         ));
     }
 

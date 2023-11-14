@@ -124,8 +124,8 @@
                     <div class="small-box bg-warning">
                         <div class="inner">
                             <h3>
-                                + {{ count($new_pengajuan) }}
-                                @if( count($new_pengajuan) > 0)
+                                + {{ count($new_realisasi) }}
+                                @if( count($new_realisasi) > 0)
                                     <i style='
                                         font-size:16px; 
                                         margin-left: 5px;

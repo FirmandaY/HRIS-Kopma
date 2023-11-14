@@ -1,4 +1,4 @@
-@extends('layouts.main',['title' => 'Form Pengajuan Anggaran'])
+@extends('layouts.main',['title' => 'Form Pengajuan Anggaran Bidang'])
 @section('content')
 
 

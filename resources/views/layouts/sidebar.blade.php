@@ -146,7 +146,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('pengajuan.adminkeu') }}" class="nav-link{{request()->is('realisasi/admin') ? ' active' : ''}}">
+                                <a href="{{ route('realisasi.adminkeu') }}" class="nav-link{{request()->is('realisasi/admin') ? ' active' : ''}}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Realisasi Anggaran</p>
                                 </a>

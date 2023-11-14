@@ -146,7 +146,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="<?php echo e(route('pengajuan.adminkeu')); ?>" class="nav-link<?php echo e(request()->is('realisasi/admin') ? ' active' : ''); ?>">
+                                <a href="<?php echo e(route('realisasi.adminkeu')); ?>" class="nav-link<?php echo e(request()->is('realisasi/admin') ? ' active' : ''); ?>">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Realisasi Anggaran</p>
                                 </a>

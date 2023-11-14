@@ -28,6 +28,21 @@ class RealisasiAnggaranController extends Controller
         return view('realisasi.index', compact('realisasis'));
     }
 
+    public function adminkeu()
+    {
+        $role_id = Auth::user()->role_id;
+        if ($role_id == 5) {
+            $realisasis = Realisasi_anggaran::orderBy('id', 'desc')->latest()->simplePaginate(12);
+        } else {
+            $realisasis = Realisasi_anggaran::whereHas('user', function ($query) {
+                $divisi_id = Auth::user()->divisi_id;
+                $query->whereDivisiId($divisi_id);
+            })->latest()->simplePaginate(12);
+        }
+
+        return view('realisasi.admin', compact('realisasis', 'role_id'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -104,9 +119,14 @@ class RealisasiAnggaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Realisasi_anggaran $realisasi)
     {
-        //
+        $role_id = Auth::user()->role_id;
+        return view('realisasi.edit', [
+            'role' => $role_id,
+            'realisasi' => $realisasi,
+            'acc_adminkeus' => Acc_adminkeu::get(),
+        ], compact('role_id'));
     }
 
     /**
@@ -116,9 +136,18 @@ class RealisasiAnggaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Realisasi_anggaran $realisasi)
     {
-        //
+        $role_id = Auth::user()->role_id;
+        $attr = $request->all();
+       
+        $attr['acc_adminkeu_id'] = request('acc_adminkeu');
+        
+        $realisasi->update($attr);
+
+        session()->flash('success', 'Tanggapan anda sudah disimpan!');
+        session()->flash('error', 'Tanggapan anda gagal disimpan!');
+        return redirect(route('realisasi.adminkeu'));
     }
 
     /**

@@ -133,9 +133,6 @@ class PengajuanAnggaranController extends Controller
         $attr = $request->all();
        
         $attr['acc_adminkeu_id'] = request('acc_adminkeu');
-
-        //pengkondisian status acc, saling berelasi antara acc mandiv dan acc hrd
-        // 1 = diproses, 2 = ditolak, 3 = disetujui, (acc hrd, 4 = - ) 
         
         $pengajuan->update($attr);
 

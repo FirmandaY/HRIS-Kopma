@@ -1,4 +1,4 @@
-@extends('layouts.main',['title' => 'Daftar Persetujuan Cuti'])
+@extends('layouts.main',['title' => 'Daftar Persetujuan Pengajuan Anggaran Bidang'])
 @section('content')
 <div class="card card-info col-sm-12 p-0">
     <div class="card-header">
@@ -70,11 +70,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($pengajuans as $pengajuan)
-                                    @if($pengajuan->acc_hrd_id == 1)
-                                    <tr style="color:tomato;">
-                                        @else
                                     <tr>
-                                        @endif
                                         <td>{{$pengajuan->nama_user ?? 'None'}}</td>
                                         <td>{{$pengajuan->user->divisi->nama ?? 'None'}}</td>
                                         <td>{{\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')}}</td>
