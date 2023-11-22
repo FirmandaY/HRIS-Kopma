@@ -62,7 +62,7 @@
                                     <td>
                                         <?php if($realisasi->acc_adminkeu_id == 4): ?>
                                             <i style="background-color: rgb(245, 255, 104); border-radius: 10px; padding: 5px 15px;">
-                                                <?php echo e($pengajuan->acc_adminkeu->nama); ?>
+                                                <?php echo e($realisasi->acc_adminkeu->nama); ?>
 
                                             </i>
                                         <?php elseif($realisasi->acc_adminkeu_id == 3): ?>
@@ -87,10 +87,10 @@
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
                                         <?php if($realisasi->acc_adminkeu_id == 4): ?>
-                                            <form action="<?php echo e(route('realisasi.edit', $realisasi->slug)); ?>" method="get">
+                                            <form action="<?php echo e(route('realisasi.revisi', $realisasi->slug)); ?>" method="get">
                                                 <?php echo csrf_field(); ?>
                                                 <button class="btn btn-warning" style="padding-right:20px; padding-left:20px; margin-top:5px;">
-                                                    <i class="fas fa-pencil"></i>Revisi
+                                                    <i class="fas fa-edit"></i>Revisi
                                                 </button>
                                             </form>
                                         <?php else: ?>

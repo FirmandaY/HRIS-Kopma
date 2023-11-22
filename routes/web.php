@@ -119,8 +119,10 @@ Route::middleware('auth')->group(function () {
         Route::delete('/delete-all', [RealisasiAnggaranController::class, 'destroyAll'])->middleware('can:isAdminkeu')->name('realisasi.delete.all');
         Route::get('/lampiran/{realisasi:slug}', [RealisasiAnggaranController::class, 'lampiran'])->name('realisasi.lampiran');
         Route::get('/{realisasi:slug}', [RealisasiAnggaranController::class, 'show'])->name('realisasi.show');
-        Route::get('/{realisasi:slug}/edit', [RealisasiAnggaranController::class, 'edit'])->middleware('can:editRealisasi')->name('realisasi.edit');
-        Route::patch('/{realisasi:slug}/edit', [RealisasiAnggaranController::class, 'update'])->middleware('can:adminAnggaran')->name('realisasi.update');
+        Route::get('/{realisasi:slug}/edit', [RealisasiAnggaranController::class, 'edit'])->middleware('can:adminAnggaran')->name('realisasi.edit');
+        Route::get('/{realisasi:slug}/revisi', [RealisasiAnggaranController::class, 'revisi'])->middleware('can:isBidang')->name('realisasi.revisi');
+        Route::patch('/{realisasi:slug}/edit', [RealisasiAnggaranController::class, 'update'])->middleware('can:editRealisasi')->name('realisasi.update');
+        Route::patch('/{realisasi:slug}/revisi', [RealisasiAnggaranController::class, 'updateRevisi'])->middleware('can:editRealisasi')->name('realisasi.update.revisi');
         Route::delete('/{realisasi:slug}/delete', [RealisasiAnggaranController::class, 'destroy'])->middleware('can:adminAnggaran');
     });
 });

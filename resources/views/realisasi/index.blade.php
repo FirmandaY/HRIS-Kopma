@@ -62,7 +62,7 @@
                                     <td>
                                         @if ($realisasi->acc_adminkeu_id == 4)
                                             <i style="background-color: rgb(245, 255, 104); border-radius: 10px; padding: 5px 15px;">
-                                                {{$pengajuan->acc_adminkeu->nama}}
+                                                {{$realisasi->acc_adminkeu->nama}}
                                             </i>
                                         @elseif ($realisasi->acc_adminkeu_id == 3)
                                             <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 15px;">
@@ -83,10 +83,10 @@
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
                                         @if($realisasi->acc_adminkeu_id == 4)
-                                            <form action="{{ route('realisasi.edit', $realisasi->slug) }}" method="get">
+                                            <form action="{{ route('realisasi.revisi', $realisasi->slug) }}" method="get">
                                                 @csrf
                                                 <button class="btn btn-warning" style="padding-right:20px; padding-left:20px; margin-top:5px;">
-                                                    <i class="fas fa-pencil"></i>Revisi
+                                                    <i class="fas fa-edit"></i>Revisi
                                                 </button>
                                             </form>
                                         @else
