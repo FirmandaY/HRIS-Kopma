@@ -101,10 +101,10 @@ unset($__errorArgs, $__bag); ?>
                     <div class="form-group">
                         <label for="file_anggaran">Lampiran Form Anggaran</label>
                         <p>
-                            <small><i>*format form anggaran dapat diakses melalui <a href="linktr.ee/KeuanganKopma">linktr.ee/KeuanganKopma</a></i></small>
+                            <small><i>*format form pengajuan anggaran dapat diakses melalui <a href="linktr.ee/KeuanganKopma">linktr.ee/KeuanganKopma</a></i></small>
                         </p>
                         <p>
-                            <small><i>*format file: .pdf .xslx | ukuran maksimal file 2MB</i></small>
+                            <small><i>*format file: .xslx | ukuran maksimal file 1MB</i></small>
                         </p>
                         
                         <div class="input-group">
@@ -171,4 +171,4 @@ unset($__errorArgs, $__bag); ?>
 </div>
 
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('layouts.main',['title' => 'Form Pengajuan Cuti'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/pengajuan/create.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.main',['title' => 'Form Pengajuan Anggaran Bidang'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/pengajuan/create.blade.php ENDPATH**/ ?>

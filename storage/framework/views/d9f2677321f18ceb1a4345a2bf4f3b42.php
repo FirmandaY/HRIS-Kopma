@@ -143,7 +143,7 @@
                         <div class="icon">
                             <i class="fas fa-file-invoice"></i>
                         </div>
-                        <a href="<?php echo e(route('kelola.indexPengurus')); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="<?php echo e(route('rekap.realisasiAnggaran', ['year' => now()->year])); ?>" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
 
                 </div>

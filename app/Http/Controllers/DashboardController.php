@@ -85,6 +85,7 @@ class DashboardController extends Controller
         }
         return view('peminjaman.rekap', compact('pinjams', 'years'));
     }
+
     public function pengajuanAnggaran(Request $request)
     {
         $pengajuans = Pengajuan_anggaran::latest()->whereYear('created_at', '=', $request->query("year"))->get();
@@ -93,5 +94,15 @@ class DashboardController extends Controller
             $years[$i] = now()->year - $i;
         }
         return view('pengajuan.rekap', compact('pengajuans', 'years'));
+    }
+
+    public function realisasiAnggaran(Request $request)
+    {
+        $realisasis = Realisasi_anggaran::latest()->whereYear('created_at', '=', $request->query("year"))->get();
+        $years = [];
+        for ($i = 0; $i < 5; $i++) {
+            $years[$i] = now()->year - $i;
+        }
+        return view('realisasi.rekap', compact('realisasis', 'years'));
     }
 }

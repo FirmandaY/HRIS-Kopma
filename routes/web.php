@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/rekap/pinjam', [DashboardController::class, 'pinjam'])->middleware('can:isAdmin')->name('rekap.pinjam');
     Route::get('/rekap/cutiPengurus', [DashboardController::class, 'cutiPengurus'])->name('rekap.cutiPengurus');
     Route::get('/rekap/pengajuan-anggaran', [DashboardController::class, 'pengajuanAnggaran'])->name('rekap.pengajuanAnggaran');
+    Route::get('/rekap/realisasi-anggaran', [DashboardController::class, 'realisasiAnggaran'])->name('rekap.realisasiAnggaran');
 
     Route::prefix('/profil')->group(function () {
         Route::get('/', [ProfilController::class, 'show'])->name('profil.show');

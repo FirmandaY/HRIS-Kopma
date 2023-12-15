@@ -141,7 +141,7 @@
                         <div class="icon">
                             <i class="fas fa-file-invoice"></i>
                         </div>
-                        <a href="{{route('kelola.indexPengurus')}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{route('rekap.realisasiAnggaran', ['year' => now()->year])}}" class="small-box-footer">Detail <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
 
                 </div>
