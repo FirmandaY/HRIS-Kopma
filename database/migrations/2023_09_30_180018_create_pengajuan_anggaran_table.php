@@ -23,6 +23,7 @@ class CreatePengajuanAnggaranTable extends Migration
             $table->string('bidang');
             $table->string('no_tlp');
             $table->string('file_anggaran');
+            $table->text('catatan')->nullable();
             $table->timestamps();
         });
     }

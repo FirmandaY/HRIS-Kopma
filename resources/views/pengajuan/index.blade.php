@@ -61,16 +61,20 @@
 
                                     <td>
                                         @if ($pengajuan->acc_adminkeu_id == 3)
-                                            <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 15px;">
-                                                {{$pengajuan->acc_adminkeu->nama}}
+                                            <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 10px;">
+                                                {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
                                             </i>
                                         @elseif ($pengajuan->acc_adminkeu_id == 2)
-                                            <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 20px;">
-                                                {{$pengajuan->acc_adminkeu->nama}}
+                                            <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 15px;">
+                                                {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
+                                            </i>
+                                        @elseif ($pengajuan->acc_adminkeu_id == 4)
+                                            <i style="background-color: rgb(255, 252, 104); border-radius: 10px; padding: 5px 15px;">
+                                                {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
                                             </i>
                                         @else
-                                            <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 15px;">
-                                                {{$pengajuan->acc_adminkeu->nama}}
+                                            <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 10px;">
+                                                {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
                                             </i>
                                         @endif
                                     </td>
@@ -79,12 +83,21 @@
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
 
-                                        <form action="{{ route('pengajuan.show', $pengajuan->slug) }}" method="get">
-                                            @csrf
-                                            <button class="btn btn-info" style="padding-right:20px; padding-left:20px; margin-top:5px;">
-                                                <i class="fa fa-pencil"></i>Detail
-                                            </button>
-                                        </form>
+                                        @if($pengajuan->acc_adminkeu_id == 4)
+                                            <form action="{{ route('pengajuan.revisi', $pengajuan->slug) }}" method="get">
+                                                @csrf
+                                                <button class="btn btn-warning" style="padding-right:20px; padding-left:20px; margin-top:5px;">
+                                                    <i class="fas fa-edit"></i>Revisi
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('pengajuan.show', $pengajuan->slug) }}" method="get">
+                                                @csrf
+                                                <button class="btn btn-info" style="padding-right:20px; padding-left:20px; margin-top:5px;">
+                                                    <i style="margin-right: 5px;" class="fas fa-eye"></i>Detail
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

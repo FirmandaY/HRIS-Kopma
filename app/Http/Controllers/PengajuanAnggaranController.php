@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Pengajuan_anggaran;
 use App\Models\Acc_adminkeu;
 use Illuminate\Http\Request;
-use File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -117,7 +117,17 @@ class PengajuanAnggaranController extends Controller
             'role' => $role_id,
             'pengajuan' => $pengajuan,
             'acc_adminkeus' => Acc_adminkeu::get(),
-        ]);
+        ], compact('role_id'));
+    }
+
+    public function revisi(Pengajuan_anggaran $pengajuan)
+    {
+        $role_id = Auth::user()->role_id;
+        return view('pengajuan.revisi', [
+            'role' => $role_id,
+            'pengajuan' => $pengajuan,
+            'acc_adminkeus' => Acc_adminkeu::get(),
+        ], compact('role_id'));
     }
 
     /**
@@ -141,6 +151,29 @@ class PengajuanAnggaranController extends Controller
         return redirect(route('pengajuan.adminkeu'));
     }
 
+    public function updatePengajuan(Request $request, Pengajuan_anggaran $pengajuan){
+
+        $request->validate([
+            'file_anggaran' => 'nullable|mimes:PDF,pdf,xlsx,xls|max:1048'
+        ]);
+
+        $role_id = Auth::user()->role_id;
+        $attr = $request->all();
+       
+        File::delete('files/pengajuan_anggaran/'.$pengajuan->file_anggaran); //data foto yang lama dihapus dulu
+        $name_file_anggaran = $request->file('file_anggaran')->getClientOriginalName();
+        $path_file_anggaran = $request->file('file_anggaran');
+        $path_file_anggaran->move('files/pengajuan_anggaran/', $name_file_anggaran);
+
+        $pengajuan->update([
+            'acc_adminkeu_id' => 1,
+            'file_anggaran' => $name_file_anggaran
+        ]);
+
+        session()->flash('success', 'Tanggapan anda sudah disimpan!');
+        session()->flash('error', 'Tanggapan anda gagal disimpan!');
+        return redirect(route('pengajuan.index'));
+    }
     /**
      * Remove the specified resource from storage.
      *

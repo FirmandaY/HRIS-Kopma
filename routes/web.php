@@ -10,6 +10,7 @@ use App\Http\Controllers\PengajuanAnggaranController;
 use App\Http\Controllers\RealisasiAnggaranController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\WelcomeController;
+use App\Models\Pengajuan_anggaran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -107,7 +108,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/lampiran/{pengajuan:slug}', [PengajuanAnggaranController::class, 'lampiran'])->name('pengajuan.lampiran');
         Route::get('/{pengajuan:slug}', [PengajuanAnggaranController::class, 'show'])->name('pengajuan.show');
         Route::get('/{pengajuan:slug}/edit', [PengajuanAnggaranController::class, 'edit'])->middleware('can:adminAnggaran')->name('pengajuan.edit');
+        Route::get('/{pengajuan:slug}/revisi', [PengajuanAnggaranController::class, 'revisi'])->middleware('can:isBidang')->name('pengajuan.revisi');
         Route::patch('/{pengajuan:slug}/edit', [PengajuanAnggaranController::class, 'update'])->middleware('can:adminAnggaran')->name('pengajuan.update');
+        Route::patch('/{pengajuan:slug}/revisi', [PengajuanAnggaranController::class, 'updatePengajuan'])->middleware('can:editPengajuan')->name('pengajuan.update.revisi');
         Route::delete('/{pengajuan:slug}/delete', [PengajuanAnggaranController::class, 'destroy'])->middleware('can:adminAnggaran');
     });
 

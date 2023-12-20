@@ -65,6 +65,7 @@
                                         <th>Tanggal Pengajuan</th>
                                         <th>File Anggaran</th>
                                         <th>Status</th>
+                                        <th>Catatan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -89,11 +90,24 @@
                                                     <?php echo e($pengajuan->acc_adminkeu->nama ?? 'None'); ?>
 
                                                 </i>
+                                            <?php elseif($pengajuan->acc_adminkeu_id == 4): ?>
+                                                <i style="background-color: rgb(255, 252, 104); border-radius: 10px; padding: 5px 15px;">
+                                                    <?php echo e($pengajuan->acc_adminkeu->nama ?? 'None'); ?>
+
+                                                </i>
                                             <?php else: ?>
                                                 <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 10px;">
                                                     <?php echo e($pengajuan->acc_adminkeu->nama ?? 'None'); ?>
 
                                                 </i>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <?php if($pengajuan->catatan): ?> 
+                                                <?php echo e($pengajuan->catatan); ?>
+
+                                            <?php else: ?>
+                                                <p align=center> - </p>
                                             <?php endif; ?>
                                         </td>
                                         <td>

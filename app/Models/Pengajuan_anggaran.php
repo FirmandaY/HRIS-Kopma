@@ -9,9 +9,18 @@ class Pengajuan_anggaran extends Model
 {
     use HasFactory;
     protected $table = 'pengajuan_anggaran';
-    protected $fillable = ['slug', 'user_id', 'acc_adminkeu_id', 'email', 
-                            'nama_user', 'bidang', 'no_tlp', 'file_anggaran'
-                        ];
+    protected $fillable = 
+    [
+        'slug', 
+        'user_id', 
+        'acc_adminkeu_id', 
+        'email', 
+        'nama_user', 
+        'bidang', 
+        'no_tlp', 
+        'file_anggaran', 
+        'catatan'
+    ];
 
     protected $with = ['user', 'acc_adminkeu'];
 

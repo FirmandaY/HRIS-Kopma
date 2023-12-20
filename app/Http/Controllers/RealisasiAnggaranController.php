@@ -173,7 +173,8 @@ class RealisasiAnggaranController extends Controller
         $request->validate([
             'foto_spj' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
             'file_realisasi' => 'nullable|mimes:PDF,pdf,xlsx,xls|max:1048',
-            'file_bukti_transaksi' => 'nullable|mimes:PDF,pdf|max:2048'
+            'file_bukti_transaksi' => 'nullable|mimes:PDF,pdf|max:2048',
+            'foto_bukti_pengembalian' => 'nullable|image|mimes:jpeg,jpg,png|max:2048'
         ]);
 
         $role_id = Auth::user()->role_id;

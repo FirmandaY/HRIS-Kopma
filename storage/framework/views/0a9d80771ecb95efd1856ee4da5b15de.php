@@ -80,11 +80,18 @@
                 <div class="col-sm-3" >
                     <div class="form-group">
                         <label for="exampleSelectRounded0">Acc Adminkeu Kopma UGM (Status)</label>
-                        <select class="custom-select rounded-0" id="acc_adminkeu" name="acc_adminkeu">
+                        <select class="custom-select rounded-0" id="acc_adminkeu" name="acc_adminkeu" onchange="note()">
                             <?php $__currentLoopData = $acc_adminkeus; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $acc_adminkeu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <option <?php echo e($acc_adminkeu->id == $pengajuan->acc_adminkeu_id ? 'selected' : ''); ?> value="<?php echo e($acc_adminkeu->id); ?>"><?php echo e($acc_adminkeu->nama); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
+                    </div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div id="catatan-form" class="col-sm-4" style="display: none;">
+                    <div class="form-group">
+                        <label for="exampleSelectRounded0">Catatan</label> <br>
+                        <textarea class="form-control" name="catatan"></textarea>
                     </div>
                 </div>
             </div>
@@ -119,6 +126,20 @@
     </div>
     <!-- /.card-body -->
 </div>
+
+<script>
+    
+    function note() {
+        var accAdminkeu = document.getElementById("acc_adminkeu");
+        if ( accAdminkeu.value == "4") {
+            // alert("check");
+            document.getElementById("catatan-form").style.display = "block";
+        } else {
+            document.getElementById("catatan-form").style.display = "none";
+        }
+    }
+
+</script>
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.main',['title' => 'Form Pengajuan Anggaran Bidang'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\ASUS\OneDrive\Documents\GitHub\Laravel\HRIS-Kopma\resources\views/pengajuan/edit.blade.php ENDPATH**/ ?>

@@ -99,5 +99,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('editRealisasi', function ($user) {
             return $user->role_id == 5 || $user->role_id == 6;
         });
+        Gate::define('editPengajuan', function ($user) {
+            return $user->role_id == 5 || $user->role_id == 6;
+        });
     }
 }

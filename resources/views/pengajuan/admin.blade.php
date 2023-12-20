@@ -65,6 +65,7 @@
                                         <th>Tanggal Pengajuan</th>
                                         <th>File Anggaran</th>
                                         <th>Status</th>
+                                        <th>Catatan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -86,10 +87,21 @@
                                                 <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 15px;">
                                                     {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
                                                 </i>
+                                            @elseif ($pengajuan->acc_adminkeu_id == 4)
+                                                <i style="background-color: rgb(255, 252, 104); border-radius: 10px; padding: 5px 15px;">
+                                                    {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
+                                                </i>
                                             @else
                                                 <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 10px;">
                                                     {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
                                                 </i>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($pengajuan->catatan) 
+                                                {{ $pengajuan->catatan }}
+                                            @else
+                                                <p align=center> - </p>
                                             @endif
                                         </td>
                                         <td>

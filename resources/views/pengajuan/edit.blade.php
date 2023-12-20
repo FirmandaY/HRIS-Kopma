@@ -76,11 +76,18 @@
                 <div class="col-sm-3" >
                     <div class="form-group">
                         <label for="exampleSelectRounded0">Acc Adminkeu Kopma UGM (Status)</label>
-                        <select class="custom-select rounded-0" id="acc_adminkeu" name="acc_adminkeu">
+                        <select class="custom-select rounded-0" id="acc_adminkeu" name="acc_adminkeu" onchange="note()">
                             @foreach($acc_adminkeus as $acc_adminkeu)
                                 <option {{$acc_adminkeu->id == $pengajuan->acc_adminkeu_id ? 'selected' : ''}} value="{{$acc_adminkeu->id}}">{{$acc_adminkeu->nama}}</option>
                             @endforeach
                         </select>
+                    </div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div id="catatan-form" class="col-sm-4" style="display: none;">
+                    <div class="form-group">
+                        <label for="exampleSelectRounded0">Catatan</label> <br>
+                        <textarea class="form-control" name="catatan"></textarea>
                     </div>
                 </div>
             </div>
@@ -115,5 +122,19 @@
     </div>
     <!-- /.card-body -->
 </div>
+
+<script>
+    
+    function note() {
+        var accAdminkeu = document.getElementById("acc_adminkeu");
+        if ( accAdminkeu.value == "4") {
+            // alert("check");
+            document.getElementById("catatan-form").style.display = "block";
+        } else {
+            document.getElementById("catatan-form").style.display = "none";
+        }
+    }
+
+</script>
 
 @endsection

@@ -62,18 +62,23 @@
 
                                     <td>
                                         <?php if($pengajuan->acc_adminkeu_id == 3): ?>
-                                            <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 15px;">
-                                                <?php echo e($pengajuan->acc_adminkeu->nama); ?>
+                                            <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 10px;">
+                                                <?php echo e($pengajuan->acc_adminkeu->nama ?? 'None'); ?>
 
                                             </i>
                                         <?php elseif($pengajuan->acc_adminkeu_id == 2): ?>
-                                            <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 20px;">
-                                                <?php echo e($pengajuan->acc_adminkeu->nama); ?>
+                                            <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 15px;">
+                                                <?php echo e($pengajuan->acc_adminkeu->nama ?? 'None'); ?>
+
+                                            </i>
+                                        <?php elseif($pengajuan->acc_adminkeu_id == 4): ?>
+                                            <i style="background-color: rgb(255, 252, 104); border-radius: 10px; padding: 5px 15px;">
+                                                <?php echo e($pengajuan->acc_adminkeu->nama ?? 'None'); ?>
 
                                             </i>
                                         <?php else: ?>
-                                            <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 15px;">
-                                                <?php echo e($pengajuan->acc_adminkeu->nama); ?>
+                                            <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 10px;">
+                                                <?php echo e($pengajuan->acc_adminkeu->nama ?? 'None'); ?>
 
                                             </i>
                                         <?php endif; ?>
@@ -83,12 +88,21 @@
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki <?php echo csrf_field(); ?>-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
 
-                                        <form action="<?php echo e(route('pengajuan.show', $pengajuan->slug)); ?>" method="get">
-                                            <?php echo csrf_field(); ?>
-                                            <button class="btn btn-info" style="padding-right:20px; padding-left:20px; margin-top:5px;">
-                                                <i class="fa fa-pencil"></i>Detail
-                                            </button>
-                                        </form>
+                                        <?php if($pengajuan->acc_adminkeu_id == 4): ?>
+                                            <form action="<?php echo e(route('pengajuan.revisi', $pengajuan->slug)); ?>" method="get">
+                                                <?php echo csrf_field(); ?>
+                                                <button class="btn btn-warning" style="padding-right:20px; padding-left:20px; margin-top:5px;">
+                                                    <i class="fas fa-edit"></i>Revisi
+                                                </button>
+                                            </form>
+                                        <?php else: ?>
+                                            <form action="<?php echo e(route('pengajuan.show', $pengajuan->slug)); ?>" method="get">
+                                                <?php echo csrf_field(); ?>
+                                                <button class="btn btn-info" style="padding-right:20px; padding-left:20px; margin-top:5px;">
+                                                    <i style="margin-right: 5px;" class="fas fa-eye"></i>Detail
+                                                </button>
+                                            </form>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
