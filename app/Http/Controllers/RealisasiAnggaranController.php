@@ -67,11 +67,13 @@ class RealisasiAnggaranController extends Controller
             'foto_spj' => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'file_realisasi' => 'required|mimes:PDF,pdf,xlsx,xls|max:1048',
             'file_bukti_transaksi' => 'required|mimes:PDF,pdf|max:2048',
+            'foto_bukti_pengembalian' => 'required|image|mimes:jpeg,jpg,png|max:2048',
             'email' => 'required|email|max:30',
             'no_tlp'=> 'required|numeric|min:10',
             'bidang' => 'required',
             'nama_user'=> 'required|regex:/[a-zA-Z\s]+/|max:30',
-            'no_spj' => 'required|numeric|min:3'
+            'no_spj' => 'required|numeric|min:3',
+            'sisa_anggaran' => 'required|numeric'
         ]);
 
         $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
@@ -86,6 +88,10 @@ class RealisasiAnggaranController extends Controller
         $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
         $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
 
+        $name_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian')->getClientOriginalName();
+        $path_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian');
+        $path_foto_bukti_pengembalian->move('files/bukti_pengembalian/', $name_foto_bukti_pengembalian);
+
         $divisi_id = Auth::user()->divisi_id;
         $role_id = Auth::user()->role_id;
 
@@ -94,6 +100,7 @@ class RealisasiAnggaranController extends Controller
         $attr['foto_spj'] = $name_foto_spj;
         $attr['file_realisasi'] = $name_file_realisasi;
         $attr['file_bukti_transaksi'] = $name_file_bukti_transaksi;
+        $attr['foto_bukti_pengembalian'] = $name_foto_bukti_pengembalian;
 
         //create peminjaman
         auth()->user()->realisasiAnggarans()->create($attr);
@@ -175,151 +182,368 @@ class RealisasiAnggaranController extends Controller
         if ($request->file('foto_spj')){
             if ($request->file('file_realisasi')){
                 if ($request->file('file_bukti_transaksi')){
-                    File::delete('files/foto_spj/'.$realisasi->foto_spj); //data foto yang lama dihapus dulu
-                    $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
-                    $path_foto_spj = $request->file('foto_spj');
-                    $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
+                    if($request->file('foto_bukti_pengembalian')){
+                        File::delete('files/foto_spj/'.$realisasi->foto_spj); //data foto yang lama dihapus dulu
+                        $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
+                        $path_foto_spj = $request->file('foto_spj');
+                        $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
 
-                    File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
-                    $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
-                    $path_file_realisasi = $request->file('file_realisasi');
-                    $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
+                        File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
+                        $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
+                        $path_file_realisasi = $request->file('file_realisasi');
+                        $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
+                        
+                        File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
+                        $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
+                        $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
+                        $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
+
+                        File::delete('files/bukti_pengembalian/'.$realisasi->foto_bukti_pengembalian);
+                        $name_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian')->getClientOriginalName();
+                        $path_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian');
+                        $path_foto_bukti_pengembalian->move('files/bukti_pengembalian/', $name_foto_bukti_pengembalian);
+
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'foto_spj' => $name_foto_spj,
+                            'file_realisasi' => $name_file_realisasi,
+                            'file_bukti_transaksi' => $name_file_bukti_transaksi,
+                            'foto_bukti_pengembalian' => $name_foto_bukti_pengembalian
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+
+                    } else{
+                        File::delete('files/foto_spj/'.$realisasi->foto_spj); //data foto yang lama dihapus dulu
+                        $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
+                        $path_foto_spj = $request->file('foto_spj');
+                        $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
+
+                        File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
+                        $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
+                        $path_file_realisasi = $request->file('file_realisasi');
+                        $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
+                        
+                        File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
+                        $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
+                        $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
+                        $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'foto_spj' => $name_foto_spj,
+                            'file_realisasi' => $name_file_realisasi,
+                            'file_bukti_transaksi' => $name_file_bukti_transaksi
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+                    }
                     
-                    File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
-                    $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
-                    $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
-                    $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
-
-                    $realisasi->update([
-                        'acc_adminkeu_id' => 1,
-                        'foto_spj' => $name_foto_spj,
-                        'file_realisasi' => $name_file_realisasi,
-                        'file_bukti_transaksi' => $name_file_bukti_transaksi
-                    ]);
-        
-                    session()->flash('success', 'Perubahan data anda sudah disimpan!');
-                    session()->flash('error', 'Perubahan data anda gagal disimpan!');
-                    return redirect(route('realisasi.index'));
 
                 } else{ //jika bukti transaksi tidak diperbarui
-                    File::delete('files/foto_spj/'.$realisasi->foto_spj);
-                    $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
-                    $path_foto_spj = $request->file('foto_spj');
-                    $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
+                    if ($request->file('foto_bukti_pengembalian')){
+                        File::delete('files/foto_spj/'.$realisasi->foto_spj);
+                        $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
+                        $path_foto_spj = $request->file('foto_spj');
+                        $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
 
-                    File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
-                    $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
-                    $path_file_realisasi = $request->file('file_realisasi');
-                    $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
+                        File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
+                        $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
+                        $path_file_realisasi = $request->file('file_realisasi');
+                        $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
 
-                    $realisasi->update([
-                        'acc_adminkeu_id' => 1,
-                        'foto_spj' => $name_foto_spj,
-                        'file_realisasi' => $name_file_realisasi
-                    ]);
-        
-                    session()->flash('success', 'Perubahan data anda sudah disimpan!');
-                    session()->flash('error', 'Perubahan data anda gagal disimpan!');
-                    return redirect(route('realisasi.index'));
+                        File::delete('files/bukti_pengembalian/'.$realisasi->foto_bukti_pengembalian);
+                        $name_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian')->getClientOriginalName();
+                        $path_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian');
+                        $path_foto_bukti_pengembalian->move('files/bukti_pengembalian/', $name_foto_bukti_pengembalian);
 
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'foto_spj' => $name_foto_spj,
+                            'file_realisasi' => $name_file_realisasi,
+                            'foto_bukti_pengembalian' => $name_foto_bukti_pengembalian
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+
+                    } else{
+                        File::delete('files/foto_spj/'.$realisasi->foto_spj);
+                        $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
+                        $path_foto_spj = $request->file('foto_spj');
+                        $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
+
+                        File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
+                        $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
+                        $path_file_realisasi = $request->file('file_realisasi');
+                        $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'foto_spj' => $name_foto_spj,
+                            'file_realisasi' => $name_file_realisasi
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+                    }
+                    
                 }
 
             } else{ //jika file realisasi tidak diperbarui
                 if ($request->file('file_bukti_transaksi')){
-                    File::delete('files/foto_spj/'.$realisasi->foto_spj);
-                    $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
-                    $path_foto_spj = $request->file('foto_spj');
-                    $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
+                    if ($request->file('foto_bukti_pengembalian')){
+                        File::delete('files/foto_spj/'.$realisasi->foto_spj);
+                        $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
+                        $path_foto_spj = $request->file('foto_spj');
+                        $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
 
-                    File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
-                    $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
-                    $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
-                    $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
+                        File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
+                        $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
+                        $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
+                        $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
 
-                    $realisasi->update([
-                        'acc_adminkeu_id' => 1,
-                        'foto_spj' => $name_foto_spj,
-                        'file_bukti_transaksi' => $name_file_bukti_transaksi
-                    ]);
-        
-                    session()->flash('success', 'Perubahan data anda sudah disimpan!');
-                    session()->flash('error', 'Perubahan data anda gagal disimpan!');
-                    return redirect(route('realisasi.index'));
+                        File::delete('files/bukti_pengembalian/'.$realisasi->foto_bukti_pengembalian);
+                        $name_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian')->getClientOriginalName();
+                        $path_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian');
+                        $path_foto_bukti_pengembalian->move('files/bukti_pengembalian/', $name_foto_bukti_pengembalian);
 
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'foto_spj' => $name_foto_spj,
+                            'file_bukti_transaksi' => $name_file_bukti_transaksi,
+                            'foto_bukti_pengembalian' => $name_foto_bukti_pengembalian
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+
+                    } else{
+                        File::delete('files/foto_spj/'.$realisasi->foto_spj);
+                        $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
+                        $path_foto_spj = $request->file('foto_spj');
+                        $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
+
+                        File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
+                        $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
+                        $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
+                        $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'foto_spj' => $name_foto_spj,
+                            'file_bukti_transaksi' => $name_file_bukti_transaksi
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+                    }
+                    
                 } else{
-                    File::delete('files/foto_spj/'.$realisasi->foto_spj); //data foto yang lama dihapus dulu
-                    $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
-                    $path_foto_spj = $request->file('foto_spj');
-                    $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
+                    if ($request->file('foto_bukti_pengembalian')){
+                        File::delete('files/foto_spj/'.$realisasi->foto_spj); //data foto yang lama dihapus dulu
+                        $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
+                        $path_foto_spj = $request->file('foto_spj');
+                        $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
 
-                    $realisasi->update([
-                        'acc_adminkeu_id' => 1,
-                        'foto_spj' => $name_foto_spj
-                    ]);
-        
-                    session()->flash('success', 'Perubahan data anda sudah disimpan!');
-                    session()->flash('error', 'Perubahan data anda gagal disimpan!');
-                    return redirect(route('realisasi.index'));
+                        File::delete('files/bukti_pengembalian/'.$realisasi->foto_bukti_pengembalian);
+                        $name_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian')->getClientOriginalName();
+                        $path_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian');
+                        $path_foto_bukti_pengembalian->move('files/bukti_pengembalian/', $name_foto_bukti_pengembalian);
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'foto_spj' => $name_foto_spj,
+                            'foto_bukti_pengembalian' => $name_foto_bukti_pengembalian
+
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+
+                    } else{
+                        File::delete('files/foto_spj/'.$realisasi->foto_spj); //data foto yang lama dihapus dulu
+                        $name_foto_spj = $request->file('foto_spj')->getClientOriginalName();
+                        $path_foto_spj = $request->file('foto_spj');
+                        $path_foto_spj->move('files/foto_spj/', $name_foto_spj);
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'foto_spj' => $name_foto_spj
+
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+                    }
+                    
                 }
             }
 
         } else { //jika foto spj tidak diperbarui
             if ($request->file('file_realisasi')){
                 if ($request->file('file_bukti_transaksi')){
-                    File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
-                    $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
-                    $path_file_realisasi = $request->file('file_realisasi');
-                    $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
+                    if ($request->file('foto_bukti_pengembalian')){
+                        File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
+                        $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
+                        $path_file_realisasi = $request->file('file_realisasi');
+                        $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
 
-                    File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
-                    $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
-                    $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
-                    $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
+                        File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
+                        $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
+                        $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
+                        $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
 
-                    $realisasi->update([
-                        'acc_adminkeu_id' => 1,
-                        'file_realisasi' => $name_file_realisasi,
-                        'file_bukti_transaksi' => $name_file_bukti_transaksi
-                    ]);
-        
-                    session()->flash('success', 'Perubahan data anda sudah disimpan!');
-                    session()->flash('error', 'Perubahan data anda gagal disimpan!');
-                    return redirect(route('realisasi.index'));
+                        File::delete('files/bukti_pengembalian/'.$realisasi->foto_bukti_pengembalian);
+                        $name_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian')->getClientOriginalName();
+                        $path_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian');
+                        $path_foto_bukti_pengembalian->move('files/bukti_pengembalian/', $name_foto_bukti_pengembalian);
+
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'file_realisasi' => $name_file_realisasi,
+                            'file_bukti_transaksi' => $name_file_bukti_transaksi,
+                            'foto_bukti_pengembalian' => $name_foto_bukti_pengembalian
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+
+                    } else{
+                        File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
+                        $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
+                        $path_file_realisasi = $request->file('file_realisasi');
+                        $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
+
+                        File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
+                        $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
+                        $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
+                        $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'file_realisasi' => $name_file_realisasi,
+                            'file_bukti_transaksi' => $name_file_bukti_transaksi
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+                    }
+                    
 
                 } else{
-                    File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
-                    $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
-                    $path_file_realisasi = $request->file('file_realisasi');
-                    $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
+                    if ($request->file('foto_bukti_pengembalian')){
+                        File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
+                        $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
+                        $path_file_realisasi = $request->file('file_realisasi');
+                        $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
 
-                    $realisasi->update([
-                        'acc_adminkeu_id' => 1,
-                        'file_realisasi' => $name_file_realisasi
-                    ]);
-        
-                    session()->flash('success', 'Perubahan data anda sudah disimpan!');
-                    session()->flash('error', 'Perubahan data anda gagal disimpan!');
-                    return redirect(route('realisasi.index'));
+                        File::delete('files/bukti_pengembalian/'.$realisasi->foto_bukti_pengembalian);
+                        $name_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian')->getClientOriginalName();
+                        $path_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian');
+                        $path_foto_bukti_pengembalian->move('files/bukti_pengembalian/', $name_foto_bukti_pengembalian);
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'file_realisasi' => $name_file_realisasi,
+                            'foto_bukti_pengembalian' => $name_foto_bukti_pengembalian
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+
+                    } else{
+                        File::delete('files/realisasi_anggaran/'.$realisasi->file_realisasi);
+                        $name_file_realisasi = $request->file('file_realisasi')->getClientOriginalName();
+                        $path_file_realisasi = $request->file('file_realisasi');
+                        $path_file_realisasi->move('files/realisasi_anggaran/', $name_file_realisasi);
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'file_realisasi' => $name_file_realisasi
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+                    }
 
                 }
             } else{
                 if ($request->file('file_bukti_transaksi')){
-                    File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
-                    $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
-                    $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
-                    $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
+                    if($request->file('foto_bukti_pengembalian')){
+                        File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
+                        $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
+                        $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
+                        $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
 
-                    $realisasi->update([
-                        'acc_adminkeu_id' => 1,
-                        'file_bukti_transaksi' => $name_file_bukti_transaksi
-                    ]);
-        
-                    session()->flash('success', 'Perubahan data anda sudah disimpan!');
-                    session()->flash('error', 'Perubahan data anda gagal disimpan!');
-                    return redirect(route('realisasi.index'));
+                        File::delete('files/bukti_pengembalian/'.$realisasi->foto_bukti_pengembalian);
+                        $name_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian')->getClientOriginalName();
+                        $path_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian');
+                        $path_foto_bukti_pengembalian->move('files/bukti_pengembalian/', $name_foto_bukti_pengembalian);
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'file_bukti_transaksi' => $name_file_bukti_transaksi,
+                            'foto_bukti_pengembalian' => $name_foto_bukti_pengembalian
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+
+                    } else{
+                        File::delete('files/bukti_transaksi/'.$realisasi->file_bukti_transaksi);
+                        $name_file_bukti_transaksi = $request->file('file_bukti_transaksi')->getClientOriginalName();
+                        $path_file_bukti_transaksi = $request->file('file_bukti_transaksi');
+                        $path_file_bukti_transaksi->move('files/bukti_transaksi/', $name_file_bukti_transaksi);
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'file_bukti_transaksi' => $name_file_bukti_transaksi
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+                    }
 
                 } else{
-                    return redirect()->back();
+                    if ($request->file('foto_bukti_pengembalian')){
+                        File::delete('files/bukti_pengembalian/'.$realisasi->foto_bukti_pengembalian);
+                        $name_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian')->getClientOriginalName();
+                        $path_foto_bukti_pengembalian = $request->file('foto_bukti_pengembalian');
+                        $path_foto_bukti_pengembalian->move('files/bukti_pengembalian/', $name_foto_bukti_pengembalian);
+
+                        $realisasi->update([
+                            'acc_adminkeu_id' => 1,
+                            'foto_bukti_pengembalian' => $name_foto_bukti_pengembalian
+                        ]);
+            
+                        session()->flash('success', 'Perubahan data anda sudah disimpan!');
+                        session()->flash('error', 'Perubahan data anda gagal disimpan!');
+                        return redirect(route('realisasi.index'));
+
+                    } else{
+                        return redirect()->back();
+                    }
+                    
                 }
             }
         }

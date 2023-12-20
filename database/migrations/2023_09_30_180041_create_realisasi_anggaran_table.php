@@ -23,9 +23,11 @@ class CreateRealisasiAnggaranTable extends Migration
             $table->string('bidang');
             $table->string('no_tlp');
             $table->string('no_spj');
+            $table->string('sisa_anggaran');
             $table->string('foto_spj');
             $table->string('file_bukti_transaksi');
             $table->string('file_realisasi');
+            $table->string('foto_bukti_pengembalian');
             $table->text('catatan')->nullable();
             $table->timestamps();
         });

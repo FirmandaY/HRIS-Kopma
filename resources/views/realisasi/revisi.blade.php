@@ -104,6 +104,51 @@
                             </div>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td><b>Foto Pengembalian Dana</b> <small><i>*jika ada</i></small></td>
+                        <td>
+                            <img src="{{ asset('files/bukti_pengembalian/'.$realisasi->foto_bukti_pengembalian) }}" alt="" height="200px">
+                        </td>
+
+                        <td>
+                            <div class="form-group">
+                                <label for="foto_bukti_pengembalian">Ubah Lampiran Gambar/Foto Lembar SPJ</label>
+                                <p>
+                                    <small><i>*format file: .jpg .jpeg .png | ukuran maksimal file 2MB</i></small>
+                                </p>
+                                
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" id="foto_bukti_pengembalian" name="foto_bukti_pengembalian">
+                                    </div>
+                                </div>
+                                <div class="text-danger">
+                                    @error('foto_bukti_pengembalian')
+                                    {{$message}}
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="preview-box" id="imagePreviewPengembalian" style=
+                            "
+                                width: 40vh;
+                                min-height: 200px;
+                                border: 2px solid #000;
+                                margin-top: 15px;
+                                margin-right: 5px;
+
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-weight: bold;
+                                color: #000;
+                            ">
+                                <img src="" class="preview-img-pengembalian" height="200px">
+                                <span class="preview-text-pengembalian">Image Preview</span>
+                            </div>
+                        </td>
+                    </tr>
                     
                     <tr>
                         <td><b>File Form Realisasi Anggaran</b></td>
@@ -214,6 +259,11 @@
     const previewImage = previewContainer.querySelector(".preview-img");
     const previewDefaultText = previewContainer.querySelector(".preview-text");
 
+    const inpFilePengembalian = document.getElementById("foto_bukti_pengembalian");
+    const previewContainerPengembalian = document.getElementById("imagePreviewPengembalian");
+    const previewImagePengembalian = previewContainerPengembalian.querySelector(".preview-img-pengembalian");
+    const previewDefaultTextPengembalian = previewContainerPengembalian.querySelector(".preview-text-pengembalian");
+
     inpFile.addEventListener("change", function(){
         const file = this.files[0];
 
@@ -230,6 +280,26 @@
             previewDefaultText.style.display = null;
             previewImage.style.display = null;
             previewImage.setAttribute("src", "")
+
+        }
+    });
+
+    inpFilePengembalian.addEventListener("change", function(){
+        const file = this.files[0];
+
+        if(file){
+            const reader = new FileReader();
+            previewDefaultTextPengembalian.style.display = "none";
+            previewImagePengembalian.style.display = "block"
+
+            reader.addEventListener("load", function(){
+                previewImagePengembalian.setAttribute("src", this.result);
+            });
+            reader.readAsDataURL(file);
+        }else{
+            previewDefaultTextPengembalian.style.display = null;
+            previewImagePengembalian.style.display = null;
+            previewImagePengembalian.setAttribute("src", "")
 
         }
     });
