@@ -44,7 +44,7 @@ unset($__errorArgs, $__bag); ?>
                         <select class="custom-select rounded-0" id="divisi" name="divisi">
                             <option disabled selected>-Pilih Bidang-</option>
                             <?php $__currentLoopData = $divisis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $divisi): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <?php if($divisi->id !== 1): ?>
+                            <?php if($divisi->id !== 1 && $divisi->id !==16): ?>
                             <option value="<?php echo e($divisi->id); ?>"><?php echo e($divisi->nama); ?></option>
                             <?php endif; ?>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -36,7 +36,7 @@
                         <select class="custom-select rounded-0" id="divisi" name="divisi">
                             <option disabled selected>-Pilih Divisi-</option>
                             @foreach($divisis as $divisi)
-                            @if($divisi->id !== 1)
+                            @if($divisi->id !== 1 && $divisi->id !== 16)
                             <option value="{{$divisi->id}}">{{$divisi->nama}}</option>
                             @endif
                             @endforeach
