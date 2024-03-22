@@ -15,8 +15,8 @@
 
             <p>
                 Silahkan Konfirmasi Pinjaman Anda ke nomor WhatsApp di bawah ini. <br>
-                Tiur : 0815-7428-2376 <br>
-                Fishio : 0896-7357-5487
+                Faisal : 0856-0733-8372 <br>
+                Ade : 0896-5298-8826
             </p>
         </div>
         <div class="row">
