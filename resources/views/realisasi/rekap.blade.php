@@ -32,32 +32,34 @@
                         <thead>
                             <tr>
                                 <th>Email</th>
-                                <th>Nama</th>
+                                <th>Nama Pemohon</th>
                                 <th>Bidang</th>
-                                <th>No. WA</th>
-                                <th>No. SPJ</th>
+                                <th>No.Telepon/WA</th>
+                                <th>No.SPJ</th>
                                 <th>Bukti Transaksi</th>
                                 <th>File SPJ</th>
                                 <th>File Realisasi</th>
+                                <th>Waktu Realisasi</th>
                                 <th>Sisa Uang</th>
-                                <th>Lampiran</th>
+                                <th>Status</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($cutis as $cuti)
+                            @foreach($realisasis as $realisasi)
                             <tr>
                                 <!-- ?? 'None' update 2 Juni Untuk mengatasi Akses Null di Environment Hosting -->
-                                <td>{{$cuti->user->name ?? 'None'}}</td>
-                                <td>{{$cuti->user->nik ?? 'None'}}</td>
-                                <td>{{$cuti->user->role->nama ?? 'None'}}</td>
-                                <td>{{$cuti->user->divisi->nama ?? 'None'}}</td>
-                                <td>{{$cuti->kategori->nama ?? 'None'}}</td>
-                                <td>{{$cuti->created_at->format('d/m/Y')}}</td>
-                                <td>{{\Carbon\Carbon::parse($cuti->tgl_mulai)->format('d/m/Y')}}</td>
-                                <td>{{\Carbon\Carbon::parse($cuti->tgl_selesai)->format('d/m/Y')}}</td>
-                                <td>{{$cuti->acc_mandiv->nama ?? 'None'}}</td>
-                                <td>{{$cuti->acc_hrd->nama ?? 'None'}}</td>
+                                <td>{{$realisasi->email ?? 'None'}}</td>
+                                <td>{{$realisasi->nama_user ?? 'None'}}</td>
+                                <td>{{$realisasi->bidang ?? 'None'}}</td>
+                                <td>{{$realisasi->no_tlp ?? 'None'}}</td>
+                                <td>{{$realisasi->no_spj ?? 'None'}}</td>
+                                <td>{{$realisasi->file_bukti_transaksi ?? 'None'}}</td>
+                                <td>{{$realisasi->foto_spj ?? 'None'}}</td>
+                                <td>{{$realisasi->file_realisasi ?? 'None'}}</td>
+                                <td>{{$realisasi->created_at->format('d/m/Y')}}</td>
+                                <td></td>
+                                <td>{{$realisasi->status ?? 'None'}}</td>
                             </tr>
                             @endforeach
                         </tbody>

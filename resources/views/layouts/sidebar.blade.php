@@ -36,10 +36,8 @@
 
                 </li>
                 
-                <li class="nav-item
-                {{request()->is('cuti') || request()->is('cuti/create') || request()->is('izin') || request()->is('izin/create')  ? 
-                ' menu-open' : ''}}">
-                @can('pengajuanUniversal')
+                <li class="nav-item{{request()->is('cuti') || request()->is('cuti/create') || request()->is('izin') || request()->is('izin/create')  ? ' menu-open' : ''}}">
+                    @can('pengajuanMenu')
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-plus-square"></i>
                         <p>
@@ -47,40 +45,52 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    @endcan
                     
                     <ul class="nav nav-treeview">
                         
-                        <li class="nav-item">
-                            <a href="{{route('cuti.index')}}" class="nav-link
-                            {{request()->is('cuti') || request()->is('cuti/create') ?
-                             ' active' : ''}}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Pengajuan Cuti</p>
-                            </a>
-                        </li>
-                        
+                        @can('pengajuanUniversal')
+                            <li class="nav-item">
+                                <a href="{{route('cuti.index')}}" class="nav-link
+                                {{request()->is('cuti') || request()->is('cuti/create') ?
+                                ' active' : ''}}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Pengajuan Cuti</p>
+                                </a>
+                            </li>
+                            
+                            @can('pengajuan')
+                                <li class="nav-item">
+                                    <a href="{{ route('izin.index') }}" class="nav-link{{request()->is('izin') || request()->is('izin/create')||request()->is('izin') ? ' active' : ''}}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pengajuan Izin</p>
+                                    </a>
+                                </li>
+                            @endcan
+                            @can('peminjaman')
+                                <li class="nav-item">
+                                    <a href="{{ route('pinjam.index') }}" class="nav-link{{request()->is('pinjam') || request()->is('pinjam/create')||request()->is('pinjam') ? ' active' : ''}}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Pengajuan Peminjaman</p>
+                                    </a>
+                                </li>
+                            @endcan
+                        @endcan
 
-                        @can('pengajuan')
-                        <li class="nav-item">
-                            <a href="{{ route('izin.index') }}" class="nav-link{{request()->is('izin') || request()->is('izin/create')||request()->is('izin') ? ' active' : ''}}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Pengajuan Izin</p>
-                            </a>
-                        </li>
-                        @can('peminjaman')
-                        <li class="nav-item">
-                            <a href="{{ route('pinjam.index') }}" class="nav-link{{request()->is('pinjam') || request()->is('pinjam/create')||request()->is('pinjam') ? ' active' : ''}}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Pengajuan Peminjaman</p>
-                            </a>
-                        </li>
-                        @can('pengajuan-anggaran')
-                        <li class="nav-item">
-                            <a href="{{ route('izin.index') }}" class="nav-link{{request()->is('izin') || request()->is('izin/create')||request()->is('izin') ? ' active' : ''}}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Pengajuan Anggaran</p>
-                            </a>
-                        </li>
+                        @can('pengajuanAnggaran')
+                            <li class="nav-item">
+                                <a href="{{ route('pengajuan.index') }}" class="nav-link{{request()->is('pengajuan') || request()->is('pengajuan/create')||request()->is('pengajuan') ? ' active' : ''}}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Pengajuan Anggaran</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('realisasi.index') }}" class="nav-link{{request()->is('realisasi') || request()->is('realisasi/create')||request()->is('realisasi') ? ' active' : ''}}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Realisasi Anggaran</p>
+                                </a>
+                            </li>
                         @endcan
                         <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -88,45 +98,63 @@
                                 <p>Inactive Page</p>
                             </a>
                         </li> -->
-                        @endcan
                     </ul>
                     
                 </li>
-                @endcan
+               
 
-                @can('persetujuan')
+                
                 <li class="nav-item{{request()->is('cuti/admin') ||  request()->is('izin/admin')   ? ' menu-open' : ''}}">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-check-square"></i>
-                        <p>
-                            Persetujuan
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
+                    @can('persetujuanMenu')
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-check-square"></i>
+                            <p>
+                                Persetujuan
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                    @endcan
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('cuti.admin')}}" class="nav-link{{request()->is('cuti/admin') ? ' active' : ''}}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Persetujuan Cuti</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('izin.admin') }}" class="nav-link{{request()->is('izin/admin') ? ' active' : ''}}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Persetujuan Izin</p>
-                            </a>
-                        </li>
+                        @can('persetujuan')
+                            <li class="nav-item">
+                                <a href="{{route('cuti.admin')}}" class="nav-link{{request()->is('cuti/admin') ? ' active' : ''}}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Persetujuan Cuti</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('izin.admin') }}" class="nav-link{{request()->is('izin/admin') ? ' active' : ''}}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Persetujuan Izin</p>
+                                </a>
+                            </li>
+                        @endcan
                         @can('persetujuanPinjam')
-                        <li class="nav-item">
-                            <a href="{{ route('pinjam.admin') }}" class="nav-link{{request()->is('pinjam/admin') ? ' active' : ''}}">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Persetujuan Peminjaman</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{ route('pinjam.admin') }}" class="nav-link{{request()->is('pinjam/admin') ? ' active' : ''}}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Persetujuan Peminjaman</p>
+                                </a>
+                            </li>
+                        @endcan
+
+                        @can('persetujuanAnggaran')
+                            <li class="nav-item">
+                                <a href="{{ route('pengajuan.adminkeu') }}" class="nav-link{{request()->is('pengajuan/admin') ? ' active' : ''}}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Pengajuan Anggaran</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realisasi.adminkeu') }}" class="nav-link{{request()->is('realisasi/admin') ? ' active' : ''}}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Realisasi Anggaran</p>
+                                </a>
+                            </li>
                         @endcan
                     </ul>
                 </li>
-                @endcan
+                
                 <li class="nav-item {{request()->is('profil') ? ' menu-open':''}}">
                     <a href="{{route('profil.show')}}" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
@@ -137,22 +165,22 @@
                 </li>
 
                 @can('isAdmin')
-                <li class="nav-item{{request()->is('angota') || request()->is('anggota/*') ? ' menu-open':''}}">
-                    <a href="{{route('kelola.indexPengurus')}}" class="nav-link">
-                        <i class="nav-icon fas fa-user-friends"></i>
-                        <p>
-                            Kelola Pengurus
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item{{request()->is('anggota') || request()->is('anggota/*') ? ' menu-open':''}}">
-                    <a href="{{route('kelola.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-user-friends"></i>
-                        <p>
-                            Kelola Karyawan
-                        </p>
-                    </a>
-                </li>
+                    <li class="nav-item{{request()->is('angota') || request()->is('anggota/*') ? ' menu-open':''}}">
+                        <a href="{{route('kelola.indexPengurus')}}" class="nav-link">
+                            <i class="nav-icon fas fa-user-friends"></i>
+                            <p>
+                                Kelola Pengurus
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item{{request()->is('anggota') || request()->is('anggota/*') ? ' menu-open':''}}">
+                        <a href="{{route('kelola.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-user-friends"></i>
+                            <p>
+                                Kelola Karyawan
+                            </p>
+                        </a>
+                    </li>
                 @endcan
                 <!-- <li class="nav-item">
                     <a href="#" class="nav-link">

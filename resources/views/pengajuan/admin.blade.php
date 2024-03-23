@@ -1,4 +1,4 @@
-@extends('layouts.main',['title' => 'Daftar Persetujuan Cuti'])
+@extends('layouts.main',['title' => 'Daftar Persetujuan Pengajuan Anggaran Bidang'])
 @section('content')
 <div class="card card-info col-sm-12 p-0">
     <div class="card-header">
@@ -13,7 +13,7 @@
         <div class="callout callout-info col-sm-12 mb-4">
             <h6><b>Informasi</b></h6>
 
-            <p>Seluruh pengajuan anggaran dari staff dan pengurus akan ditampilkan di sini.</p>
+            <p>Seluruh pengajuan anggaran dari bidang akan ditampilkan di sini.</p>
         </div>
         <!-- @can('isAdmin')
         <div class="row">
@@ -57,75 +57,65 @@
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
-                            @if($role_id == 1)
+                            @if($role_id == 5)
                                 <thead>
                                     <tr>
-                                        <th>Nama</th>
+                                        <th>Nama Pemohon</th>
                                         <th>Divisi</th>
-                                        <th>Tanggal Mengajukan</th>
+                                        <th>Tanggal Pengajuan</th>
+                                        <th>File Anggaran</th>
                                         <th>Status</th>
+                                        <th>Catatan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($cutis as $cuti)
-                                    @if($cuti->acc_hrd_id == 1)
-                                    <tr style="color:tomato;">
-                                        @else
+                                    @foreach($pengajuans as $pengajuan)
                                     <tr>
-                                        @endif
-                                        <td>{{$cuti->user->name ?? 'None'}}</td>
-                                        <td>{{$cuti->user->divisi->nama ?? 'None'}}</td>
-                                        <td>{{$cuti->kategori->nama ?? 'None'}}</td>
-                                        <td>{{\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')}}</td>
-                                        <td>{{$cuti->acc_hrd->nama ?? 'None'}}</td>
+                                        <td>{{$pengajuan->nama_user ?? 'None'}}</td>
+                                        <td>{{$pengajuan->user->divisi->nama ?? 'None'}}</td>
+                                        <td>{{\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')}}</td>
+                                        <td>
+                                            {{ $pengajuan->file_anggaran }}
+                                        </td>
+                                        <td>
+                                            @if ($pengajuan->acc_adminkeu_id == 3)
+                                                <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 10px;">
+                                                    {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
+                                                </i>
+                                            @elseif ($pengajuan->acc_adminkeu_id == 2)
+                                                <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 15px;">
+                                                    {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
+                                                </i>
+                                            @elseif ($pengajuan->acc_adminkeu_id == 4)
+                                                <i style="background-color: rgb(255, 252, 104); border-radius: 10px; padding: 5px 15px;">
+                                                    {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
+                                                </i>
+                                            @else
+                                                <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 10px;">
+                                                    {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
+                                                </i>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($pengajuan->catatan) 
+                                                {{ $pengajuan->catatan }}
+                                            @else
+                                                <p align=center> - </p>
+                                            @endif
+                                        </td>
                                         <td>
                                             <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
                                             <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
 
-                                            <form action="{{ route('cuti.edit', $cuti->slug) }}" method="get">
+                                            <form action="{{ route('pengajuan.edit', $pengajuan->slug) }}" method="get">
                                                 @csrf
                                                 <button class="btn btn-warning" onClick="return confirm ('Yakin mau diubah?')"
                                                 style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
-                                                    <i class="fa fa-pencil"></i>Edit 
+                                                    <i class="fas fa-edit"></i>Edit 
                                                 </button>
                                             </form>
                                             
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            @elseif($role_id == 2)
-                                <thead>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Tanggal Mengajukan</th>
-                                        <th>Status</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($cutis as $cuti)
-                                    @if($cuti->acc_mandiv_id == 1)
-                                    <tr style="color:tomato;">
-                                        @else
-                                    <tr>
-                                        @endif
-                                        <td>{{$cuti->user->name ?? 'None'}}</td>
-                                        <td>{{$cuti->kategori->nama ?? 'None'}}</td>
-                                        <td>{{\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')}}</td>
-                                        <td>{{$cuti->acc_mandiv->nama ?? 'None'}}</td>
-                                        <td>
-                                            <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
-                                            <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
-
-                                            <form action="{{ route('cuti.edit', $cuti->slug) }}" method="get">
-                                                @csrf
-                                                <button class="btn btn-warning" onClick="return confirm ('Yakin mau diubah?')"
-                                                style="padding-right:20px; padding-left:20px; margin-top:5px;"> 
-                                                    <i class="fa fa-pencil"></i>Edit 
-                                                </button>
-                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -140,7 +130,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            {{$cutis->links()}}
+            {{$pengajuans->links()}}
         </div>
     </div>
 </section>

@@ -16,7 +16,7 @@ class DivisisTableSeeder extends Seeder
         $divisis = collect(
             ['Admin SDM', 'Konveksi dan Sablonase', 'Swalayan', 'Warparpostel', 'Non Divisi',
             'Ketua Umum', 'Pengawas', 'Bidang Keanggotaan', 'Bidang Bisnis', 'Bidang SDM', 'Bidang Keuangan',
-            'Bidang Humas', 'Bidang Medkref', 'Bidang Ristek', 'Bidang Adum',
+            'Bidang Humas', 'Bidang Medkref', 'Bidang Ristek', 'Bidang Adum', 'Adminkeu',
             ]
         );
         $divisis->each(function ($c) {

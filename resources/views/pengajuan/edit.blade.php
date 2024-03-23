@@ -1,64 +1,98 @@
-@extends('layouts.main',['title' => 'Form Pengajuan Cuti'])
+@extends('layouts.main',['title' => 'Form Pengajuan Anggaran Bidang'])
 @section('content')
 
 
 <div class="card card-info col-sm-12">
     <div class="card-header">
-        <h3 class="card-title">Persetujuan Pengajuan Anggaran</h3>
+        <h3 class="card-title">Persetujuan Pengajuan Anggaran Bidang</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        @if($role == 2 && $cuti->acc_mandiv_id == 3 && $cuti->acc_hrd_id >= 2)
+
+       
         <div class="row">
             <table class="table table-bordered">
                 <tr>
-                    <td> <b>Nama Lengkap</b></td>
-                    <td> {{$cuti->user->name}}</td>
-                </tr>
-                <tr>
-                    <td> <b>Nomor Induk Karyawan</b></td>
-                    <td> {{$cuti->user->nik}}</td>
-                </tr>
-                <tr>
-                    <td><b>Jabatan</b></td>
-                    <td> {{$cuti->user->role->nama}}</td>
-                </tr>
-                <tr>
-                    <td><b>Divisi</b></td>
-                    <td> {{$cuti->user->divisi->nama}}</td>
-                </tr>
-                <tr>
-                    <td><b>Jenis Kelamin</b></td>
-                    <td> {{$cuti->user->gender}}</td>
-                </tr>
-                <tr>
-                    <td><b>File Pengajuan Anggaran</b></td>
-                    <td> {{$cuti->user->gender}}</td>
-                </tr>
-                <tr>
-                    <td><b>Lampiran</b></td>
-                    <td>
-                        @if($cuti->lampiran)
-                        <a href="/cuti/lampiran/{{$cuti->slug}}" target="_blank">
-                            <img class="img-fluid" src="{{asset($cuti->takeImageCuti)}}" width="100" height="120">
-                        </a>
-                        @else -
-                        @endif
+                    <td style="width:20em"> <b>Nama Pemohon</b></td>
+                    <td> {{$pengajuan->nama_user ?? 'None'}}
                     </td>
                 </tr>
                 <tr>
-                    <td><b>Acc Mandiv</b></td>
-                    <td> {{$cuti->acc_mandiv->nama}}</td>
+                    <td> <b>Asal Bidang</b></td>
+                    <td> {{$pengajuan->bidang ?? 'None'}}</td>
                 </tr>
                 <tr>
-                    <td><b>Acc HRD</b></td>
-                    <td> {{$cuti->acc_hrd->nama}}</td>
+                    <td><b>Alamat Email Bidang</b></td>
+                    <td> {{$pengajuan->user->email ?? 'None'}}</td>
+                </tr>
+                <tr>
+                    <td><b>Divisi</b></td>
+                    <td> {{$pengajuan->user->divisi->nama ?? 'None'}}</td>
+                </tr>
+                <tr>
+                    <td><b>Nomor Telepon Pemohon</b></td>
+                    <td> {{ $pengajuan->no_tlp }} 
+                        <a href="https://wa.me/{{ $pengajuan->no_tlp }}">
+                            <i class="fab fa-whatsapp" style="font-size:16px; color:green; margin-left:8px;"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Alamat Email Pemohon</b></td>
+                    <td> {{ $pengajuan->email }}</td>
+                </tr>
+                <tr>
+                    <td><b>Waktu Pengajuan</b></td>
+                    <td>
+                        <p>{{\Carbon\Carbon::parse($pengajuan->created_at)->format('d M Y')}}</p>
+                        <p>
+                            Pukul {{\Carbon\Carbon::parse($pengajuan->created_at)->format('H:i')}}
+                            <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 15px;">
+                                {{ $pengajuan->created_at->diffForHumans() }}
+                            </i>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>File Anggaran</b></td>
+                    <td>
+                        {{ $pengajuan->file_anggaran }}
+                        <p style="margin-top: 8px;">
+                            <a class="btn btn-primary" href="{{ asset('files/pengajuan_anggaran/'.$pengajuan->file_anggaran) }}" target="_blank">
+                                <i class="fas fa-file-excel"></i>
+                                Open file
+                            </a>
+                        </p>
+                    </td>
                 </tr>
             </table>
         </div>
-        <!-- /.card-header -->
-        @else
+
+        {{-- Editor Admin --}}
+        <form action="{{route('pengajuan.update',$pengajuan->slug)}}" method="post">
+            @method('patch')
+            @csrf
+            <div class="row">
+                <div class="col-sm-3" >
+                    <div class="form-group">
+                        <label for="exampleSelectRounded0">Acc Adminkeu Kopma UGM (Status)</label>
+                        <select class="custom-select rounded-0" id="acc_adminkeu" name="acc_adminkeu" onchange="note()">
+                            @foreach($acc_adminkeus as $acc_adminkeu)
+                                <option {{$acc_adminkeu->id == $pengajuan->acc_adminkeu_id ? 'selected' : ''}} value="{{$acc_adminkeu->id}}">{{$acc_adminkeu->nama}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-1"></div>
+                <div id="catatan-form" class="col-sm-4" style="display: none;">
+                    <div class="form-group">
+                        <label for="exampleSelectRounded0">Catatan</label> <br>
+                        <textarea class="form-control" name="catatan"></textarea>
+                    </div>
+                </div>
+            </div>
             <div class="row justify-content-center">
+                <a href="{{ route('pengajuan.adminkeu') }}" class="btn btn-warning" style="margin-right: 15px;">Batal</a>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#createModal">
                 <i class="fas fa-save"></i>
                     Simpan
@@ -73,8 +107,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Pastikan data konfirmasi sudah benar.</p>
-                            <p>Perubahan data pengajuan harap hubungi karyawan yang bersangkutan </p>
+                            <p>Pastikan data konfirmasi anda sudah benar.</p>
+                            <p>Perubahan data pengajuan harap hubungi bidang yang bersangkutan </p>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     <button class="btn btn-sm btn-success" type="submit">Simpan</button>
@@ -84,9 +118,23 @@
                 </div>
             </div>
         </form>
-        @endif
+
     </div>
     <!-- /.card-body -->
 </div>
+
+<script>
+    
+    function note() {
+        var accAdminkeu = document.getElementById("acc_adminkeu");
+        if ( accAdminkeu.value == "4") {
+            // alert("check");
+            document.getElementById("catatan-form").style.display = "block";
+        } else {
+            document.getElementById("catatan-form").style.display = "none";
+        }
+    }
+
+</script>
 
 @endsection

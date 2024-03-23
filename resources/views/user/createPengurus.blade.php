@@ -2,7 +2,7 @@
 @section('content')
 <div class="card card-info col-sm-12">
     <div class="card-header">
-        <h3 class="card-title">Isikan data Pengurus pada formulir berikut</h3>
+        <h3 class="card-title">Isikan data Pengurus/Staff pada formulir berikut</h3>
     </div>
     @include('layouts.alert')
     <!-- /.card-header -->
@@ -17,7 +17,7 @@
                         <select class="custom-select rounded-0" id="role" name="role">
                             <option disabled selected>-Pilih Jabatan-</option>
                             @foreach($roles as $role)
-                            @if($role->id !==1)
+                            @if($role->id !==1 && $role->id !==5)
                             <option value="{{$role->id}}">{{$role->nama}}</option>
                             @endif
                             @endforeach
@@ -32,11 +32,11 @@
 
                 <div class="col-sm-9">
                     <div class="form-group">
-                        <label for="exampleSelectRounded0">Divisi</label>
+                        <label for="exampleSelectRounded0">Bidang</label>
                         <select class="custom-select rounded-0" id="divisi" name="divisi">
-                            <option disabled selected>-Pilih Divisi-</option>
+                            <option disabled selected>-Pilih Bidang-</option>
                             @foreach($divisis as $divisi)
-                            @if($divisi->id !== 1)
+                            @if($divisi->id !== 1 && $divisi->id !== 16)
                             <option value="{{$divisi->id}}">{{$divisi->nama}}</option>
                             @endif
                             @endforeach
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-sm-9">
                     <div class="form-group">
-                        <label>NIK</label>
+                        <label>NAK</label>
                         <input type="text" class="form-control" id="nik" name="nik" autocomplete="off">
                         <div class="text-danger">
                             @error('nik')

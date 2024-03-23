@@ -6,6 +6,8 @@ use App\Models\Cuti;
 use App\Models\Izin;
 use App\Models\User;
 use App\Models\Peminjaman;
+use App\Models\Pengajuan_anggaran;
+use App\Models\Realisasi_anggaran;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -31,13 +33,31 @@ class DashboardController extends Controller
         $cuti = Cuti::count();
         $izin = Izin::count();
         $pinjam = Peminjaman::count();
+        $count_pengajuan = Pengajuan_anggaran::count();
+        $count_realisasi = Realisasi_anggaran::count();
+
+        $new_pengajuan = Pengajuan_anggaran::where('acc_adminkeu_id', 1)->get();
+        $new_realisasi = Realisasi_anggaran::where('acc_adminkeu_id', 1)->get();
 
         $usersKaryawan = User::whereBetween('role_id', [2, 3])->get();
         $usersPengurus = User::where('role_id', 4, 'ASC')->get();
 
 
-        return view('dashboard', compact('user', 'cuti', 'pinjam', 'izin', 'isCuti', 'isIzin', 'usersKaryawan', 'usersPengurus'));
+        return view('dashboard', compact(
+            'user', 
+            'cuti', 
+            'pinjam', 
+            'izin', 
+            'isCuti', 
+            'isIzin', 
+            'usersKaryawan', 
+            'usersPengurus',
+            'count_pengajuan',
+            'new_pengajuan',
+            'new_realisasi'
+        ));
     }
+
     public function cuti(Request $request)
     {
         $cutis = Cuti::latest()->whereYear('tgl_mulai', '=', $request->query("year"))->get();
@@ -64,5 +84,25 @@ class DashboardController extends Controller
             $years[$i] = now()->year - $i;
         }
         return view('peminjaman.rekap', compact('pinjams', 'years'));
+    }
+
+    public function pengajuanAnggaran(Request $request)
+    {
+        $pengajuans = Pengajuan_anggaran::latest()->whereYear('created_at', '=', $request->query("year"))->get();
+        $years = [];
+        for ($i = 0; $i < 5; $i++) {
+            $years[$i] = now()->year - $i;
+        }
+        return view('pengajuan.rekap', compact('pengajuans', 'years'));
+    }
+
+    public function realisasiAnggaran(Request $request)
+    {
+        $realisasis = Realisasi_anggaran::latest()->whereYear('created_at', '=', $request->query("year"))->get();
+        $years = [];
+        for ($i = 0; $i < 5; $i++) {
+            $years[$i] = now()->year - $i;
+        }
+        return view('realisasi.rekap', compact('realisasis', 'years'));
     }
 }

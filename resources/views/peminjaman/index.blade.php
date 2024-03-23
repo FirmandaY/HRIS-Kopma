@@ -15,8 +15,8 @@
 
             <p>
                 Silahkan Konfirmasi Pinjaman Anda ke nomor WhatsApp di bawah ini. <br>
-                Tiur : 0815-7428-2376 <br>
-                Fishio : 0896-7357-5487
+                Faisal : 0856-0733-8372 <br>
+                Ade : 0896-5298-8826
             </p>
         </div>
         <div class="row">
@@ -65,7 +65,7 @@
 
                                         <form action="{{ route('pinjam.show', $pinjam->slug) }}" method="get">
                                             @csrf
-                                            <button class="btn btn-info" onClick="return confirm ('Yakin mau diubah?')" style="padding-right:20px; padding-left:20px; margin-top:5px;">
+                                            <button class="btn btn-info" style="padding-right:20px; padding-left:20px; margin-top:5px;">
                                                 <i class="fa fa-pencil"></i>Detail
                                             </button>
                                         </form>

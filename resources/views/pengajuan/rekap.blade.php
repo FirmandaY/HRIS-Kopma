@@ -2,15 +2,15 @@
 @section('content')
 <div class="card card-info col-sm-12 p-0">
     <div class="card-header">
-        <h1 class="card-title">Rekap Pengajuan Anggaran</h1>
+        <h1 class="card-title">Rekap Pengajuan Anggaran Bidang</h1>
     </div>
 </div>
 <section class="container">
 
     <div class="container-fluid">
-        @can('isAdmin')
+        @can('isAdminkeu')
         <div class="d-flex">
-            <a href="{{ route('cuti.export') }}" class="btn btn-success">
+            <a href="{{ route('pengajuan.export') }}" class="btn btn-success">
                 <i class="fas fa-print"></i>
                 Print</a>
         </div>
@@ -18,10 +18,10 @@
         <div class="row">
             <div class="card">
                 <div class="card-header ">
-                    <h3 class="card-title"><strong>Rekap Pengajuan Anggaran</strong></h3>
+                    <h3 class="card-title"><strong>Rekap Pengajuan Anggaran Bidang</strong></h3>
                     <div class="d-flex justify-content-end">
                         @foreach($years as $year)
-                        <a href={{route('rekap.cuti', ['year' => $year])}}> {{$year}}</a>&nbsp;
+                        <a href={{route('rekap.pengajuanAnggaran', ['year' => $year])}}> {{$year}}</a>&nbsp;
                         @endforeach
                     </div>
                 </div>
@@ -31,27 +31,29 @@
 
                         <thead>
                             <tr>
-                                <th>Email</th>
-                                <th>Nama</th>
-                                <th>Bidang</th>
-                                <th>Lampiran</th>
-                                
+                                <th>Nama Pemohon</th>
+                                <th>Divisi</th>
+                                <th>Tanggal Pengajuan</th>
+                                <th>File Anggaran</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($cutis as $cuti)
+                            @foreach($pengajuans as $pengajuan)
+                            @if($pengajuan->acc_hrd_id == 1)
+                            <tr style="color:tomato;">
+                                @else
                             <tr>
-                                <!-- ?? 'None' update 2 Juni Untuk mengatasi Akses Null di Environment Hosting -->
-                                <td>{{$cuti->user->name ?? 'None'}}</td>
-                                <td>{{$cuti->user->nik ?? 'None'}}</td>
-                                <td>{{$cuti->user->role->nama ?? 'None'}}</td>
-                                <td>{{$cuti->user->divisi->nama ?? 'None'}}</td>
-                                <td>{{$cuti->kategori->nama ?? 'None'}}</td>
-                                <td>{{$cuti->created_at->format('d/m/Y')}}</td>
-                                <td>{{\Carbon\Carbon::parse($cuti->tgl_mulai)->format('d/m/Y')}}</td>
-                                <td>{{\Carbon\Carbon::parse($cuti->tgl_selesai)->format('d/m/Y')}}</td>
-                                <td>{{$cuti->acc_mandiv->nama ?? 'None'}}</td>
-                                <td>{{$cuti->acc_hrd->nama ?? 'None'}}</td>
+                                @endif
+                                <td>{{$pengajuan->nama_user ?? 'None'}}</td>
+                                <td>{{$pengajuan->user->divisi->nama ?? 'None'}}</td>
+                                <td>{{\Carbon\Carbon::parse($pengajuan->created_at)->format('d/m/Y')}}</td>
+                                <td>
+                                    {{ $pengajuan->file_anggaran }}
+                                </td>
+                                <td>
+                                    {{$pengajuan->acc_adminkeu->nama ?? 'None'}}
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

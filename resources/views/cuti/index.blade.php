@@ -16,7 +16,7 @@
             <p>
                 Halaman ini berisi riwayat pengajuan cuti anda. Semua Cuti yang pernah anda ajukan akan tercatat di sini. <br>
                 Silahkan Konfirmasi Pengajuan Cuti Anda ke nomor WhatsApp di bawah ini. <br>
-                Tiur : 0815-7428-2376 <br>
+                Faisal : 0856-0733-8372 <br>
 
                 @if($role == 4)
                 <br>
@@ -73,7 +73,7 @@
 
                                         <form action="{{ route('cuti.show', $cuti->slug) }}" method="get">
                                             @csrf
-                                            <button class="btn btn-info" onClick="return confirm ('Yakin mau diubah?')" style="padding-right:20px; padding-left:20px; margin-top:5px;">
+                                            <button class="btn btn-info" style="padding-right:20px; padding-left:20px; margin-top:5px;">
                                                 <i class="fa fa-pencil"></i>Detail
                                             </button>
                                         </form>

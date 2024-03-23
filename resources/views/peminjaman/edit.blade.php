@@ -1,4 +1,4 @@
-@extends('layouts.main',['title' => 'Form Pengajuan Izin'])
+@extends('layouts.main',['title' => 'Form Pengajuan Peminjaman'])
 @section('content')
 <!-- <div class="container">
     <div class="d-flex justify-content-end">

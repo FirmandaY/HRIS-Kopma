@@ -1,8 +1,8 @@
-@extends('layouts.main',['title' => 'Daftar Pengajuan'])
+@extends('layouts.main',['title' => 'Daftar Realisasi Anggaran'])
 @section('content')
 <div class="card card-info col-sm-12 p-0">
     <div class="card-header">
-        <h1 class="card-title">Daftar Pengajuan Realisasi</h1>
+        <h1 class="card-title">Daftar Pengajuan Realisasi Anggaran Bidang</h1>
     </div>
 </div>
 @include('layouts.alert')
@@ -16,20 +16,17 @@
             <p>
                 Halaman ini berisi riwayat pengajuan realisasi anda. Semua realisasi yang pernah anda ajukan akan tercatat di sini. <br>
                 Silahkan Konfirmasi Pengajuan realisasi Anda ke nomor WhatsApp di bawah ini. <br>
-                Efina : 0853-2741-0870 <br>
+                Efina : 0853-2741-0870 <br><br>
 
-                @if($role == 4)
-                <br>
-            <p style="color: red;"><i> PERHATIAN ! </i></p>
-            <p><i> Mohon Pastikan Anda Menghubungi Ketua Bidang Terlebih dahulu sebelum mengajukan realisasi ya! </i></p>
-            @endif
+                <p style="color: red;"><i> PERHATIAN ! </i></p>
+                <p><i> Agar tidak terjadi kesalahpahaman, mohon pastikan anda berkoordinasi dengan Ketua Bidang terlebih dahulu sebelum mengajukan anggaran ya! </i></p>
             </p>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <a href="{{ route('cuti.create') }}" class="btn btn-success">
+                <a href="{{ route('realisasi.create') }}" class="btn btn-success">
                     <i class="fas fa-plus-square"></i>
-                    Ajukan Realisasi</a>
+                    Buat Realisasi</a>
             </div>
         </div>
         <hr>
@@ -37,7 +34,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title"><strong>Riwayat Pengajuan Realisasi Anda</strong></h3>
+                        <h3 class="card-title"><strong>Riwayat Pengajuan Realisasi Anggaran Anda</strong></h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">
@@ -45,38 +42,61 @@
 
                             <thead>
                                 <tr>
+                                    <th>Nama Staff</th>
+                                    <th>Nomor SPJ Anggaran</th>
                                     <th>File Realisasi</th>
                                     <th>Tanggal Mengajukan</th>
-
-                                    @if($role != 4)
-                                    <th>Konfirmasi Mandiv</th>
-                                    @endif
-
-                                    <th>Konfirmasi HRD</th>
+                                    <th>Konfirmasi Adminkeu</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach($cutis as $cuti)
+
+                            <tbody align="center">
+                                @foreach($realisasis as $realisasi)
                                 <tr>
-                                    <td>{{$cuti->kategori->nama}}</td>
-                                    <td>{{\Carbon\Carbon::parse($cuti->created_at)->format('d/m/Y')}}</td>
+                                    <td> {{$realisasi->nama_user}} </td>
+                                    <td> {{ $realisasi->no_spj }} </td>
+                                    <td> {{ $realisasi->file_realisasi }} </td>
+                                    <td>{{\Carbon\Carbon::parse($realisasi->created_at)->format('d/m/Y')}}</td>
 
-                                    @if($role != 4)
-                                    <td>{{$cuti->acc_mandiv->nama}}</td>
-                                    @endif
+                                    <td>
+                                        @if ($realisasi->acc_adminkeu_id == 4)
+                                            <i style="background-color: rgb(245, 255, 104); border-radius: 10px; padding: 5px 15px;">
+                                                {{$realisasi->acc_adminkeu->nama}}
+                                            </i>
+                                        @elseif ($realisasi->acc_adminkeu_id == 3)
+                                            <i style="background-color: rgb(104, 255, 104); border-radius: 10px; padding: 5px 15px;">
+                                                {{$realisasi->acc_adminkeu->nama}}
+                                            </i>
+                                        @elseif ($realisasi->acc_adminkeu_id == 2)
+                                            <i style="background-color: rgb(255, 104, 104); border-radius: 10px; padding: 5px 20px;">
+                                                {{$realisasi->acc_adminkeu->nama}}
+                                            </i>
+                                        @else
+                                            <i style="background-color: rgb(201, 201, 201); border-radius: 10px; padding: 5px 15px;">
+                                                {{$realisasi->acc_adminkeu->nama}}
+                                            </i>
+                                        @endif
+                                    </td>
 
-                                    <td>{{$cuti->acc_hrd->nama}}</td>
                                     <td>
                                         <!-- PERHATIAN! Saat hosting semua tombol harus di dalam tag <form> dan memiliki @csrf-->
                                         <!-- PERHATIAN! Jika tidak maka, halaman akan 404 not found!-->
-
-                                        <form action="{{ route('cuti.show', $cuti->slug) }}" method="get">
-                                            @csrf
-                                            <button class="btn btn-info" onClick="return confirm ('Yakin mau diubah?')" style="padding-right:20px; padding-left:20px; margin-top:5px;">
-                                                <i class="fa fa-pencil"></i>Detail
-                                            </button>
-                                        </form>
+                                        @if($realisasi->acc_adminkeu_id == 4)
+                                            <form action="{{ route('realisasi.revisi', $realisasi->slug) }}" method="get">
+                                                @csrf
+                                                <button class="btn btn-warning" style="padding-right:20px; padding-left:20px; margin-top:5px;">
+                                                    <i class="fas fa-edit"></i>Revisi
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('realisasi.show', $realisasi->slug) }}" method="get">
+                                                @csrf
+                                                <button class="btn btn-info" style="padding-right:20px; padding-left:20px; margin-top:5px;">
+                                                    <i style="margin-right: 5px;" class="fas fa-eye"></i>Detail
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
@@ -89,7 +109,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            {{$cutis->links()}}
+            {{$realisasis->links()}}
         </div>
     </div>
 </section>
