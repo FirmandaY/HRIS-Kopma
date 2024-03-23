@@ -16,7 +16,7 @@
             <p>
                 Halaman ini berisi riwayat pengajuan anggaran anda. Semua anggaran yang pernah bidang anda ajukan akan tercatat di sini. <br>
                 Silahkan Konfirmasi Pengajuan anggaran Anda ke nomor WhatsApp di bawah ini. <br>
-                Efina : 0853-2741-0870 <br><br>
+                Anggun : 0857-5112-7247 <br><br>
 
                 <p style="color: red;"><i> PERHATIAN ! </i></p>
                 <p><i> Agar tidak terjadi kesalahpahaman, mohon pastikan anda berkoordinasi dengan Ketua Bidang terlebih dahulu sebelum mengajukan anggaran ya! </i></p>
