@@ -16,7 +16,7 @@
             <p>
                 Silahkan Konfirmasi Pinjaman Anda ke nomor WhatsApp di bawah ini. <br>
                 Faisal : 0856-0733-8372 <br>
-                Ade : 0896-5298-8826
+                Fishio : 0896-7357-5487
             </p>
         </div>
         <div class="row">
